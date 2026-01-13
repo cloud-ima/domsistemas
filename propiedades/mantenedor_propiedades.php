@@ -1,0 +1,207 @@
+<?
+   include("../seguridad.php");
+   include("../fechaclasss.php");
+   
+   if ( isset($_GET["param"]) ) {
+      $x_param = $_GET["param"]; }
+	  
+   if ( isset($_POST["param"]) ) {
+      $x_param = $_POST["param"]; }
+	  
+$fecha_hoy = date('Y')."/".date('m')."/".date('d');
+	  
+$link=Conectarse();
+
+if ( $x_param == 1 ){
+
+			// $idx = $_POST['id'];
+			  $rolx = $_POST['rol'];
+			  $direx = $_POST['dire'];
+			  $desx= $_POST['destino'];
+			  $viax = $_POST['via'];
+			  $numx = $_POST['num'];
+			  $blockx = $_POST['block'];
+			  $deptox = $_POST['depto'];
+			  $sitiox = $_POST['sitio'];
+			  $manx = $_POST['man'];
+			  $pobx = $_POST['pob'];
+			  $refx = $_POST['referencia'];
+			  $zonax = $_POST['zona'];
+			  $urbax = $_POST['urba'];
+			  $tipox = $_POST['tipo'];
+			  $usox = $_POST['uso'];
+			  $expox = $_POST['expo'];
+			  $radiox = $_POST['radio'];
+			  $classx = $_POST['class'];
+			  $mtx = $_POST['mt'];
+			  $mtcx = $_POST['mtc'];
+			  $kx = $_POST['kardex'];
+			  $obsx = $_POST["FCKeditor2"];
+			  
+		      $n1x = $_POST["via1"];
+			  $n2x = $_POST["via2"];
+			  $n3x = $_POST["via3"];
+			  $n4x = $_POST["via4"];
+			  $a1x = $_POST["ante1"];
+			  $a2x = $_POST["ante2"];
+			  $a3x = $_POST["ante3"];
+			  $a4x = $_POST["ante4"];
+			  $l1x = $_POST["linea1"];
+			  $l2x = $_POST["linea2"];
+			  $l3x = $_POST["linea3"];
+			  $l4x = $_POST["linea4"];
+			  $d1x = $_POST["derecho1"];
+			  $d2x = $_POST["derecho2"];
+			  $d3x = $_POST["derecho3"];
+			  $d4x = $_POST["derecho4"];
+			  
+		      $pcx = $_POST["pc"];
+			  $pcdx = $_POST["pcd"];
+			  $rfx = $_POST["rf"];
+			  $rfdx = $_POST["rfd"];
+			  
+ 			  $sitpatx = $_POST["sitpatente"];
+			  $obspatx = $_POST["obspat"];
+			  $numnx = $_POST["numnuevo"];
+			  
+   			 $link=conectarse();
+			 $sql = "INSERT INTO propiedades (rol,tipocalle,direccion,numero,depto,block,pob,manzana,sitio,clase,tipo,mt2total,mt2cons,uso,nombre_referencial,urbanizacion,kardex,expropiacion,radiourbano,zona,obs,destino,n1,n2,n3,n4,a1,a2,a3,a4,l1,l2,l3,l4,d1,d2,d3,d4,pc,pcdate,rf,rfdate,estadopatente,festadopatente,otrosnum,obspatente) VALUES
+                                         ('$rolx','$viax','$direx','$numx','$deptox','$blockx','$pobx','$manx','$sitiox','$classx','$tipox','$mtx','$mtcx','$usox','$refx','$urbax','$kx','$expox','$radiox','$zonax','$obsx','$desx','$n1x','$n2x','$n3x','$n4x','$a1x','$a2x','$a3x','$a4x','$l1x','$l2x','$l3x','$l4x','$d1x','$d2x','$d3x','$d4x','$pcx','$pcdx','$rfx','$rfdx','$sitpatx','$fecha_hoy','$numnx','$obspatx')";
+			 $result2=mysql_query($sql);
+			 $ultimo_id = mysql_insert_id($link);
+			 mysql_close($link);
+			 $linknuevo = 'propiedades.php?id='.$ultimo_id.'&flag=1';
+			 echo '<script language="javascript">';
+			 echo "alert('Nueva registro de Propiedad Correctamente, con Nro. Folio : $ultimo_id; ');";
+			 echo "location.href='$linknuevo';";
+			 echo "</script>";
+}
+
+if ( $x_param == 2 ){
+
+			 $idx = $_POST['codigo'];
+		     $desx= $_POST['destino'];			 
+			 $rolx = $_POST['rol'];
+			 $direx = $_POST['dire'];
+			 $viax = $_POST['via'];
+			 $numx = $_POST['num'];
+			 $blockx = $_POST['block'];
+			 $deptox = $_POST['depto'];
+			 $sitiox = $_POST['sitio'];
+			 $manx = $_POST['man'];
+			 $pobx = $_POST['pob'];
+			 $refx = $_POST['referencia'];
+			 $zonax = $_POST['zona'];
+			 $urbax = $_POST['urba'];
+			 $tipox = $_POST['tipo'];
+			 $usox = $_POST['uso'];
+			 $expox = $_POST['expo'];
+			 $radiox = $_POST['radio'];
+			 $classx = $_POST['class'];
+			 $mtx = $_POST['mt'];
+			 $mtcx = $_POST['mtc'];
+			 $kx = $_POST['kardex'];
+			 $obsx = $_POST["FCKeditor2"];
+			 
+		      $n1x = $_POST["via1"];
+			  $n2x = $_POST["via2"];
+			  $n3x = $_POST["via3"];
+			  $n4x = $_POST["via4"];
+			  $a1x = $_POST["ante1"];
+			  $a2x = $_POST["ante2"];
+			  $a3x = $_POST["ante3"];
+			  $a4x = $_POST["ante4"];
+			  $l1x = $_POST["linea1"];
+			  $l2x = $_POST["linea2"];
+			  $l3x = $_POST["linea3"];
+			  $l4x = $_POST["linea4"];
+			  $d1x = $_POST["derecho1"];
+			  $d2x = $_POST["derecho2"];
+			  $d3x = $_POST["derecho3"];
+			  $d4x = $_POST["derecho4"];
+			  
+ 		      $pcx = $_POST["pc"];
+			  $pcdx = $_POST["pcd"];
+			  $rfx = $_POST["rf"];
+			  $rfdx = $_POST["rfd"];
+			  
+ 			  $sitpatx = $_POST["sitpatente"];
+			  $obspatx = $_POST["obspat"];
+			  $numnx = $_POST["numnuevo"];
+
+ 			 $linknuevo = 'propiedades.php?id='.$idx.'&flag=1';
+
+		 	 $link=conectarse();
+    	     $sql= "UPDATE propiedades SET 
+			 tipocalle='$viax',
+			 direccion='$direx',
+			 numero='$numx',
+			 depto='$deptox',
+			 block='$blockx',
+			 pob='$pobx',
+			 manzana='$manx',
+			 sitio='$sitiox',
+			 clase='$classx',
+			 tipo='$tipox',
+			 mt2total='$mtx',
+			 mt2cons='$mtcx',
+			 uso='$usox',
+			 nombre_referencial='$refx',
+			 urbanizacion='$urbax',
+			 kardex='$kx',
+			 expropiacion='$expox',
+			 radiourbano='$radiox',
+			 obs='$obsx',
+			 destino='$desx',
+			 n1='$n1x',
+			 n2='$n2x',
+			 n3='$n3x',
+			 n4='$n4x',
+			 a1='$a1x',
+			 a2='$a2x',
+			 a3='$a3x',
+			 a4='$a4x',
+			 l1='$l1x',
+			 l2='$l2x',
+			 l3='$l3x',
+			 l4='$l4x',
+			 d1='$d1x',
+			 d2='$d2x',
+			 d3='$d3x',
+			 d4='$d4x',
+			 pc='$pcx',
+			 pcdate='$pcdx',
+			 rf='$rfx',
+			 rfdate='$rfdx',
+			 estadopatente='$sitpatx',
+			 festadopatente='$fecha_hoy',
+			 otrosnum='$numnx',
+			 obspatente='$obspatx',
+			 zona='$zonax' WHERE id='$idx'";
+   		     $result2=mysql_query($sql);
+  		     mysql_close($link);
+			 echo '<script language="javascript">';
+			 echo "alert('Cambios guardados correctamente');";
+			 echo "location.href='$linknuevo';";
+			 echo "</script>";
+			 /*echo "opener.window.location.reload( false );";
+	         echo "window.close();";
+ 		     echo "</script>"*/;
+}
+
+if ( $x_param == 3 ){
+			 echo '<script language="javascript">';
+			 echo "alert('Entro en modo Borrado');";
+ 		     echo "</script>";
+
+		    /* $idx  = $_GET["id"];
+             $link=conectarse();
+             $sql="DELETE FROM noticias where id = '$idx'";
+             $result = mysql_query($sql);
+  		     mysql_close($link);
+			 echo '<script language="javascript">';
+			 echo "alert('Registro Borrado');";
+			 echo "location.href='list_publicaciones.php';";
+ 		     echo "</script>";		*/
+}
+?>

@@ -1,0 +1,22 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Untitled Document</title>
+</head>
+
+<body><div id="todo_formulario">
+   <form action="#" method="post" name="f1" id="f1">
+   <div id="input_pais">
+      Nombre país: <input type="text" name="nombre_pais"> <a style='cursor:pointer;text-decoration:underline; color:#0000ff;' onclick="xajax_validar_pais(document.f1.nombre_pais.value);">Validar pais</a>
+   </div>
+   <div id="validador_pais"></div>
+   <p>
+   Año de visita: <input type="text" name="ano" size="8">
+   <p>
+   <input type="button" onclick="xajax_procesar_formulario(xajax.getFormValues('f1'))" value="Enviar">
+   </form>
+</div>
+</body>
+</html>

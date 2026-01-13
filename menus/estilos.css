@@ -1,0 +1,114 @@
+BODY {
+	SCROLLBAR-FACE-COLOR: #efefef; SCROLLBAR-HIGHLIGHT-COLOR: #efefef; SCROLLBAR-SHADOW-COLOR: #efefef; SCROLLBAR-3DLIGHT-COLOR: #ffffff; SCROLLBAR-ARROW-COLOR: #ffffff; SCROLLBAR-TRACK-COLOR: #ffffff; SCROLLBAR-DARKSHADOW-COLOR: #244668
+}
+.SubmenuNormal {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #ffffff 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #ffffff 1px solid; CURSOR: auto; BORDER-BOTTOM: #cccccc 1px solid; FONT-FAMILY: "arial"; BACKGROUND-COLOR: #eeeeee
+}
+.SubmenuOver {
+	BORDER-RIGHT: #244668 1px solid; BORDER-TOP: #244668 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #244668 1px solid; CURSOR: hand; COLOR: #ffffff; BORDER-BOTTOM: #244668 1px solid; FONT-FAMILY: arial; BACKGROUND-COLOR: #518ecb
+}
+.TituloPagina2 {
+	FONT-WEIGHT: bold; FONT-SIZE: 16px; CURSOR: auto; COLOR: #000000; FONT-FAMILY: "Arial"
+}
+.TituloVentana {
+	FONT-WEIGHT: bold; FONT-SIZE: 16px; CURSOR: auto; COLOR: #ffffff; FONT-FAMILY: "Arial"
+}
+.TituloPagina {
+	FONT-SIZE: 28px; COLOR: #ffffff; FONT-FAMILY: "Gill Sans MT Ext Condensed Bold"
+}
+.TopBottom {
+	BORDER-RIGHT: #eeeeee 1px solid; BORDER-TOP: #ffffff 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #eeeeee 1px solid; CURSOR: auto; MARGIN-RIGHT: 15px; BORDER-BOTTOM: #cccccc 1px solid; FONT-FAMILY: "arial"; BACKGROUND-COLOR: #eeeeee; TEXT-ALIGN: right
+}
+.TopOnly {
+	BORDER-RIGHT: black 0px solid; BORDER-TOP: #ffffff 1px solid; FONT-SIZE: 11px; BORDER-LEFT: black 0px solid; CURSOR: auto; MARGIN-RIGHT: 15px; BORDER-BOTTOM: black 0px solid; FONT-FAMILY: "arial"; BACKGROUND-COLOR: #eeeeee; TEXT-ALIGN: right
+}
+.MenuDelimiterUp {
+	BORDER-RIGHT: #cccccc 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 11px; MARGIN: 0px; COLOR: #333333; BORDER-BOTTOM: #cccccc 1px solid; FONT-FAMILY: "arial"; BACKGROUND-COLOR: #bbbbbb
+}
+.MenuDelimiterDown {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #eeeeee 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 2px; MARGIN: 0px; COLOR: #ffffff; FONT-FAMILY: "arial"; BACKGROUND-COLOR: #cccccc
+}
+.WindowFlat {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #cccccc 1px solid; BORDER-BOTTOM: #cccccc 1px solid; FONT-FAMILY: "arial"; BACKGROUND-COLOR: #dddddd
+}
+.WindowFlatLeft {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #a9a9a9 1px solid; BORDER-BOTTOM: #cccccc 1px solid; FONT-FAMILY: "arial"; BACKGROUND-COLOR: #dddddd
+}
+.WindowFrame {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #cccccc 1px solid; BORDER-BOTTOM: #cccccc 1px solid; FONT-FAMILY: "arial"; BACKGROUND-COLOR: #ffffff
+}
+.WindowFrameGreen {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 11px; BORDER-LEFT: #cccccc 1px solid; COLOR: #1b9621; BORDER-BOTTOM: #cccccc 1px solid; FONT-FAMILY: "arial"; BACKGROUND-COLOR: #ffffff
+}
+.WindowFrameRed {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 11px; BORDER-LEFT: #cccccc 1px solid; COLOR: #ee362d; BORDER-BOTTOM: #cccccc 1px solid; FONT-FAMILY: "arial"; BACKGROUND-COLOR: #ffffff
+}
+.WindowFrameBlue {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 11px; BORDER-LEFT: #cccccc 1px solid; COLOR: #0033cc; BORDER-BOTTOM: #cccccc 1px solid; FONT-FAMILY: "arial"; BACKGROUND-COLOR: #ffffff
+}
+.NormalCell {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #cccccc 1px solid; BORDER-BOTTOM: #cccccc 1px solid; FONT-FAMILY: "arial"; BACKGROUND-COLOR: #ffffff
+}
+.FocusCell {
+	BORDER-RIGHT: #244668 1px solid; BORDER-TOP: #244668 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #244668 1px solid; BORDER-BOTTOM: #244668 1px solid; FONT-FAMILY: "arial"; BACKGROUND-COLOR: #ffffff
+}
+.Normal {
+	FONT-SIZE: 11px; FONT-FAMILY: arial
+}
+.MenuNormal {
+	BORDER-RIGHT: #244668 1px solid; BORDER-TOP: #739fcb 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 11pt; BORDER-LEFT: #739fcb 1px solid; CURSOR: hand; COLOR: #ffffff; BORDER-BOTTOM: #244668 1px solid; FONT-FAMILY: "arial"; BACKGROUND-COLOR: #336699
+}
+.MenuOver {
+	BORDER-RIGHT: #3f6790 1px solid; BORDER-TOP: #9ed2ff 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 11pt; BORDER-LEFT: #9ed2ff 1px solid; CURSOR: hand; COLOR: #ffffff; BORDER-BOTTOM: #3f6790 1px solid; FONT-FAMILY: "arial"; BACKGROUND-COLOR: #518ecb
+}
+.OptionNone {
+	BORDER-RIGHT: #eeeeee 1px solid; BORDER-TOP: #eeeeee 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #eeeeee 1px solid; BORDER-BOTTOM: #eeeeee 1px solid; FONT-FAMILY: "arial"; BACKGROUND-COLOR: #eeeeee
+}
+.TituloPagina3 {
+	BORDER-RIGHT: #444444 0px; BORDER-TOP: #444444 0px; FONT-WEIGHT: bold; FONT-SIZE: 14px; BORDER-LEFT: #444444 0px; CURSOR: auto; COLOR: #444444; BORDER-BOTTOM: #444444 1px solid; FONT-FAMILY: "Trebuchet ms"
+}
+.TituloDialogo {
+	BORDER-RIGHT: #bbbbbb 1px solid; BORDER-TOP: #eeeeee 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 14px; BORDER-LEFT: #eeeeee 1px solid; CURSOR: auto; COLOR: #444444; BORDER-BOTTOM: #bbbbbb 1px solid; FONT-FAMILY: "Trebuchet ms"; BACKGROUND-COLOR: #dddddd
+}
+.Sunken {
+	BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #999999 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #999999 1px solid; COLOR: #000000; BORDER-BOTTOM: #ffffff 1px solid; FONT-FAMILY: "arial"; BACKGROUND-COLOR: #ffffff
+}
+.EnlaceNormal {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 11px; BORDER-LEFT: #cccccc 1px solid; COLOR: #0033cc; BORDER-BOTTOM: #cccccc 1px solid; FONT-FAMILY: arial; BACKGROUND-COLOR: #ffffff
+}
+.EnlaceOver {
+	BORDER-RIGHT: #244668 1px solid; BORDER-TOP: #244668 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 11px; BORDER-LEFT: #244668 1px solid; CURSOR: hand; COLOR: #ffffff; BORDER-BOTTOM: #244668 1px solid; FONT-FAMILY: arial; BACKGROUND-COLOR: #518ecb
+}
+.BotonNormal {
+	BORDER-RIGHT: #999999 1px solid; BORDER-TOP: #999999 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 11px; BORDER-LEFT: #999999 1px solid; CURSOR: hand; COLOR: #000000; BORDER-BOTTOM: #999999 1px solid; FONT-FAMILY: "arial"; HEIGHT: 23px; BACKGROUND-COLOR: #cccccc
+}
+.BotonOver {
+	BORDER-RIGHT: #244668 1px solid; BORDER-TOP: #244668 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 11px; BORDER-LEFT: #244668 1px solid; CURSOR: hand; COLOR: #ffffff; BORDER-BOTTOM: #244668 1px solid; FONT-FAMILY: arial; HEIGHT: 23px; BACKGROUND-COLOR: #518ecb
+}
+.ToolSeleccion {
+	BORDER-RIGHT: #999999 1px solid; BORDER-TOP: #ffffff 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 11px; BORDER-LEFT: #ffffff 1px solid; CURSOR: hand; COLOR: #000000; BORDER-BOTTOM: #999999 1px solid; FONT-FAMILY: "arial"; HEIGHT: 11px; BACKGROUND-COLOR: #cccccc
+}
+.ToolNormal {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #ffffff 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #ffffff 1px solid; CURSOR: hand; COLOR: #000000; BORDER-BOTTOM: #cccccc 1px solid; FONT-FAMILY: "arial"; BACKGROUND-COLOR: #eeeeee
+}
+.ToolOver {
+	BORDER-RIGHT: #244668 1px solid; BORDER-TOP: #244668 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #244668 1px solid; CURSOR: hand; COLOR: #ffffff; BORDER-BOTTOM: #244668 1px solid; FONT-FAMILY: arial; BACKGROUND-COLOR: #518ecb
+}
+.SubMenuFila {
+	BORDER-RIGHT: #244668; BORDER-TOP: #244668; FONT-SIZE: 11px; BORDER-LEFT: #244668; COLOR: #ffffff; BORDER-BOTTOM: #244668; FONT-FAMILY: arial; BACKGROUND-COLOR: #518ecb
+}
+.Raised {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #ffffff 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #ffffff 1px solid; CURSOR: auto; BORDER-BOTTOM: #cccccc 1px solid; FONT-FAMILY: "arial"; BACKGROUND-COLOR: #eeeeee
+}
+.RaisedSides {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #ffffff 0px solid; FONT-SIZE: 11px; BORDER-LEFT: #eeeeee 0px solid; MARGIN-RIGHT: 15px; BORDER-BOTTOM: #cccccc 0px solid; FONT-FAMILY: "arial"; BACKGROUND-COLOR: #eeeeee
+}
+.Alerta {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; CURSOR: auto; COLOR: #ff0000; FONT-FAMILY: "Trebuchet ms"
+}
+.Ruteo {
+	FONT-SIZE: 12px; CURSOR: auto; COLOR: #6666ff; FONT-FAMILY: "Trebuchet ms"; BACKGROUND-COLOR: #ffffcc
+}
+.Advertencia {
+	BORDER-RIGHT: #ff0000 1px solid; BORDER-TOP: #ff0000 1px solid; FONT-SIZE: 12px; BORDER-LEFT: #ff0000 1px solid; CURSOR: auto; COLOR: #6666ff; BORDER-BOTTOM: #ff0000 1px solid; FONT-FAMILY: Trebuchet ms,Arial, Helvetica, sans-serif; BACKGROUND-COLOR: #ffffcc
+}

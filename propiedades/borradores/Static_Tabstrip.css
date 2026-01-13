@@ -1,0 +1,70 @@
+    /**
+    * o------------------------------------------------------------------------------o
+    * | This package is licensed under the Phpguru license. A quick summary is       |
+    * | that for commercial use, there is a small one-time licensing fee to pay. For |
+    * | registered charities and educational institutes there is a reduced license   |
+    * | fee available. You can read more  at:                                        |
+    * |                                                                              |
+    * |                  http://www.phpguru.org/static/license.html                  |
+    * o------------------------------------------------------------------------------o
+    *
+    */
+
+/**
+* Generic tabstrip styles
+*/
+div.tabstrip {
+    position: relative;
+    border-bottom: 1px solid black;
+}
+
+div.tabstrip div.tabstrip_tab {
+    position: relative;
+    top: -2px;
+    top: expression(2);
+    display: inline;
+    width: 110px;
+    height: 25px;
+    border: 1px solid #ccc;
+    border-bottom: 0;
+    margin: 0 3px 0 0;
+    padding: 5px;
+    padding: expression(0);
+    padding-top: expression(4);
+    text-align: center;
+    font-size: 9pt;
+    background-color: #eee;
+    font-family: Tahoma;
+    color: #bbb;
+}
+
+div.tabstrip div.tabstrip_tab.active {
+    position: relative;
+    top: -1px;
+    top: expression(3);
+    border: 1px solid #777;
+    border-bottom: 1px solid white;
+    background-color: white;
+    height: 28px;
+}
+
+div.tabstrip div.tabstrip_tab a {
+    text-decoration: none;
+    color: #777;
+    font-weight: bold;
+}
+
+div.tabstrip div.tabstrip_tab.active a {
+    font-weight: normal;
+    color: #555;
+    z-index: 3;
+    position: relative;
+}
+
+div.tab_body {
+    border: 1px solid #777;
+    position: relative;
+    padding: 15px;
+    top: -1px;
+    z-index: -1;
+}
