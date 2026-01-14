@@ -23,7 +23,7 @@
     </table></td>
   </tr>
   <tr bgcolor="#ADBEE4">
-    <td colspan="3"><div align="center"><img src="/domsistemas/images/menu.jpg" width="990" height="41" border="0" usemap="#Map"></div></td>
+    <td colspan="3"><div align="center"><img src="/images/menu.jpg" width="990" height="41" border="0" usemap="#Map"></div></td>
   </tr>
 </table>
 <map name="Map">
