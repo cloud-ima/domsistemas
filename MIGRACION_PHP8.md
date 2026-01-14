@@ -39,7 +39,7 @@
 
 1. **Copiar archivos al servidor:**
    ```bash
-   scp -r domsistemas/ usuario@servidor:/var/www/html/
+   scp -r  usuario@servidor:/var/www/html/
    ```
 
 2. **Configurar credenciales de BD:**
@@ -68,7 +68,7 @@
    ```
 
 6. **Verificar instalación:**
-   Acceder a: `http://tu-servidor/domsistemas/test_php8_compatibility.php`
+   Acceder a: `http://tu-servidor/test_php8_compatibility.php`
 
 ---
 
@@ -125,7 +125,7 @@ php test_php8_compatibility.php
 
 O acceder vía navegador:
 ```
-http://tu-servidor/domsistemas/test_php8_compatibility.php
+http://tu-servidor/test_php8_compatibility.php
 ```
 
 ---

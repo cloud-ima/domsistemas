@@ -155,7 +155,7 @@ width=13></td>
           $dias_diferencia = abs($dias_diferencia);
           $dias_diferencia = floor($dias_diferencia);		   
 		  
-		  $direc = "/domsistemas/propiedades/fichapropiedades.php?id=".$row["id"]."&rol=". $row["rol"];
+		  $direc = "/propiedades/fichapropiedades.php?id=".$row["id"]."&rol=". $row["rol"];
 		   
 	/*	   $codsec= $row["estado"];
            $link=Conectarse(); 

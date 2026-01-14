@@ -4,7 +4,7 @@ include("../fechaclasss.php");
 include("fckeditor/fckeditor.php");
 
 //******************************************************
-// Validación del Ingreso (Nuevo,edición)
+// Validaciï¿½n del Ingreso (Nuevo,ediciï¿½n)
 
 
 $x_flag = $_GET["flag"] ?? '';
@@ -24,7 +24,7 @@ if ( $x_flag == 0 ) {
 if ( $x_flag == 1 ) {
    
 /*    $dire = '../uploads/ID_ROL'.$_GET['id'] ?? '';
-	$direreal='/domsistemas/uploads/ID_ROL'.$_GET['id'] ?? '';
+	$direreal='/uploads/ID_ROL'.$_GET['id'] ?? '';
 
 	
 if (is_dir($dire)) {
@@ -104,7 +104,7 @@ mkdir($dire, 0777, true);
 
 /*if ($tipousuario == 2 or $tipousuario == 3 ) {
  			 echo '<script language="javascript">';
-			 echo "alert('Sr. Usuario, no tiene acceso a Este módulo!');";
+			 echo "alert('Sr. Usuario, no tiene acceso a Este mï¿½dulo!');";
 			 echo "location.href='principal.php';";
 			 echo "</script>";
 }*/
@@ -112,10 +112,10 @@ mkdir($dire, 0777, true);
 function suma_fechas($fecha,$ndias)
 {
       if (preg_match("/[0-9]{1,2}\/[0-9]{1,2}\/([0-9][0-9]){1,2}/",$fecha))
-              list($dia,$mes,$año)=split("/", $fecha);
+              list($dia,$mes,$aï¿½o)=split("/", $fecha);
       if (preg_match("/[0-9]{1,2}-[0-9]{1,2}-([0-9][0-9]){1,2}/",$fecha))
-              list($dia,$mes,$año)=split("-",$fecha);
-              $nueva = mktime(0,0,0, $mes,$dia,$año) + $ndias * 24 * 60 * 60;
+              list($dia,$mes,$aï¿½o)=split("-",$fecha);
+              $nueva = mktime(0,0,0, $mes,$dia,$aï¿½o) + $ndias * 24 * 60 * 60;
               $nuevafecha=date("Y-m-d",$nueva);
 	  return ($nuevafecha);
 }

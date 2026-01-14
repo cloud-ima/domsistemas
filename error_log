@@ -1,19 +1,19 @@
 [09-Apr-2014 17:48:32 America/Santiago] PHP Warning:  mysql_close(): 3 is not a valid MySQL-Link resource in /home/muniaric/public_html/dom/validacion.php on line 49
 [09-Apr-2014 17:50:43 America/Santiago] PHP Warning:  mysql_close(): 3 is not a valid MySQL-Link resource in /home/muniaric/public_html/dom/validacion.php on line 49
-[09-Apr-2014 17:58:11 America/Santiago] PHP Warning:  mysql_close(): 3 is not a valid MySQL-Link resource in /home/muniaric/public_html/domsistemas/validacion.php on line 49
-[09-Apr-2014 18:02:10 America/Santiago] PHP Warning:  mysql_close(): 3 is not a valid MySQL-Link resource in /home/muniaric/public_html/domsistemas/validacion.php on line 49
-[20-Mar-2024 22:29:21 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/domsistemas/menu-adm.php on line 66
-[20-Mar-2024 22:29:38 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/domsistemas/menu-adm.php on line 66
-[20-Mar-2024 22:33:53 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/domsistemas/menu-adm.php on line 66
-[20-Mar-2024 22:34:16 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/domsistemas/menu-adm.php on line 66
-[20-Mar-2024 22:35:07 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/domsistemas/menu-adm.php on line 66
-[20-Mar-2024 22:35:48 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/domsistemas/menu-adm.php on line 66
-[20-Mar-2024 22:36:12 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/domsistemas/menu-adm.php on line 66
-[20-Mar-2024 22:49:19 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/domsistemas/menu-adm.php on line 66
-[20-Mar-2024 22:49:22 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/domsistemas/menu-adm.php on line 66
-[20-Mar-2024 22:49:39 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/domsistemas/menu-adm.php on line 66
-[20-Mar-2024 22:57:34 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/domsistemas/menu-adm.php on line 66
-[22-Mar-2024 08:43:17 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/domsistemas/menu-adm.php on line 66
-[22-Mar-2024 08:43:20 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/domsistemas/menu-adm.php on line 66
-[22-Mar-2024 08:43:34 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/domsistemas/menu-adm.php on line 66
-[22-Mar-2024 08:47:39 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/domsistemas/menu-adm.php on line 66
+[09-Apr-2014 17:58:11 America/Santiago] PHP Warning:  mysql_close(): 3 is not a valid MySQL-Link resource in /home/muniaric/public_html/validacion.php on line 49
+[09-Apr-2014 18:02:10 America/Santiago] PHP Warning:  mysql_close(): 3 is not a valid MySQL-Link resource in /home/muniaric/public_html/validacion.php on line 49
+[20-Mar-2024 22:29:21 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/menu-adm.php on line 66
+[20-Mar-2024 22:29:38 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/menu-adm.php on line 66
+[20-Mar-2024 22:33:53 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/menu-adm.php on line 66
+[20-Mar-2024 22:34:16 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/menu-adm.php on line 66
+[20-Mar-2024 22:35:07 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/menu-adm.php on line 66
+[20-Mar-2024 22:35:48 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/menu-adm.php on line 66
+[20-Mar-2024 22:36:12 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/menu-adm.php on line 66
+[20-Mar-2024 22:49:19 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/menu-adm.php on line 66
+[20-Mar-2024 22:49:22 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/menu-adm.php on line 66
+[20-Mar-2024 22:49:39 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/menu-adm.php on line 66
+[20-Mar-2024 22:57:34 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/menu-adm.php on line 66
+[22-Mar-2024 08:43:17 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/menu-adm.php on line 66
+[22-Mar-2024 08:43:20 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/menu-adm.php on line 66
+[22-Mar-2024 08:43:34 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/menu-adm.php on line 66
+[22-Mar-2024 08:47:39 America/Havana] PHP Fatal error:  Call to undefined function Conectarse() in /home/imaarica/public_html/menu-adm.php on line 66

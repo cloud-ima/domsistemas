@@ -11,7 +11,7 @@
 <body>
 <table width="100%"  border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="1%" bgcolor="#123783"><img src="/domsistemas/images/alto-menu.jpg" width="7" height="25"></td>
+    <td width="1%" bgcolor="#123783"><img src="/images/alto-menu.jpg" width="7" height="25"></td>
     <td width="85%" bgcolor="#123783" ><strong><font color="#FFFFFF"><strong><?php echo "Sistema de Control de Gesti�n Direcci�n de Obras" ?></font></strong></td>
     <td width="14%" bgcolor="#123783"><div align="right"><img src="/images/soft-name.jpg" width="125" height="25"></div></td>
   </tr>

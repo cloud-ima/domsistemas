@@ -11,7 +11,7 @@
 <body>
 <table width="100%"  border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="1%" bgcolor="#123783"><img src="/domsistemas/images/alto-menu.jpg" width="7" height="25"></td>
+    <td width="1%" bgcolor="#123783"><img src="/images/alto-menu.jpg" width="7" height="25"></td>
     <td width="85%" bgcolor="#123783" ><font color="#FFFFFF"><strong><?php echo "Sistema de Control de Gesti�n Direcci�n de Obras" ?></font></strong></td>
     <td width="14%" bgcolor="#123783"><div align="right"><img src="/images/soft-name.jpg" width="125" height="25"></div></td>
   </tr>
@@ -27,10 +27,10 @@
   </tr>
 </table>
 <map name="Map">
-  <area shape="rect" coords="29,19,117,51" href="/domsistemas/principal.php">
-  <area shape="rect" coords="124,19,241,50" href="/domsistemas/parametros.php">
-  <area shape="rect" coords="248,18,431,57" href="/domsistemas/propiedades/">
-  <area shape="rect" coords="436,18,634,65" href="/domsistemas/consultas/">
-  <area shape="rect" coords="640,19,754,55" href="/domsistemas/estadisticas/">
-  <area shape="rect" coords="760,19,921,66" href="/domsistemas/cambiopass.php">
+  <area shape="rect" coords="29,19,117,51" href="/principal.php">
+  <area shape="rect" coords="124,19,241,50" href="/parametros.php">
+  <area shape="rect" coords="248,18,431,57" href="/propiedades/">
+  <area shape="rect" coords="436,18,634,65" href="/consultas/">
+  <area shape="rect" coords="640,19,754,55" href="/estadisticas/">
+  <area shape="rect" coords="760,19,921,66" href="/cambiopass.php">
 </map>
