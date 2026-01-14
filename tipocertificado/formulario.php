@@ -2,7 +2,7 @@
 
 include("../conexion.php");
 
-$x_flag = $_GET["flag"];
+$x_flag = $_GET["flag"] ?? '';
 
 if ( $x_flag == 0 ) {
    $idestado = "Estado(Ingresando Nuevo Registro)";
@@ -13,7 +13,7 @@ if ( $x_flag == 0 ) {
 if ( $x_flag == 1 ) {
     $idestado = "Estado(Modificación del Registro)";
 	$link=conectarse();
-    $idz=$_GET['id'];
+    $idz=$_GET['id'] ?? '';
     $ssql = "select * from tipocertificado where id ='$idz'";
     $rs = mysql_query($ssql,$link);
     $num_registros = mysql_num_rows($rs); 
@@ -53,7 +53,7 @@ $fechaactualed = date('d')."/".date('n')."/".date('Y');
                 de certificados<font size="2"></font></strong></div></td>
           </tr>
           <tr>
-            <td align="center"><div align="left"><? echo $idestado ?></div></td>
+            <td align="center"><div align="left"><?php echo $idestado ?></div></td>
           </tr>
         </table>
         <table width="459" border="0" cellpadding="0" cellspacing="0" bordercolor="#cccccc">
@@ -68,7 +68,7 @@ $fechaactualed = date('d')."/".date('n')."/".date('Y');
                 <tr> 
                   <td width="146" height="26" bgcolor="#efefef" class=estilo_titulo >Nombre 
                     Certificado</td>
-                  <td width="294" bgcolor="#efefef"> <input name="nombre" type="text" id="titulo2" value="<? echo $nomz ?>" size="48" maxlength="100"> 
+                  <td width="294" bgcolor="#efefef"> <input name="nombre" type="text" id="titulo2" value="<?php echo $nomz ?>" size="48" maxlength="100"> 
                   </td>
                 </tr>
                 <tr> 
@@ -82,39 +82,39 @@ $resultc = mysql_query("SELECT * FROM moneda order by id",$linkc);
                       <?php
 while($rowc = mysql_fetch_array($resultc)) {
 ?>
-                      <option value="<? echo $rowc["id"] ?>"
-<? if($rowc["id"] == $monz){?>selected<?}?>> <? echo $rowc["nombre"]?> </option>
-                      <? }
+                      <option value="<?php echo $rowc["id"] ?>"
+<?php if($rowc["id"] == $monz){?>selected<?php }?>> <?php echo $rowc["nombre"]?> </option>
+                      <?php }
 mysql_close($linkc);
 ?>
                     </select> </td>
                 </tr>
                 <tr> 
                   <td height="19" bgcolor="#efefef" class=estilo_titulo >Precio</td>
-                  <td bgcolor="#efefef"> <input name="precio" type="text" id="nombre2" value="<? echo $prez ?>" size="20" maxlength="100"> 
+                  <td bgcolor="#efefef"> <input name="precio" type="text" id="nombre2" value="<?php echo $prez ?>" size="20" maxlength="100"> 
                   </td>
                 </tr>
                 <tr> 
                   <td height="19" bgcolor="#efefef" class=estilo_titulo >Plazo 
                     en D&iacute;as</td>
-                  <td bgcolor="#efefef"> <input name="plazo" type="text" id="nombre3" value="<? echo $plaz ?>" size="20" maxlength="100"> 
+                  <td bgcolor="#efefef"> <input name="plazo" type="text" id="nombre3" value="<?php echo $plaz ?>" size="20" maxlength="100"> 
                   </td>
                 </tr>
                 <tr>
                   <td height="19" bgcolor="#efefef" class=estilo_titulo >N&ordm; 
                     de Copias</td>
-                  <td bgcolor="#efefef"> <input name="copias" type="text" id="copias" value="<? echo $copz ?>" size="20" maxlength="100"> 
+                  <td bgcolor="#efefef"> <input name="copias" type="text" id="copias" value="<?php echo $copz ?>" size="20" maxlength="100"> 
                   </td>
                 </tr>
                 <tr> 
                   <td height="19" bgcolor="#efefef" class=estilo_titulo >Cuenta 
                     Imputaci&oacute;n </td>
-                  <td bgcolor="#efefef"> <input name="cuenta" type="text" id="cuenta" value="<? echo $ctaz ?>" size="20" maxlength="100"> 
+                  <td bgcolor="#efefef"> <input name="cuenta" type="text" id="cuenta" value="<?php echo $ctaz ?>" size="20" maxlength="100"> 
                   </td>
                 </tr>
                 <tr> 
-                  <td height="19" class=estilo_titulo > <input name="param" type="hidden" id="param4" value="<? echo $parz ?>"> 
-                    <input name="codigo" type="hidden" id="param5" value="<? echo $idz ?>"></td>
+                  <td height="19" class=estilo_titulo > <input name="param" type="hidden" id="param4" value="<?php echo $parz ?>"> 
+                    <input name="codigo" type="hidden" id="param5" value="<?php echo $idz ?>"></td>
                   <td bgcolor="#FFFFFF">&nbsp;</td>
                 </tr>
               </table></td>

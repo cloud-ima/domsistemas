@@ -2,7 +2,7 @@
 include("../seguridad.php");
 include("../fechaclasss.php");
 
-$rut_id = $_GET["rut"];
+$rut_id = $_GET["rut"] ?? '';
 $link=Conectarse();
 $qry = "SELECT * FROM rut where rut ='$rut_id'";
 $res = mysql_query($qry);
@@ -102,7 +102,7 @@ if(form1.certificado.value=="10" && form1.dias.value==""){
   <tr> 
     <td width="391" valign="middle"> 
       <div align="right"></div>
-      <div align="left"><font size="3"><strong><? echo $mensajetitulo ?></strong></font></div></td>
+      <div align="left"><font size="3"><strong><?php echo $mensajetitulo ?></strong></font></div></td>
     <td width="425"><div align="right"></div></td>
   </tr>
 </table>
@@ -113,8 +113,8 @@ if(form1.certificado.value=="10" && form1.dias.value==""){
 border=0>
           <TBODY>
             <TR> 
-              <TD bgColor=#ffffff><input name="param" type="hidden" id="param2" value="<? echo $parz ?>"> 
-                <input name="rut" type="hidden" id="codigo2" value="<? echo $rut_id ?>"> 
+              <TD bgColor=#ffffff><input name="param" type="hidden" id="param2" value="<?php echo $parz ?>"> 
+                <input name="rut" type="hidden" id="codigo2" value="<?php echo $rut_id ?>"> 
               </TD>
               <TD width="88" align="right" bgColor=#ffffff> <div align="right"> 
                 </div></TD>
@@ -126,21 +126,21 @@ border=0>
             </TR>
             <TR> 
               <TD bgColor=#ffffff><strong>RUT</strong></TD>
-              <TD colspan="3" bgColor=#ffffff><font color="#990000"><strong><? echo $rut_id
+              <TD colspan="3" bgColor=#ffffff><font color="#990000"><strong><?php echo $rut_id
  ?></strong></font></TD>
             </TR>
             <TR> 
               <TD bgColor=#ffffff>Nombre de Solicitante</TD>
-              <TD colspan="3" bgColor=#ffffff><font color="#333333"><strong><? echo $nombre
+              <TD colspan="3" bgColor=#ffffff><font color="#333333"><strong><?php echo $nombre
  ?></strong></font></TD>
             </TR>
             <TR> 
               <TD width="235" bgColor=#ffffff>Direcci&oacute;n y Tel&eacute;fonos 
                 de Contacto</TD>
-              <TD colspan="3" bgColor=#ffffff><font color="#333333"><strong><? echo $dir . " -------- " . $tel;
+              <TD colspan="3" bgColor=#ffffff><font color="#333333"><strong><?php echo $dir . " -------- " . $tel;
 
  ?></strong> <br>
-                <strong><? echo $cor;
+                <strong><?php echo $cor;
 
  ?></strong> </font></TD>
             </TR>
@@ -159,9 +159,9 @@ $resultc = mysql_query("SELECT * FROM tipocertificado order by nombre",$linkc);
                   <?php
 while($rowc = mysql_fetch_array($resultc)) {
 ?>
-                  <option value="<? echo $rowc["id"] ?>"
-<? if($rowc["id"] == $tc){?>selected<?}?>> <? echo $rowc["nombre"]?> </option>
-                  <? }
+                  <option value="<?php echo $rowc["id"] ?>"
+<?php if($rowc["id"] == $tc){?>selected<?php }?>> <?php echo $rowc["nombre"]?> </option>
+                  <?php }
 mysql_close($linkc);
 ?>
                 </select></TD>
@@ -169,14 +169,14 @@ mysql_close($linkc);
             <TR> 
               <TD bgColor=#ffffff><SPAN >Fecha Ingreso</SPAN></TD>
               <TD colspan="3" bgColor=#ffffff><font color="#000099"> 
-                <input name="fecha" type="hidden" value="<? echo $fecha_hoy; ?>" size="11" maxlength="10">
-                <strong><? echo $fec;
+                <input name="fecha" type="hidden" value="<?php echo $fecha_hoy; ?>" size="11" maxlength="10">
+                <strong><?php echo $fec;
  ?></strong></font></TD>
             </TR>
             <TR> 
               <TD bgColor=#ffffff>Fecha de Entrega</TD>
               <TD colspan="3" bgColor=#ffffff><font color="#000099"> 
-                <input name="fentrega" type="text" id="dateArriva9" onClick="popUpCalendar(this, form1.dateArriva9, 'dd-mm-yyyy');" value="<? echo $fec_entrega; ?>" size="11" maxlength="10">
+                <input name="fentrega" type="text" id="dateArriva9" onClick="popUpCalendar(this, form1.dateArriva9, 'dd-mm-yyyy');" value="<?php echo $fec_entrega; ?>" size="11" maxlength="10">
                 </font> </TD>
             </TR>
             <TR bgcolor="#ADBEE4"> 
@@ -215,11 +215,11 @@ mysql_close($linkc);
             </TR>
             <TR> 
               <TD height="25" bgColor=#ffffff>Atendido por</TD>
-              <TD colspan="3" bgColor=#ffffff><p><font color="#000099"><strong><? echo $nombreusuario; ?></strong></font></p></TD>
+              <TD colspan="3" bgColor=#ffffff><p><font color="#000099"><strong><?php echo $nombreusuario; ?></strong></font></p></TD>
             </TR>
             <TR> 
               <TD colspan="4" bgColor=#ffffff> 
-                <? include "../footer.php" ?>
+                <?php include "../footer.php" ?>
               </TD>
             </TR>
           </TBODY>

@@ -1,5 +1,5 @@
-<? //include "top.php" ?>
-<? $error=$_GET['error']; ?>
+<?php //include "top.php" ?>
+<?php $error=$_GET['error'] ?? ''; ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>MUNIARICA.CL</TITLE>
@@ -69,7 +69,7 @@ width=13></TD>
           </SPAN>
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr> 
-              <td><div align="center"><strong><font class=normal color="#FF0000"><? echo $error ?></font></strong></div></td>
+              <td><div align="center"><strong><font class=normal color="#FF0000"><?php echo $error ?></font></strong></div></td>
             </tr>
             <tr>
               <td>&nbsp;</td>
@@ -125,7 +125,7 @@ width=13></TD>
 <table class=normal width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td><div align="center">
-        <? include("footer.php");?>
+        <?php include("footer.php");?>
       </div></td>
   </tr>
 </table>

@@ -1,5 +1,4 @@
-<?
-include "../seguridad.php";
+<?php include "../seguridad.php";
 $fecha_hoy = date('d')."/".date('m')."/".date('Y');
 $hoy = date('Y')."-".date('m')."-".date('d');
 if ( $tipousuario <> 1 ) { 
@@ -42,7 +41,7 @@ z-index:100;
   <tr>
     <td width="713" height="29" valign="top"><table width="695" height="26" border="0" cellpadding="2" cellspacing="2">
         <tr>
-          <? 
+          <?php 
                     $color2 = "#A6E2FF";
 				if ($a == 0) {
                     $color = "#EFEF99";
@@ -56,7 +55,7 @@ z-index:100;
           <td width="384" height="22" align="center" bgcolor="#EFEFEF"><div align="center"></div>
               <strong>Tipo de Certificados valorizados en $ </strong></td>
           <td width="144" align="left" bgcolor="#EFEFEF" ><div align="center"><strong>Total A&ntilde;o</strong></div></td>
-          <td width="147" align="right" bgcolor="#EFEFEF" ><div align="center"><strong><? echo $fecha_hoy ?></strong></div></td>
+          <td width="147" align="right" bgcolor="#EFEFEF" ><div align="center"><strong><?php echo $fecha_hoy ?></strong></div></td>
         </tr>
     </table></td>
   </tr>
@@ -64,8 +63,7 @@ z-index:100;
     <td height="56" valign="top"><table width="43" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td width="43"><font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-            <?
-		  $link=Conectarse(); 
+            <?php 		  $link=Conectarse(); 
 		  
           $result=mysql_query("SELECT * FROM tipocertificado order by id ",$link); 
           $a=0;
@@ -120,7 +118,7 @@ while ($row = mysql_fetch_array($result)){
       </table>
         <table width="695" height="26" border="0" cellpadding="2" cellspacing="2">
           <tr>
-            <? 
+            <?php 
 										  $color = "#ffffff";
 /*                    $color2 = "#A6E2FF";
 				if ($a == 0) {
@@ -133,9 +131,9 @@ while ($row = mysql_fetch_array($result)){
 		        }	 */
 				?>
             <td width="11" height="22" align="center"><div align="center"></div></td>
-            <td width="365" align="left" bgcolor="<? echo $color ?>" ><table width="365" border="0" cellspacing="0" cellpadding="0">
+            <td width="365" align="left" bgcolor="<?php echo $color ?>" ><table width="365" border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                  <td colspan="2"><? echo $row["nombre"] ?></td>
+                  <td colspan="2"><?php echo $row["nombre"] ?></td>
                 </tr>
                 <tr>
                   <td width="40">(<?php echo( $porcentaje ) ?>%)</td>
@@ -146,21 +144,21 @@ while ($row = mysql_fetch_array($result)){
                   </table></td>
                 </tr>
             </table></td>
-            <td width="146" align="right" bgcolor="<? echo $color ?>" ><span class="style2"><? echo number_format($acum1, 0, ",", ".");
- ?> ---&gt;(<? echo $total_year ?>)</span></td>
-            <td width="147" align="right" bgcolor="<? echo $color ?>" ><span class="style2"><? echo number_format($acum2, 0, ",", ".");
- ?> ---&gt;(<? echo $num_total_registros ?>) </span></td>
+            <td width="146" align="right" bgcolor="<?php echo $color ?>" ><span class="style2"><?php echo number_format($acum1, 0, ",", ".");
+ ?> ---&gt;(<?php echo $total_year ?>)</span></td>
+            <td width="147" align="right" bgcolor="<?php echo $color ?>" ><span class="style2"><?php echo number_format($acum2, 0, ",", ".");
+ ?> ---&gt;(<?php echo $num_total_registros ?>) </span></td>
           </tr>
         </table>
         <table width="41" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td width="41"><? }?>
+            <td width="41"><?php }?>
             </td>
           </tr>
         </table>
         <table width="694" height="27" border="0" cellpadding="2" cellspacing="2">
           <tr>
-            <? 
+            <?php 
 									                      $color = "#ffffff";
 /*                    $color2 = "#A6E2FF";
 					                    $color = "#ffffff";
@@ -175,15 +173,15 @@ while ($row = mysql_fetch_array($result)){
 				?>
             <td width="338" height="22" align="center" bgcolor="#EFEFEF"><div align="center"></div>
                 <div align="right"><strong>TOTALES -----------&gt;</strong></div></td>
-            <td width="190" align="right" bgcolor="#EFEFEF" ><span class="style2"><? echo number_format($tot1, 0, ",", ".");
- ?> ---&gt;(<? echo $total_year_acum ?>) </span></td>
-            <td width="146" align="right" bgcolor="#EFEFEF" ><span class="style2"><? echo number_format($tot2, 0, ",", "."); ?> ---&gt;(<? echo $num_total_registros_acum ?>) </span></td>
+            <td width="190" align="right" bgcolor="#EFEFEF" ><span class="style2"><?php echo number_format($tot1, 0, ",", ".");
+ ?> ---&gt;(<?php echo $total_year_acum ?>) </span></td>
+            <td width="146" align="right" bgcolor="#EFEFEF" ><span class="style2"><?php echo number_format($tot2, 0, ",", "."); ?> ---&gt;(<?php echo $num_total_registros_acum ?>) </span></td>
           </tr>
       </table></td>
   </tr>
 </table>
 <p>
-  <? include ("../footer.php") ?>
+  <?php include ("../footer.php") ?>
 </p>
 </body>
 </html>

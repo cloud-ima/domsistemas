@@ -25,7 +25,7 @@
         </tr>
         <tr>
           <td><div align="center"><span class="style4">
-              <? $ultimo_id; ?>
+              <?php $ultimo_id; ?>
           </span></div></td>
         </tr>
         <tr>

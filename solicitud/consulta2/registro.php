@@ -3,7 +3,7 @@
 include ("conexion.php");
 $link=Conectarse();
 
-$nom=$_POST['nombres'];
+$nom=$_POST['nombres'] ?? '';
 $sql=mysql_query("SELECT * FROM propiedades where id = '$nom'",$link);
 
 ?>

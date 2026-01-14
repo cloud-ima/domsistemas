@@ -5,8 +5,8 @@ include("../fechaclasss.php");
 
 $link=conectarse();
 
-$ok = $_POST['listo'];
-$ff = $_POST['foliox'];
+$ok = $_POST['listo'] ?? '';
+$ff = $_POST['foliox'] ?? '';
 
 //*******************[ Busqueda de Directores para firma de documentos ]**********************
 			  $qry = "SELECT * FROM directores where activo ='S'";
@@ -27,41 +27,41 @@ if ( $ok == 'checkbox' )
 
 $ssql = "select * from propiedades where id ='$idx'";
 
-			 $idx = $_POST['codigo'];
-			 $rolx = $_POST['rol'];
-			 $direx = $_POST['dire'];
-			 $viax = $_POST['via'];
-			 $numx = $_POST['num'];
-			 $blockx = $_POST['block'];
-			 $deptox = $_POST['depto'];
-			 $sitiox = $_POST['sitio'];
-			 $manx = $_POST['man'];
-			 $pobx = $_POST['pob'];
-			 $refx = $_POST['referencia'];	 
-			 $zonax = $_POST['zona'];
-			 $urbax = $_POST['urba'];
-			 $tipox = $_POST['tipo'];
-			 $usox = $_POST['uso'];
-			 $expox = $_POST['expo'];
-			 $radiox = $_POST['radio'];
-			 $classx = $_POST['class'];
-			 $mtx = $_POST['mt'];
-			 $mtcx = $_POST['mtc'];
-			 $kx = $_POST['kardex'];
+			 $idx = $_POST['codigo'] ?? '';
+			 $rolx = $_POST['rol'] ?? '';
+			 $direx = $_POST['dire'] ?? '';
+			 $viax = $_POST['via'] ?? '';
+			 $numx = $_POST['num'] ?? '';
+			 $blockx = $_POST['block'] ?? '';
+			 $deptox = $_POST['depto'] ?? '';
+			 $sitiox = $_POST['sitio'] ?? '';
+			 $manx = $_POST['man'] ?? '';
+			 $pobx = $_POST['pob'] ?? '';
+			 $refx = $_POST['referencia'] ?? '';	 
+			 $zonax = $_POST['zona'] ?? '';
+			 $urbax = $_POST['urba'] ?? '';
+			 $tipox = $_POST['tipo'] ?? '';
+			 $usox = $_POST['uso'] ?? '';
+			 $expox = $_POST['expo'] ?? '';
+			 $radiox = $_POST['radio'] ?? '';
+			 $classx = $_POST['class'] ?? '';
+			 $mtx = $_POST['mt'] ?? '';
+			 $mtcx = $_POST['mtc'] ?? '';
+			 $kx = $_POST['kardex'] ?? '';
 
- 			  $cod = $_POST['pob'];
+ 			  $cod = $_POST['pob'] ?? '';
  			  $link=Conectarse();
 			  $qry = "SELECT * FROM pob where id ='$cod'";
 			  $res = mysql_query($qry);
 			  $pobed = mysql_result($res, 0, "nombre");
 			  
-			  $roled = $_POST['rol'];
-			  $numed =  $_POST['num'];
+			  $roled = $_POST['rol'] ?? '';
+			  $numed =  $_POST['num'] ?? '';
 	          $viaed  = strtolower($_POST['via']);
-			  $direed = $_POST['dire'];
-			  $sitioed = $_POST['sitio'];
-			  $maned = $_POST['man'];
-			  $deptox = $_POST['depto'];
+			  $direed = $_POST['dire'] ?? '';
+			  $sitioed = $_POST['sitio'] ?? '';
+			  $maned = $_POST['man'] ?? '';
+			  $deptox = $_POST['depto'] ?? '';
 			  $deptoed=''; 
 			  
   			  $link=Conectarse();
@@ -72,22 +72,22 @@ $ssql = "select * from propiedades where id ='$idx'";
 			  
 			  
 			  if ( $deptox <> '' ) {
-			       $deptoed = 'Block ' . $_POST['block'] . ' Depto Num. '. $_POST['depto'];
+			       $deptoed = 'Block ' . $_POST['block'] ?? '' . ' Depto Num. '. $_POST['depto'] ?? '';
 			  }	   
 
 			  if ( $maned <> '' ){
-			       $maned = ' , Manzana ' . $_POST['man'];
+			       $maned = ' , Manzana ' . $_POST['man'] ?? '';
 			  }
 
 			  if ( $sitioed <> '' ){
-			       $sitioed = ' , Sitio ' . $_POST['sitio'];
+			       $sitioed = ' , Sitio ' . $_POST['sitio'] ?? '';
 			  }
 
-			  $urbax = $_POST['urba'];
-			  $expox = $_POST['expo'];
-			  $radiox = $_POST['radio'];
-			  $zonax =  $_POST['zona'];
-			  $classx = $_POST['class'];
+			  $urbax = $_POST['urba'] ?? '';
+			  $expox = $_POST['expo'] ?? '';
+			  $radiox = $_POST['radio'] ?? '';
+			  $zonax =  $_POST['zona'] ?? '';
+			  $classx = $_POST['class'] ?? '';
 			  			  
 require_once('../tcpdf/config/lang/eng.php');
 require_once('../tcpdf/config/tcpdf_config_alt.php');

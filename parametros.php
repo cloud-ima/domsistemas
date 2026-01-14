@@ -4,7 +4,7 @@ include("seguridad.php");
 
 if ( $tipousuario <> 1 ) { 
 			 echo '<script language="javascript">';
-			 echo "alert('Sr. Usuario no tiene acceso a este módulo');";
+			 echo "alert('Sr. Usuario no tiene acceso a este mï¿½dulo');";
 			 echo "location.href='principal.php';";
 			 echo "</script>";
 }
@@ -48,27 +48,27 @@ $hoy = date('Y')."-".date('m')."-".date('d');
               <tr>
                 <td width="43%" valign="top"><table width="252" border="0" align="right" cellpadding="2" cellspacing="2">
                   <tr>
-                    <td width="46"><div align="left"><img src="Images/form-ico.jpg" width="40" height="39"></div></td>
+                    <td width="46"><div align="left"><img src="images/form-ico.jpg" width="40" height="39"></div></td>
                     <td width="192" valign="middle"><a href="zonas/">Creaci&oacute;n de Zonas </a></td>
                   </tr>
                   <tr>
-                    <td><div align="left"><img src="Images/form-ico.jpg" width="40" height="39"></div></td>
+                    <td><div align="left"><img src="images/form-ico.jpg" width="40" height="39"></div></td>
                     <td valign="middle"><a href="clases/">Creaci&oacute;n de Clases </a></td>
                   </tr>
                   <tr>
-                    <td><img src="Images/form-ico.jpg" width="40" height="39"></td>
+                    <td><img src="images/form-ico.jpg" width="40" height="39"></td>
                     <td valign="middle"><a href="tipocertificado/">Tipos de Certificados </a></td>
                   </tr>
                   <tr>
-                    <td><img src="Images/form-ico.jpg" width="40" height="39"></td>
+                    <td><img src="images/form-ico.jpg" width="40" height="39"></td>
                     <td valign="middle"><a href="parametros/">Par&aacute;metros Financieros</a> </td>
                   </tr>
                   <tr>
-                    <td><img src="Images/form-ico.jpg" width="40" height="39"></td>
+                    <td><img src="images/form-ico.jpg" width="40" height="39"></td>
                     <td valign="middle"><a href="pob/">Poblaciones </a></td>
                   </tr>
                   <tr>
-                    <td><img src="Images/form-ico.jpg" width="40" height="39"></td>
+                    <td><img src="images/form-ico.jpg" width="40" height="39"></td>
                     <td valign="middle"><a href="directores/">Directores y Activaci&oacute;n Firmas</a></td>
                   </tr>
                 </table>
@@ -76,23 +76,23 @@ $hoy = date('Y')."-".date('m')."-".date('d');
                   </td>
                 <td width="57%" valign="top">                  <table width="300" border="0" align="left" cellpadding="2" cellspacing="2">
                   <tr>
-                    <td width="47"><div align="left"><img src="Images/form-ico.jpg" width="40" height="39"></div></td>
+                    <td width="47"><div align="left"><img src="images/form-ico.jpg" width="40" height="39"></div></td>
                     <td width="253" valign="middle"><a href="tipopropiedades/">Tipo de Propiedades </a></td>
                   </tr>
                   <tr>
-                    <td><div align="left"><img src="Images/form-ico.jpg" width="40" height="39"></div></td>
+                    <td><div align="left"><img src="images/form-ico.jpg" width="40" height="39"></div></td>
                     <td valign="middle"><a href="usos/">Usos de Suelo </a></td>
                   </tr>
                   <tr>
-                    <td><img src="Images/form-ico.jpg" width="40" height="39"></td>
+                    <td><img src="images/form-ico.jpg" width="40" height="39"></td>
                     <td valign="middle"><a href="destino/">Destinos de la Propiedad </a></td>
                   </tr>
                   <tr>
-                    <td><img src="Images/form-ico.jpg" width="40" height="39"></td>
+                    <td><img src="images/form-ico.jpg" width="40" height="39"></td>
                     <td valign="middle"><a href="usuarios/">Usuarios</a></td>
                   </tr>
                   <tr>
-                    <td><img src="Images/form-ico.jpg" width="40" height="39"></td>
+                    <td><img src="images/form-ico.jpg" width="40" height="39"></td>
                     <td valign="middle"><a href="solicitud/consultaestado.php">Modificar Estado de Solicitud </a></td>
                   </tr>
                   <tr>
@@ -109,6 +109,6 @@ $hoy = date('Y')."-".date('m')."-".date('d');
   </tr>
 </table>
 <br>
-<? include("footer.php"); ?>
+<?php include("footer.php"); ?>
 </body>
 </html>

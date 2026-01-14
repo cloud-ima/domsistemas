@@ -7,7 +7,7 @@ include("fckeditor/fckeditor.php");
 // Validación del Ingreso (Nuevo,edición)
 
 
-$x_flag = $_GET["flag"];
+$x_flag = $_GET["flag"] ?? '';
 if ( $x_flag == 0 ) {
    $idestado = "Nuevo Registro";
    $parz = 1;
@@ -23,8 +23,8 @@ if ( $x_flag == 0 ) {
 
 if ( $x_flag == 1 ) {
    
-/*    $dire = '../uploads/ID_ROL'.$_GET['id'];
-	$direreal='/domsistemas/uploads/ID_ROL'.$_GET['id'];
+/*    $dire = '../uploads/ID_ROL'.$_GET['id'] ?? '';
+	$direreal='/domsistemas/uploads/ID_ROL'.$_GET['id'] ?? '';
 
 	
 if (is_dir($dire)) {
@@ -38,7 +38,7 @@ mkdir($dire, 0777, true);
 */
     $idestado = "Modificando Registro";
 	$link=conectarse();
-    $idz=$_GET['id'];
+    $idz=$_GET['id'] ?? '';
     $ssql = "select * from propiedades where id ='$idz'";
     $rs = mysql_query($ssql,$link);
     $num_registros = mysql_num_rows($rs); 
@@ -184,7 +184,7 @@ return false;
       <br>
       <table width="998" border="0" cellpadding="2" cellspacing="2" bgcolor="#cccccc">
         <tr>
-          <td><span class="style8">Antecedentes Generales de la Propiedad (<span class="style13"><font size="3"><? echo $idestado ?></font></span>) </span></td>
+          <td><span class="style8">Antecedentes Generales de la Propiedad (<span class="style13"><font size="3"><?php echo $idestado ?></font></span>) </span></td>
         </tr>
       </table>
       <br>
@@ -193,13 +193,13 @@ return false;
           <td width="481" valign="top"><table width="480" border="0" cellspacing="2" cellpadding="2">
             <tr>
               <td width="122"><div align="left"><strong>R.O.L.</strong></div></td>
-              <td width="339"><input name="rol" type="text" class=bordecampos id="rol" value="<? echo $rolx; ?>" size="15" maxlength="10"></td>
+              <td width="339"><input name="rol" type="text" class=bordecampos id="rol" value="<?php echo $rolx; ?>" size="15" maxlength="10"></td>
             </tr>
             <tr>
               <td><div align="right" class="style11">
                 <div align="left">Direcci&oacute;n</div>
               </div></td>
-              <td><input  name="dire" type="text" class=bordecampos id="dire" value="<? echo $direx; ?>" size="50" maxlength="100"></td>
+              <td><input  name="dire" type="text" class=bordecampos id="dire" value="<?php echo $direx; ?>" size="50" maxlength="100"></td>
             </tr>
             <tr>
               <td><div align="right" class="style11">
@@ -213,16 +213,16 @@ $resultc = mysql_query("SELECT * FROM vias order by nombre",$linkc);
                   <?php
 while($rowc = mysql_fetch_array($resultc)) {
 ?>
-                  <option value="<? echo $rowc["nombre"] ?>"
-<? if($rowc["nombre"] == $viax){?>selected<?}?>> <? echo $rowc["nombre"]?> </option>
-                  <? }
+                  <option value="<?php echo $rowc["nombre"] ?>"
+<?php if($rowc["nombre"] == $viax){?>selected<?php }?>> <?php echo $rowc["nombre"]?> </option>
+                  <?php }
 mysql_close($linkc);
 ?>
               </select></td>
             </tr>
             <tr>
               <td><span class="style11">N&uacute;meraci&oacute;n</span></td>
-              <td><input  name="num" type="text" class=bordecampos id="num" value="<? echo $numx; ?>" size="50" maxlength="100"></td>
+              <td><input  name="num" type="text" class=bordecampos id="num" value="<?php echo $numx; ?>" size="50" maxlength="100"></td>
             </tr>
             <tr>
               <td><div align="left"></div></td>
@@ -235,16 +235,16 @@ mysql_close($linkc);
                 </tr>
                 <tr>
                   <td><div align="center">
-                    <input  name="block" type="text" class=bordecampos id="block" value="<? echo $blockx; ?>" size="8" maxlength="10">
+                    <input  name="block" type="text" class=bordecampos id="block" value="<?php echo $blockx; ?>" size="8" maxlength="10">
                   </div></td>
                   <td><div align="center">
-                    <input  name="depto" type="text" class=bordecampos id="depto" value="<? echo $deptox; ?>" size="8" maxlength="10">
+                    <input  name="depto" type="text" class=bordecampos id="depto" value="<?php echo $deptox; ?>" size="8" maxlength="10">
                   </div></td>
                   <td><div align="center">
-                    <input  name="sitio" type="text" class=bordecampos id="sitio" value="<? echo $sitiox; ?>" size="8" maxlength="10">
+                    <input  name="sitio" type="text" class=bordecampos id="sitio" value="<?php echo $sitiox; ?>" size="8" maxlength="10">
                   </div></td>
                   <td><div align="center">
-                    <input  name="man" type="text" class=bordecampos id="man" value="<? echo $manx; ?>" size="20" maxlength="50">
+                    <input  name="man" type="text" class=bordecampos id="man" value="<?php echo $manx; ?>" size="20" maxlength="50">
                   </div></td>
                 </tr>
               </table></td>
@@ -260,16 +260,16 @@ $resultc = mysql_query("SELECT * FROM pob order by nombre",$linkc);
                   <?php
 while($rowc = mysql_fetch_array($resultc)) {
 ?>
-                  <option value="<? echo $rowc["id"] ?>"
-<? if($rowc["id"] == $pobx){?>selected<?}?>> <? echo $rowc["nombre"]?> </option>
-                  <? }
+                  <option value="<?php echo $rowc["id"] ?>"
+<?php if($rowc["id"] == $pobx){?>selected<?php }?>> <?php echo $rowc["nombre"]?> </option>
+                  <?php }
 mysql_close($linkc);
 ?>
                 </select></td>
             </tr>
             <tr>
               <td><div align="left"><span class="style11">Nombre Referencia </span></div></td>
-              <td><input  name="referencia" type="text" class=bordecampos id="referencia" value="<? echo $refx; ?>" size="50" maxlength="100"></td>
+              <td><input  name="referencia" type="text" class=bordecampos id="referencia" value="<?php echo $refx; ?>" size="50" maxlength="100"></td>
             </tr>
             <tr>
               <td><div align="left"><span class="style11">Clase</span></div></td>
@@ -281,17 +281,17 @@ $resultc = mysql_query("SELECT * FROM clases order by nombre",$linkc);
                   <?php
 while($rowc = mysql_fetch_array($resultc)) {
 ?>
-                  <option value="<? echo $rowc["id"] ?>"
-<? if($rowc["id"] == $classx){?>selected<?}?>> <? echo $rowc["nombre"]?> </option>
-                  <? }
+                  <option value="<?php echo $rowc["id"] ?>"
+<?php if($rowc["id"] == $classx){?>selected<?php }?>> <?php echo $rowc["nombre"]?> </option>
+                  <?php }
 mysql_close($linkc);
 ?>
                 </select></td>
             </tr>
             <tr>
               <td><div align="left"></div></td>
-              <td><input name="param" type="hidden" id="param2" value="<? echo $parz ?>">
-                <input name="codigo" type="hidden" id="codigo" value="<? echo $idz ?>"></td>
+              <td><input name="param" type="hidden" id="param2" value="<?php echo $parz ?>">
+                <input name="codigo" type="hidden" id="codigo" value="<?php echo $idz ?>"></td>
             </tr>
           </table>
             
@@ -299,7 +299,7 @@ mysql_close($linkc);
               <tr>
                 <td width="467"><table width="93%" height="20" border="0" cellpadding="2" cellspacing="2">
                   <tr>
-                    <? 
+                    <?php 
                     $color2 = "#A6E2FF";
 				if ($a == 0) {
                     $color = "#f1f1f1";
@@ -316,7 +316,7 @@ mysql_close($linkc);
                       <div align="center" class="style11"></div>                      <div align="center" class="style11"></div>                      <div align="center" class="style11"></div>                      <div align="center" class="style11"></div></td>
                     </tr>
                 </table>
-                  <textarea name="numnuevo" cols="70" rows="10" class="bordecampos" id="numnuevo"><? echo $newnumx; ?></textarea>
+                  <textarea name="numnuevo" cols="70" rows="10" class="bordecampos" id="numnuevo"><?php echo $newnumx; ?></textarea>
                   <br>
                   <span class="style14">Nota: Solo llenar este campo especificamente con informaci&oacute;n de <br>
                   nuevos n&uacute;meros agregados a la propiedad , pudiendo ingresar nuevas <br>
@@ -335,9 +335,9 @@ $resultc = mysql_query("SELECT * FROM destino order by nombre",$linkc);
                   <?php
 while($rowc = mysql_fetch_array($resultc)) {
 ?>
-                  <option value="<? echo $rowc["id"] ?>"
-<? if($rowc["id"] == $desx){?>selected<?}?>> <? echo $rowc["nombre"]?> </option>
-                  <? }
+                  <option value="<?php echo $rowc["id"] ?>"
+<?php if($rowc["id"] == $desx){?>selected<?php }?>> <?php echo $rowc["nombre"]?> </option>
+                  <?php }
 mysql_close($linkc);
 ?>
                 </select></td>
@@ -352,9 +352,9 @@ $resultc = mysql_query("SELECT * FROM zonas order by id",$linkc);
                   <?php
 while($rowc = mysql_fetch_array($resultc)) {
 ?>
-                  <option value="<? echo $rowc["id"] ?>"
-<? if($rowc["id"] == $zonax){?>selected<?}?>> <? echo $rowc["id"]?> </option>
-                  <? }
+                  <option value="<?php echo $rowc["id"] ?>"
+<?php if($rowc["id"] == $zonax){?>selected<?php }?>> <?php echo $rowc["id"]?> </option>
+                  <?php }
 mysql_close($linkc);
 ?>
                 </select></td>
@@ -371,9 +371,9 @@ $resultc = mysql_query("SELECT * FROM urbanizacion order by id",$linkc);
                   <?php
 while($rowc = mysql_fetch_array($resultc)) {
 ?>
-                  <option value="<? echo $rowc["id"] ?>"
-<? if($rowc["id"] == $urbax){?>selected<?}?>> <? echo $rowc["id"]?> </option>
-                  <? }
+                  <option value="<?php echo $rowc["id"] ?>"
+<?php if($rowc["id"] == $urbax){?>selected<?php }?>> <?php echo $rowc["id"]?> </option>
+                  <?php }
 mysql_close($linkc);
 ?>
                 </select></td>
@@ -391,9 +391,9 @@ $resultc = mysql_query("SELECT * FROM tipo order by nombre",$linkc);
                   <?php
 while($rowc = mysql_fetch_array($resultc)) {
 ?>
-                  <option value="<? echo $rowc["id"] ?>"
-<? if($rowc["id"] == $tpx){?>selected<?}?>> <? echo $rowc["nombre"]?> </option>
-                  <? }
+                  <option value="<?php echo $rowc["id"] ?>"
+<?php if($rowc["id"] == $tpx){?>selected<?php }?>> <?php echo $rowc["nombre"]?> </option>
+                  <?php }
 mysql_close($linkc);
 ?>
                 </select></td>
@@ -409,9 +409,9 @@ $resultc = mysql_query("SELECT * FROM usos order by nombre",$linkc);
                   <?php
 while($rowc = mysql_fetch_array($resultc)) {
 ?>
-                  <option value="<? echo $rowc["id"] ?>"
-<? if($rowc["id"] == $usox){?>selected<?}?>> <? echo $rowc["nombre"]?> </option>
-                  <? }
+                  <option value="<?php echo $rowc["id"] ?>"
+<?php if($rowc["id"] == $usox){?>selected<?php }?>> <?php echo $rowc["nombre"]?> </option>
+                  <?php }
 mysql_close($linkc);
 ?>
                 </select></td>
@@ -426,9 +426,9 @@ $resultc = mysql_query("SELECT * FROM expropiacion order by id",$linkc);
                   <?php
 while($rowc = mysql_fetch_array($resultc)) {
 ?>
-                  <option value="<? echo $rowc["id"] ?>"
-<? if($rowc["id"] == $expox){?>selected<?}?>> <? echo $rowc["id"]?> </option>
-                  <? }
+                  <option value="<?php echo $rowc["id"] ?>"
+<?php if($rowc["id"] == $expox){?>selected<?php }?>> <?php echo $rowc["id"]?> </option>
+                  <?php }
 mysql_close($linkc);
 ?>
                 </select></td>
@@ -443,24 +443,24 @@ $resultc = mysql_query("SELECT * FROM radiourbano order by id",$linkc);
                   <?php
 while($rowc = mysql_fetch_array($resultc)) {
 ?>
-                  <option value="<? echo $rowc["id"] ?>"
-<? if($rowc["id"] == $radiox){?>selected<?}?>> <? echo $rowc["id"]?> </option>
-                  <? }
+                  <option value="<?php echo $rowc["id"] ?>"
+<?php if($rowc["id"] == $radiox){?>selected<?php }?>> <?php echo $rowc["id"]?> </option>
+                  <?php }
 mysql_close($linkc);
 ?>
                 </select></td>
             </tr>
             <tr>
               <td><div align="left" class="style11"><span class="style11">MT 2 </span></div></td>
-              <td><input  name="mt" type="text" class=bordecampos id="mt" value="<? echo $mtx; ?>" size="10" maxlength="10"></td>
+              <td><input  name="mt" type="text" class=bordecampos id="mt" value="<?php echo $mtx; ?>" size="10" maxlength="10"></td>
             </tr>
             <tr>
               <td><div align="left" class="style11">MT 2 Const. </div></td>
-              <td><input  name="mtc" type="text" class=bordecampos id="mtc" value="<? echo $mtcx; ?>" size="10" maxlength="10"></td>
+              <td><input  name="mtc" type="text" class=bordecampos id="mtc" value="<?php echo $mtcx; ?>" size="10" maxlength="10"></td>
             </tr>
             <tr>
               <td><span class="style11">Nr. KARDEX </span></td>
-              <td><input  name="kardex" type="text" class=bordecampos id="kardex" value="<? echo $karx; ?>" size="10" maxlength="10"></td>
+              <td><input  name="kardex" type="text" class=bordecampos id="kardex" value="<?php echo $karx; ?>" size="10" maxlength="10"></td>
             </tr>
             <tr>
               <td><div align="left" class="style11">Otro Antecedente</div></td>
@@ -473,9 +473,9 @@ $resultc = mysql_query("SELECT * FROM antecedentes order by id",$linkc);
                   <?php
 while($rowc = mysql_fetch_array($resultc)) {
 ?>
-                  <option value="<? echo $rowc["id"] ?>"
-<? if($rowc["id"] == $oax){?>selected<?}?>> <? echo $rowc["nombre"]?> </option>
-                  <? }
+                  <option value="<?php echo $rowc["id"] ?>"
+<?php if($rowc["id"] == $oax){?>selected<?php }?>> <?php echo $rowc["nombre"]?> </option>
+                  <?php }
 mysql_close($linkc);
 ?>
                 </select></td>
@@ -485,15 +485,15 @@ mysql_close($linkc);
               </tr>
             <tr>
               <td>PC</td>
-              <td><input  name="pc" type="text" class=bordecampos id="pc" value="<? echo $pcx; ?>" size="15" maxlength="10"> 
+              <td><input  name="pc" type="text" class=bordecampos id="pc" value="<?php echo $pcx; ?>" size="15" maxlength="10"> 
                 - 
-                  <input  name="pcd" type="text" class=bordecampos id="pcd" value="<? echo $pcdx; ?>" size="15" maxlength="10"></td>
+                  <input  name="pcd" type="text" class=bordecampos id="pcd" value="<?php echo $pcdx; ?>" size="15" maxlength="10"></td>
             </tr>
             <tr>
               <td>RF</td>
-              <td><input  name="rf" type="text" class=bordecampos id="rf" value="<? echo $rfx; ?>" size="15" maxlength="10"> 
+              <td><input  name="rf" type="text" class=bordecampos id="rf" value="<?php echo $rfx; ?>" size="15" maxlength="10"> 
                 - 
-                  <input  name="rfd" type="text" class=bordecampos id="rfd" value="<? echo $rfdx; ?>" size="15" maxlength="10"></td>
+                  <input  name="rfd" type="text" class=bordecampos id="rfd" value="<?php echo $rfdx; ?>" size="15" maxlength="10"></td>
             </tr>
             <tr>
               <td>Situaci&oacute;n Final </td>
@@ -506,17 +506,17 @@ $resultc = mysql_query("SELECT * FROM situacionpatente order by id",$linkc);
                   <?php
 while($rowc = mysql_fetch_array($resultc)) {
 ?>
-                  <option value="<? echo $rowc["id"] ?>"
-<? if($rowc["id"] == $estpatx){?>selected<?}?>> <? echo $rowc["nombre"]?> </option>
-                  <? }
+                  <option value="<?php echo $rowc["id"] ?>"
+<?php if($rowc["id"] == $estpatx){?>selected<?php }?>> <?php echo $rowc["nombre"]?> </option>
+                  <?php }
 mysql_close($linkc);
 ?>
                 </select> <br>
-                <? echo $fsitpatx; ?></td>
+                <?php echo $fsitpatx; ?></td>
             </tr>
             <tr>
               <td>Observaciones</td>
-              <td><textarea name="obspat" cols="55" rows="7" class="bordecampos" id="obspat"><? echo $obspatx; ?></textarea></td>
+              <td><textarea name="obspat" cols="55" rows="7" class="bordecampos" id="obspat"><?php echo $obspatx; ?></textarea></td>
             </tr>
             <tr>
               <td><div align="left"></div></td>
@@ -542,21 +542,21 @@ mysql_close($linkc);
                 <td><div align="right" class="style11">
                     <div align="left">Nombre de V&iacute;a </div>
                 </div></td>
-                <td><input  name="via1" type="text" class=bordecampos id="via1" value="<? echo $n1x; ?>" size="40" maxlength="100"></td>
+                <td><input  name="via1" type="text" class=bordecampos id="via1" value="<?php echo $n1x; ?>" size="40" maxlength="100"></td>
               </tr>
               <tr>
                 <td><div align="right" class="style11">
                     <div align="left">Antejard&iacute;n De: </div>
                 </div></td>
-                <td><input  name="ante1" type="text" class=bordecampos id="ante1" value="<? echo $a1x; ?>" size="40" maxlength="100"></td>
+                <td><input  name="ante1" type="text" class=bordecampos id="ante1" value="<?php echo $a1x; ?>" size="40" maxlength="100"></td>
               </tr>
               <tr>
                 <td><div align="left"><span class="style11">L&iacute;nea oficial se encuentra a </span></div></td>
-                <td><input  name="linea1" type="text" class=bordecampos id="linea1" value="<? echo $l1x; ?>" size="40" maxlength="100"></td>
+                <td><input  name="linea1" type="text" class=bordecampos id="linea1" value="<?php echo $l1x; ?>" size="40" maxlength="100"></td>
               </tr>
               <tr>
                 <td><div align="left"><span class="style11">Derecho a V&iacute;a </span></div></td>
-                <td><input  name="derecho1" type="text" class=bordecampos id="derecho1" value="<? echo $d1x; ?>" size="40" maxlength="100"></td>
+                <td><input  name="derecho1" type="text" class=bordecampos id="derecho1" value="<?php echo $d1x; ?>" size="40" maxlength="100"></td>
               </tr>
               <tr>
                 <td><div align="left"></div></td>
@@ -570,21 +570,21 @@ mysql_close($linkc);
                 <td><div align="right" class="style11">
                     <div align="left">Nombre de V&iacute;a </div>
                 </div></td>
-                <td><input  name="via2" type="text" class=bordecampos id="via2" value="<? echo $n2x; ?>" size="40" maxlength="100"></td>
+                <td><input  name="via2" type="text" class=bordecampos id="via2" value="<?php echo $n2x; ?>" size="40" maxlength="100"></td>
               </tr>
               <tr>
                 <td><div align="right" class="style11">
                     <div align="left">Antejard&iacute;n De: </div>
                 </div></td>
-                <td><input  name="ante2" type="text" class=bordecampos id="ante2" value="<? echo $a2x; ?>" size="40" maxlength="100"></td>
+                <td><input  name="ante2" type="text" class=bordecampos id="ante2" value="<?php echo $a2x; ?>" size="40" maxlength="100"></td>
               </tr>
               <tr>
                 <td><div align="left"><span class="style11">L&iacute;nea oficial se encuentra a </span></div></td>
-                <td><input  name="linea2" type="text" class=bordecampos id="linea2" value="<? echo $l2x; ?>" size="40" maxlength="100"></td>
+                <td><input  name="linea2" type="text" class=bordecampos id="linea2" value="<?php echo $l2x; ?>" size="40" maxlength="100"></td>
               </tr>
               <tr>
                 <td><div align="left"><span class="style11">Derecho a V&iacute;a </span></div></td>
-                <td><input  name="derecho2" type="text" class=bordecampos id="derecho2" value="<? echo $d2x; ?>" size="40" maxlength="100"></td>
+                <td><input  name="derecho2" type="text" class=bordecampos id="derecho2" value="<?php echo $d2x; ?>" size="40" maxlength="100"></td>
               </tr>
           </table></td>
           <td width="489" valign="top"><table width="487" border="0" cellspacing="2" cellpadding="2">
@@ -596,21 +596,21 @@ mysql_close($linkc);
                 <td><div align="right" class="style11">
                     <div align="left">Nombre de V&iacute;a </div>
                 </div></td>
-                <td><input  name="via3" type="text" class=bordecampos id="via3" value="<? echo $n3x; ?>" size="40" maxlength="100"></td>
+                <td><input  name="via3" type="text" class=bordecampos id="via3" value="<?php echo $n3x; ?>" size="40" maxlength="100"></td>
               </tr>
               <tr>
                 <td><div align="right" class="style11">
                     <div align="left">Antejard&iacute;n De: </div>
                 </div></td>
-                <td><input  name="ante3" type="text" class=bordecampos id="ante3" value="<? echo $a3x; ?>" size="40" maxlength="100"></td>
+                <td><input  name="ante3" type="text" class=bordecampos id="ante3" value="<?php echo $a3x; ?>" size="40" maxlength="100"></td>
               </tr>
               <tr>
                 <td><div align="left"><span class="style11">L&iacute;nea oficial se encuentra a </span></div></td>
-                <td><input  name="linea3" type="text" class=bordecampos id="linea3" value="<? echo $l3x; ?>" size="40" maxlength="100"></td>
+                <td><input  name="linea3" type="text" class=bordecampos id="linea3" value="<?php echo $l3x; ?>" size="40" maxlength="100"></td>
               </tr>
               <tr>
                 <td><div align="left"><span class="style11">Derecho a V&iacute;a </span></div></td>
-                <td><input  name="derecho3" type="text" class=bordecampos id="derecho3" value="<? echo $d3x; ?>" size="40" maxlength="100"></td>
+                <td><input  name="derecho3" type="text" class=bordecampos id="derecho3" value="<?php echo $d3x; ?>" size="40" maxlength="100"></td>
               </tr>
               <tr>
                 <td>&nbsp;</td>
@@ -624,21 +624,21 @@ mysql_close($linkc);
                 <td><div align="right" class="style11">
                     <div align="left">Nombre de V&iacute;a </div>
                 </div></td>
-                <td><input  name="via4" type="text" class=bordecampos id="via4" value="<? echo $n4x; ?>" size="40" maxlength="100"></td>
+                <td><input  name="via4" type="text" class=bordecampos id="via4" value="<?php echo $n4x; ?>" size="40" maxlength="100"></td>
               </tr>
               <tr>
                 <td><div align="right" class="style11">
                     <div align="left">Antejard&iacute;n De: </div>
                 </div></td>
-                <td><input  name="ante4" type="text" class=bordecampos id="ante4" value="<? echo $a4x; ?>" size="40" maxlength="100"></td>
+                <td><input  name="ante4" type="text" class=bordecampos id="ante4" value="<?php echo $a4x; ?>" size="40" maxlength="100"></td>
               </tr>
               <tr>
                 <td><div align="left"><span class="style11">L&iacute;nea oficial se encuentra a </span></div></td>
-                <td><input  name="linea4" type="text" class=bordecampos id="linea4" value="<? echo $l4x; ?>" size="40" maxlength="100"></td>
+                <td><input  name="linea4" type="text" class=bordecampos id="linea4" value="<?php echo $l4x; ?>" size="40" maxlength="100"></td>
               </tr>
               <tr>
                 <td><div align="left"><span class="style11">Derecho a V&iacute;a </span></div></td>
-                <td><input  name="derecho4" type="text" class=bordecampos id="derecho4" value="<? echo $d4x; ?>" size="40" maxlength="100"></td>
+                <td><input  name="derecho4" type="text" class=bordecampos id="derecho4" value="<?php echo $d4x; ?>" size="40" maxlength="100"></td>
               </tr>
           </table></td>
         </tr>

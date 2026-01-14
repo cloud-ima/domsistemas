@@ -1,4 +1,4 @@
-<? include("../seguridad.php"); 
+<?php include("../seguridad.php"); 
 $fecha_hoy = date('Y')."-".date('m')."-".date('d');?>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link href="../css/estilos.css" rel="stylesheet" type="text/css">
@@ -27,7 +27,7 @@ document.onkeypress = stopRKey;
     <td>&nbsp;</td>
   </tr>
   <tr> 
-    <td valign="middle"><strong><img src="Images/excelico.jpg" width="111" height="113" align="left"><br>
+    <td valign="middle"><strong><img src="images/excelico.jpg" width="111" height="113" align="left"><br>
       <br>
       <br>
       <br>
@@ -39,13 +39,13 @@ document.onkeypress = stopRKey;
           <tr> 
             <td width="198">Fecha Inicial</td>
             <td width="349"><font color="#000099"> 
-              <input name="desde" type="text" id="dateArriva3" onClick="popUpCalendar(this, form1.dateArriva3, 'yyyy-mm-dd');" value="<? echo $fecha_hoy ?>" size="15" maxlength="10">
+              <input name="desde" type="text" id="dateArriva3" onClick="popUpCalendar(this, form1.dateArriva3, 'yyyy-mm-dd');" value="<?php echo $fecha_hoy ?>" size="15" maxlength="10">
               </font></td>
           </tr>
           <tr> 
             <td>Fecha T&eacute;rmino</td>
             <td><font color="#000099"> 
-              <input name="hasta" type="text" id="dateArriva4" onClick="popUpCalendar(this, form1.dateArriva4, 'yyyy-mm-dd');" value="<? echo $fecha_hoy ?>" size="15" maxlength="10">
+              <input name="hasta" type="text" id="dateArriva4" onClick="popUpCalendar(this, form1.dateArriva4, 'yyyy-mm-dd');" value="<?php echo $fecha_hoy ?>" size="15" maxlength="10">
               </font></td>
           </tr>
           <tr> 

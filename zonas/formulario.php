@@ -2,7 +2,7 @@
 
 include("../conexion.php");
 
-$x_flag = $_GET["flag"];
+$x_flag = $_GET["flag"] ?? '';
 
 if ( $x_flag == 0 ) {
    $idestado = "Estado(Ingresando Nuevo Registro)";
@@ -13,7 +13,7 @@ if ( $x_flag == 0 ) {
 if ( $x_flag == 1 ) {
     $idestado = "Estado(Modificación del Registro)";
 	$link=conectarse();
-    $idz=$_GET['id'];
+    $idz=$_GET['id'] ?? '';
     $ssql = "select * from zonas where id ='$idz'";
     $rs = mysql_query($ssql,$link); 
     $num_registros = mysql_num_rows($rs); 
@@ -50,7 +50,7 @@ $fechaactualed = date('d')."/".date('n')."/".date('Y');
             <td width="461" align="center"> <div align="left"><strong>Tipo de Zona<font size="2"></font></strong></div></td>
           </tr>
           <tr>
-            <td align="center"><div align="left"><? echo $idestado ?></div></td>
+            <td align="center"><div align="left"><?php echo $idestado ?></div></td>
           </tr>
         </table>
         <table width="459" border="0" cellpadding="0" cellspacing="0" bordercolor="#cccccc">
@@ -65,20 +65,20 @@ $fechaactualed = date('d')."/".date('n')."/".date('Y');
                 <tr> 
                   <td width="146" height="26" bgcolor="#efefef" class=estilo_titulo >Descripci&oacute;n</td>
                   <td width="294" bgcolor="#efefef"> 
-                    <input name="ide" type="text" id="titulo2" value="<? echo $idz ?>" size="50" maxlength="100">
+                    <input name="ide" type="text" id="titulo2" value="<?php echo $idz ?>" size="50" maxlength="100">
                   </td>
                 </tr>
                 <tr>
                   <td height="19" bgcolor="#efefef" class=estilo_titulo >Resoluci&oacute;n</td>
-                  <td bgcolor="#FFFFFF"><input name="info" type="text" id="titulo2" value="<? echo $infz ?>" size="50" maxlength="100"></td>
+                  <td bgcolor="#FFFFFF"><input name="info" type="text" id="titulo2" value="<?php echo $infz ?>" size="50" maxlength="100"></td>
                 </tr>
                 <tr>
                   <td height="19" bgcolor="#efefef" class=estilo_titulo >Archivo Complemento</td>
-                  <td bgcolor="#FFFFFF"><input name="file" type="text" id="titulo2" value="<? echo $filez ?>" size="50" maxlength="100"></td>
+                  <td bgcolor="#FFFFFF"><input name="file" type="text" id="titulo2" value="<?php echo $filez ?>" size="50" maxlength="100"></td>
                 </tr>
                 <tr> 
-                  <td height="19" class=estilo_titulo > <input name="param" type="hidden" id="param4" value="<? echo $parz ?>"> 
-                    <input name="codigo" type="hidden" id="param5" value="<? echo $idz ?>"></td>
+                  <td height="19" class=estilo_titulo > <input name="param" type="hidden" id="param4" value="<?php echo $parz ?>"> 
+                    <input name="codigo" type="hidden" id="param5" value="<?php echo $idz ?>"></td>
                   <td bgcolor="#FFFFFF">&nbsp;</td>
                 </tr>
               </table></td>

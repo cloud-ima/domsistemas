@@ -1,18 +1,17 @@
-<?
-   include("../conexion.php");
+<?php    include("../conexion.php");
    
    if ( isset($_GET["param"]) ) {
-      $x_param = $_GET["param"]; }
+      $x_param = $_GET["param"] ?? ''; }
 	  
    if ( isset($_POST["param"]) ) {
-      $x_param = $_POST["param"]; }
+      $x_param = $_POST["param"] ?? ''; }
 	  
 	  		 $nomx = strtoupper($_POST["nombres"]);
 			 $apex = strtoupper($_POST["apellidos"]);
-  		     $telx = $_POST["telefonos"]; 
+  		     $telx = $_POST["telefonos"] ?? ''; 
  		     $dirx = strtoupper($_POST["direc"]);
 			 $corx = strtoupper($_POST["correo"]);
-  		     $rutx = $_POST["rut"];
+  		     $rutx = $_POST["rut"] ?? '';
    
 if ( $x_param == 1 ){
 			 $link=conectarse();
@@ -37,7 +36,7 @@ if ( $x_param == 2 ){
 }
 
 if ( $x_param == 3 ){
-		    /* $idx  = $_GET["id"];
+		    /* $idx  = $_GET["id"] ?? '';
              $link=conectarse();
              $sql="DELETE FROM noticias where id = '$idx'";
              $result = mysql_query($sql);

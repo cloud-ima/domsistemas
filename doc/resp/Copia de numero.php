@@ -4,8 +4,8 @@ include("../conexion.php");
 include("../fechaclasss.php");
 
 $link=conectarse();
-$idz=$_GET['id'];
-$folioz=$_GET['folio'];
+$idz=$_GET['id'] ?? '';
+$folioz=$_GET['folio'] ?? '';
 
 $ssql = "select * from propiedades where id ='$idz'";
 $rs = mysql_query($ssql,$link);

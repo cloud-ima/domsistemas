@@ -1,16 +1,15 @@
-<?
-   include("../conexion.php");
+<?php    include("../conexion.php");
    
    if ( isset($_GET["param"]) ) {
-      $x_param = $_GET["param"]; }
+      $x_param = $_GET["param"] ?? ''; }
 	  
    if ( isset($_POST["param"]) ) {
-      $x_param = $_POST["param"]; }
+      $x_param = $_POST["param"] ?? ''; }
    
 if ( $x_param == 1 ){
-			 $desx = $_POST["ide"];
-			 $infx = $_POST["info"];
-			 $filex = $_POST["file"];			 			 
+			 $desx = $_POST["ide"] ?? '';
+			 $infx = $_POST["info"] ?? '';
+			 $filex = $_POST["file"] ?? '';			 			 
 			 $link=conectarse();
 			 $sql = "INSERT INTO zonas (id,info,file) VALUES ('$desx','$infx','$filex')";
 			 $result2=mysql_query($sql);
@@ -23,9 +22,9 @@ if ( $x_param == 1 ){
 }
 
 if ( $x_param == 2 ){
-			 $idx  = $_POST["ide"];
-			 $infx = $_POST["info"];
-			 $filex = $_POST["file"];			 			 
+			 $idx  = $_POST["ide"] ?? '';
+			 $infx = $_POST["info"] ?? '';
+			 $filex = $_POST["file"] ?? '';			 			 
 		 
 		 	 $link=conectarse();
     	     $sql= "UPDATE zonas SET info='$infx', file='$filex' WHERE id='$idx'";
@@ -42,7 +41,7 @@ if ( $x_param == 2 ){
 
 
 if ( $x_param == 3 ){
-			 $idx  = $_GET["id"];
+			 $idx  = $_GET["id"] ?? '';
 			 if ( $idx <> 'SIN ESPECIFICAR ' ) {
 	             $link=conectarse();
     	         $sql="DELETE FROM zonas where id = '$idx'";

@@ -6,9 +6,9 @@ $hoy = date('Y')."-".date('m')."-".date('d');
 $x_num = '';
 $x_rol = '';
 $x_via = '';
-$x_rol = $_POST["rol"];
-$x_num = $_POST["num"];
-$x_via = strtoupper($_POST["via"]);
+$x_rol = $_POST["rol"] ?? '';
+$x_num = $_POST["num"] ?? '';
+$x_via = strtoupper($_POST["via"] ?? '');
 
 if ( $x_rol == '' and $x_num == '' and $x_via == '' ){
           $consultaSQL = "SELECT * FROM propiedades where rol = 'NN' order by rol"; 
@@ -48,7 +48,7 @@ z-index:100;
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr> 
     <td> 
-      <? //include "botones.php"; ?>
+      <?php //include "botones.php"; ?>
     </td>
   </tr>
   <tr> 
@@ -64,17 +64,17 @@ z-index:100;
                   </tr>
                   <tr> 
                     <td width="220">Nombre Avenida/Calle/Pasaje</td>
-                    <td colspan="2"><input name="via" type="text" id="num3" value="<? echo $x_via; ?>" size="30">
+                    <td colspan="2"><input name="via" type="text" id="num3" value="<?php echo $x_via; ?>" size="30">
                       * Solo para busqueda por n&uacute;mero</td>
                   </tr>
                   <tr> 
                     <td>N&uacute;mero de Domicilio</td>
-                    <td colspan="2"><input name="num" type="text" id="num2" value="<? echo $x_num; ?>" size="30"></td>
+                    <td colspan="2"><input name="num" type="text" id="num2" value="<?php echo $x_num; ?>" size="30"></td>
                   </tr>
                   <tr> 
                     <td>N&uacute;mero de Rol</td>
-                    <td width="194"><input name="rol" type="text" id="rol2" value="<? echo $x_rol ?>" size="30"></td>
-                    <td width="408"><input name="imageField" type="image" onClick="nombreFormulario.send();return false" src="../Images/zoom.gif" width="24" height="22" border="0"></td>
+                    <td width="194"><input name="rol" type="text" id="rol2" value="<?php echo $x_rol ?>" size="30"></td>
+                    <td width="408"><input name="imageField" type="image" onClick="nombreFormulario.send();return false" src="../images/zoom.gif" width="24" height="22" border="0"></td>
                   </tr>
                 </table>
               </td>
@@ -142,7 +142,7 @@ width=13></td>
             </table>
             <table width="99%" height="35" border="0" cellpadding="0" cellspacing="0">
               <tr> 
-                <? 
+                <?php 
                     $color2 = "#A6E2FF";
 				if ($a == 0) {
                     $color = "#f1f1f1";
@@ -156,28 +156,28 @@ width=13></td>
 				    $color = "#FFCC66";
 					 } */
 				?>
-                <td width="100" height="35" align="center" bgcolor="<? echo $color ?>" ><? echo $row["rol"]
+                <td width="100" height="35" align="center" bgcolor="<?php echo $color ?>" ><?php echo $row["rol"]
  ?> <br /> </td>
-                <td width="126" bgcolor="<? echo $color ?>" ><? echo $row["tipocalle"]
+                <td width="126" bgcolor="<?php echo $color ?>" ><?php echo $row["tipocalle"]
  ?></td>
-                <td width="216" bgcolor="<? echo $color ?>" ><? echo $row["direccion"]
+                <td width="216" bgcolor="<?php echo $color ?>" ><?php echo $row["direccion"]
  ?></td>
-                <td width="313" bgcolor="<? echo $color ?>" ><? echo $row["pob"]
- ?> - <? echo $row["manzana"]
- ?> - <? echo $row["sitio"]
+                <td width="313" bgcolor="<?php echo $color ?>" ><?php echo $row["pob"]
+ ?> - <?php echo $row["manzana"]
+ ?> - <?php echo $row["sitio"]
  ?> </td>
-                <td width="52" bgcolor="<? echo $color ?>" ><div align="right"></div></td>
-                <td width="24" bgcolor="<? echo $color ?>"> <div align="center"><a href="propiedades.php?id=<? echo $row["id"]. "&flag=1"?>" target="_blank"><img src="../Images/note.gif" width="16" height="16" border="0"></a> 
+                <td width="52" bgcolor="<?php echo $color ?>" ><div align="right"></div></td>
+                <td width="24" bgcolor="<?php echo $color ?>"> <div align="center"><a href="propiedades.php?id=<?php echo $row["id"]. "&flag=1"?>" target="_blank"><img src="../images/note.gif" width="16" height="16" border="0"></a> 
                   </div></td>
-                <td width="18" bgcolor="<? echo $color ?>"><div align="center"> 
+                <td width="18" bgcolor="<?php echo $color ?>"><div align="center"> 
                   </div>
-                <td width="13" bgcolor="<? echo $color ?>"> <div align="center"></div></td>
+                <td width="13" bgcolor="<?php echo $color ?>"> <div align="center"></div></td>
               </tr>
             </table>
             <table width="41" border="0" cellspacing="0" cellpadding="0">
               <tr> 
                 <td width="41"> 
-                  <? }?>
+                  <?php }?>
                 </td>
               </tr>
             </table></td>

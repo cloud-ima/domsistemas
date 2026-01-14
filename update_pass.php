@@ -1,8 +1,8 @@
 <?php
 $id = session_id();
 include("seguridad.php");
-$pold = $_POST['passold'];
-$p1 = $_POST['pass1'];
+$pold = $_POST['passold'] ?? '';
+$p1 = $_POST['pass1'] ?? '';
 $link=conectarse();
 $qry = "SELECT * FROM usuarios where session = '$id'";
 $res = mysql_query($qry);

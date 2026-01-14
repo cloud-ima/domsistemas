@@ -1,4 +1,4 @@
-<? $error=$_GET['error']; ?>
+<?php $error=$_GET['error'] ?? ''; ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -71,7 +71,7 @@ body {
                       </SPAN>
                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
-                          <td><div align="center"><strong><font class=normal color="#FF0000"><? echo $error ?></font></strong></div></td>
+                          <td><div align="center"><strong><font class=normal color="#FF0000"><?php echo $error ?></font></strong></div></td>
                         </tr>
                         <tr>
                           <td>&nbsp;</td>

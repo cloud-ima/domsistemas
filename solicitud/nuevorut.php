@@ -1,7 +1,6 @@
-<?
-include("../seguridad.php");
+<?php include("../seguridad.php");
 $link=conectarse();
-$rut_id=$_POST['rut'];
+$rut_id=$_POST['rut'] ?? '';
 if ( $rut_id == '') { header("location: ingresa.php"); }
 $sql = "select * from rut where rut ='$rut_id'";
 $rs = mysql_query($sql,$link);
@@ -93,42 +92,42 @@ return false;
                     </tr>
                     <tr> 
                       <td width="122" height="20">R.U.T.</td>
-                      <td width="309"><strong><font color="#990000"><? echo $rut_id ?></font></strong></td>
+                      <td width="309"><strong><font color="#990000"><?php echo $rut_id ?></font></strong></td>
                     </tr>
                     <tr> 
                       <td height="20">Nombres</td>
                       <td><font size="2" face="Arial, Helvetica, sans-serif"> 
-                        <input name="nombres" type="text" id="nombre2" value="<? echo $nomz?>" size="50">
+                        <input name="nombres" type="text" id="nombre2" value="<?php echo $nomz?>" size="50">
                         </font></td>
                     </tr>
                     <tr> 
                       <td height="20">Apellidos</td>
                       <td><font size="2" face="Arial, Helvetica, sans-serif"> 
-                        <input name="apellidos" type="text" id="email2" value="<? echo $apez?>" size="50">
+                        <input name="apellidos" type="text" id="email2" value="<?php echo $apez?>" size="50">
                         </font></td>
                     </tr>
                     <tr> 
                       <td height="20">Tel&eacute;fonos</td>
                       <td><font size="2" face="Arial, Helvetica, sans-serif"> 
-                        <input name="telefonos" type="text" id="email3" value="<? echo $telz?>" size="50">
+                        <input name="telefonos" type="text" id="email3" value="<?php echo $telz?>" size="50">
                         </font></td>
                     </tr>
                     <tr> 
                       <td height="25">Direcci&oacute;n</td>
                       <td height="25"><font size="2" face="Arial, Helvetica, sans-serif"> 
-                        <input name="direc" type="text" id="direc" value="<? echo $dirz?>" size="50">
+                        <input name="direc" type="text" id="direc" value="<?php echo $dirz?>" size="50">
                         </font></td>
                     </tr>
                     <tr> 
                       <td height="25">Correo El&eacute;ctr&oacute;nico</td>
                       <td height="25"><font size="2" face="Arial, Helvetica, sans-serif"> 
-                        <input name="correo" type="text" id="correo" value="<? echo $corz?>" size="50">
+                        <input name="correo" type="text" id="correo" value="<?php echo $corz?>" size="50">
                         </font></td>
                     </tr>
                     <tr> 
                       <td height="25"><font size="2" face="Arial, Helvetica, sans-serif"> 
-                        <input name="rut" type="hidden" id="rut3" value="<? echo $rut_id ?>">
-                        <input name="param" type="hidden" id="param3" value="<? echo $parz ?>">
+                        <input name="rut" type="hidden" id="rut3" value="<?php echo $rut_id ?>">
+                        <input name="param" type="hidden" id="param3" value="<?php echo $parz ?>">
                         </font></td>
                       <td height="25"><input type="submit" name="Submit" value="Continuar"></td>
                     </tr>
@@ -141,7 +140,7 @@ return false;
         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
           <tr> 
             <td><div align="center"> 
-                <? include("../footer.php");?>
+                <?php include("../footer.php");?>
               </div></td>
           </tr>
         </table>

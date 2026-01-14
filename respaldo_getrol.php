@@ -1,5 +1,5 @@
 <?php
-$q=$_GET["q"];
+$q=$_GET["q"] ?? '';
 //$q='1718-10';
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 $con = mysql_connect('localhost', 'muniaric_root', 'tnb688dite');

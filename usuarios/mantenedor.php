@@ -1,17 +1,16 @@
-<?
-   include("../conexion.php");
+<?php    include("../conexion.php");
    
    if ( isset($_GET["param"]) ) {
-      $x_param = $_GET["param"]; }
+      $x_param = $_GET["param"] ?? ''; }
 	  
    if ( isset($_POST["param"]) ) {
-      $x_param = $_POST["param"]; }
+      $x_param = $_POST["param"] ?? ''; }
    
 if ( $x_param == 1 ){
-			 $nomx = $_POST["nombre"];
-			 $ctax = $_POST["cuenta"];
-			 $pasx = $_POST["pass"];
-			 $tipx = $_POST["tipo"];
+			 $nomx = $_POST["nombre"] ?? '';
+			 $ctax = $_POST["cuenta"] ?? '';
+			 $pasx = $_POST["pass"] ?? '';
+			 $tipx = $_POST["tipo"] ?? '';
 			 
 			 $link=conectarse();
 			 $sql = "INSERT INTO usuarios (nombre,usuario,tipo,password,unidad,estado) VALUES ('$nomx','$ctax','$tipx','$pasx','1','1')";
@@ -25,11 +24,11 @@ if ( $x_param == 1 ){
 }
 
 if ( $x_param == 2 ){
-			 $nomx = $_POST["nombre"];
-			 $ctax = $_POST["cuenta"];
-			 $pasx = $_POST["pass"];
-			 $tipx = $_POST["tipo"];
-			 $idx  = $_POST["codigo"];
+			 $nomx = $_POST["nombre"] ?? '';
+			 $ctax = $_POST["cuenta"] ?? '';
+			 $pasx = $_POST["pass"] ?? '';
+			 $tipx = $_POST["tipo"] ?? '';
+			 $idx  = $_POST["codigo"] ?? '';
 		 
 		 	 $link=conectarse();
     	     $sql= "UPDATE usuarios SET nombre='$nomx',password='$pasx',tipo='$tipx' WHERE id='$idx'";
@@ -45,7 +44,7 @@ if ( $x_param == 2 ){
 }
 
 if ( $x_param == 3 ){
-			 $idx  = $_GET["id"];
+			 $idx  = $_GET["id"] ?? '';
              $link=conectarse();
              $sql="DELETE FROM usuarios where id = '$idx'";
              $result = mysql_query($sql);

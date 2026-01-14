@@ -22,13 +22,13 @@
             </div>
         
 <div class="tab_body">
-  <?if(empty($_GET['tab'])):?>
+  <?php if(empty($_GET['tab'])):?>
     <h1>Some content</h1>
  
     <p>
       Put the main content in here
     </p>
-  <?elseif($_GET['tab'] == 2):?>
+  <?elseif($_GET['tab'] ?? '' == 2):?>
     <h1>More content</h1>
  
     <p>

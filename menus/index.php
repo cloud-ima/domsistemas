@@ -42,7 +42,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
           <td width="645"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="5">
               <tr> 
                 <td width="661" height="12"><div align="left"><A onclick="MM_openBrWindow('formulario.php?param=1','','scrollbars=no,width=500,height=250')" 
-            href="javascript:;"><? echo "Agregar Nuevo Registro" ?></a></div></td>
+            href="javascript:;"><?php echo "Agregar Nuevo Registro" ?></a></div></td>
                 <td width="661"><div align="right"></div></td>
               </tr>
             </table>
@@ -80,7 +80,7 @@ while ($row = mysql_fetch_array($result)){
                   </table>
                   <table width="100%" height="20" border="0" cellpadding="0" cellspacing="0">
                     <tr> 
-                      <? 
+                      <?php 
                     $color2 = "#A6E2FF";
 				if ($a == 0) {
                     $color = "#f1f1f1";
@@ -91,23 +91,23 @@ while ($row = mysql_fetch_array($result)){
 					$a = 0;
 		        }	 
 				?>
-                      <td width="43" height="18" bgcolor="<? echo $color ?>"> 
-                        <div align="left"><? echo $row["id"]?></div></td>
-                      <td width="112" align="center" bgcolor="<? echo $color ?>" ><? echo $row["desde"] ?> 
+                      <td width="43" height="18" bgcolor="<?php echo $color ?>"> 
+                        <div align="left"><?php echo $row["id"]?></div></td>
+                      <td width="112" align="center" bgcolor="<?php echo $color ?>" ><?php echo $row["desde"] ?> 
                         <br /> </td>
-                      <td width="116" align="center" bgcolor="<? echo $color ?>" ><? echo $row["hasta"] ?></td>
-                      <td width="93" bgcolor="<? echo $color ?>" ><div align="center"><? echo $row["uf"] ?></div></td>
-                      <td width="94" bgcolor="<? echo $color ?>" ><div align="center"><? echo $row["utm"] ?></div></td>
-                      <td width="119" bgcolor="<? echo $color ?>"> <div align="center"><? echo $row["cuota"] ?></div></td>
-                      <td width="35" bgcolor="<? echo $color ?>"><div align="center"><A onclick="MM_openBrWindow('formulario.php?id=<? echo $row["id"]. "&flag=1"?>','','scrollbars=no,width=500,height=250')" 
+                      <td width="116" align="center" bgcolor="<?php echo $color ?>" ><?php echo $row["hasta"] ?></td>
+                      <td width="93" bgcolor="<?php echo $color ?>" ><div align="center"><?php echo $row["uf"] ?></div></td>
+                      <td width="94" bgcolor="<?php echo $color ?>" ><div align="center"><?php echo $row["utm"] ?></div></td>
+                      <td width="119" bgcolor="<?php echo $color ?>"> <div align="center"><?php echo $row["cuota"] ?></div></td>
+                      <td width="35" bgcolor="<?php echo $color ?>"><div align="center"><A onclick="MM_openBrWindow('formulario.php?id=<?php echo $row["id"]. "&flag=1"?>','','scrollbars=no,width=500,height=250')" 
             href="javascript:;"><img src="../css/modificar.gif" alt="Modificar Ficha" width="17" height="12" border="0"></a></div></td>
-                      <td width="33" bgcolor="<? echo $color ?>"> <div align="center"><a href="mantenedor_pub.php?id=<?php echo $row['id']."&param=3"; ?>"class="bot" onClick="if(!confirm('¿Deseas realmente borrar el Registro, ID Número : <?php echo strtolower($row['id']); ?>?'))return false"><img src="../css/action_stop.gif" title="Eliminar Solicitud" width="16" height="16" border="0"></a></div></td>
+                      <td width="33" bgcolor="<?php echo $color ?>"> <div align="center"><a href="mantenedor_pub.php?id=<?php echo $row['id']."&param=3"; ?>"class="bot" onClick="if(!confirm('¿Deseas realmente borrar el Registro, ID Número : <?php echo strtolower($row['id']); ?>?'))return false"><img src="../css/action_stop.gif" title="Eliminar Solicitud" width="16" height="16" border="0"></a></div></td>
                     </tr>
                   </table>
                   <table width="41" border="0" cellspacing="0" cellpadding="0">
                     <tr> 
                       <td width="41"> 
-                        <? }?>
+                        <?php }?>
                       </td>
                     </tr>
                   </table></td>

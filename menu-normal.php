@@ -33,7 +33,7 @@ $hoy = date('Y')."-".date('m')."-".date('d');
 <body leftmargin="0" topmargin="0">
 <table width="900" border="0" align="center" cellpadding="2" cellspacing="2">
   <tr>
-    <td align="center"><span class="style2">Informaci&oacute;n de Estad&iacute;stica Diaria : <? echo $fecha_hoy ?> ----------&gt; Solicitudes del D&iacute;a (<? echo $tot2 ?>) </span></td>
+    <td align="center"><span class="style2">Informaci&oacute;n de Estad&iacute;stica Diaria : <?php echo $fecha_hoy ?> ----------&gt; Solicitudes del D&iacute;a (<?php echo $tot2 ?>) </span></td>
   </tr>
   <tr>
     <td align="left"><table width="99%" border="0" align="center" cellpadding="0" cellspacing="0">
@@ -41,19 +41,19 @@ $hoy = date('Y')."-".date('m')."-".date('d');
           <td width="38%" valign="top"><br>
               <table width="300" border="0" align="center" cellpadding="2" cellspacing="2">
                 <tr>
-                  <td width="47"><div align="left"><a href="solicitud/ingresa.php"><img src="Images/iconos_1.jpg" width="365" height="83" border="0"></a></div></td>
+                  <td width="47"><div align="left"><a href="solicitud/ingresa.php"><img src="images/iconos_1.jpg" width="365" height="83" border="0"></a></div></td>
                 </tr>
                 <tr>
-                  <td><div align="left"><a href="solicitud/list_solicitudes.php"><img src="Images/iconos_2.jpg" width="365" height="87" border="0"></a></div></td>
+                  <td><div align="left"><a href="solicitud/list_solicitudes.php"><img src="images/iconos_2.jpg" width="365" height="87" border="0"></a></div></td>
                 </tr>
                 <tr>
-                  <td><a href="solicitud/list_solicitudes_ok.php"><img src="Images/iconos_3.jpg" width="365" height="83" border="0"></a></td>
+                  <td><a href="solicitud/list_solicitudes_ok.php"><img src="images/iconos_3.jpg" width="365" height="83" border="0"></a></td>
                 </tr>
                 <tr>
-                  <td><a href="solicitud/entregar.php"><img src="Images/iconos_4.jpg" width="365" height="84" border="0"></a></td>
+                  <td><a href="solicitud/entregar.php"><img src="images/iconos_4.jpg" width="365" height="84" border="0"></a></td>
                 </tr>
                 <tr>
-                  <td><a href="solicitud/centro_exportacion.php"><img src="Images/iconos_5.jpg" width="365" height="82" border="0"></a></td>
+                  <td><a href="solicitud/centro_exportacion.php"><img src="images/iconos_5.jpg" width="365" height="82" border="0"></a></td>
                 </tr>
             </table></td>
         </tr>

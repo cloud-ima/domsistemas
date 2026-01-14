@@ -158,6 +158,6 @@ include("seguridad.php");
   </tr>
 </table>
 <br>
-<? include("footer.php"); ?>
+<?php include("footer.php"); ?>
 </body>
 </html>

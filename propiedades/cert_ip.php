@@ -20,8 +20,8 @@ $link=conectarse();
 			  $linea_fin2 = mysql_result($res, 0, "titulo");
 			  $linea_fin3 = mysql_result($res, 0, "cargo");			 
 
-$ok = $_POST['listo'];
-$ff = $_POST['foliox'];
+$ok = $_POST['listo'] ?? '';
+$ff = $_POST['foliox'] ?? '';
 
 include("grabaclass.php");
 
@@ -185,7 +185,7 @@ window.open('zonas/zm1.pdf','','toolbar=0,location=0,menubar=0,resizable=0,top=0
         <tr>
           <td><div align="center"><span class="style15">CERTIFICADO DE 
   INFORMES PREVIOS 
-  N&ordm; <? echo $ff ?> </span></div></td>
+  N&ordm; <?php echo $ff ?> </span></div></td>
         </tr>
         <tr>
           <td>&nbsp;</td>
@@ -199,31 +199,31 @@ window.open('zonas/zm1.pdf','','toolbar=0,location=0,menubar=0,resizable=0,top=0
           <td><table width="650" border="0" cellspacing="1" cellpadding="1">
             <tr>
               <td width="106"><div align="left" class="style11"><strong>R.O.L.</strong></div></td>
-              <td width="537" class="style17"><? echo $rolx; ?></td>
+              <td width="537" class="style17"><?php echo $rolx; ?></td>
             </tr>
             <tr>
               <td><div align="right" class="style11">
                   <div align="left">Direcci&oacute;n</div>
               </div></td>
-              <td><span class="style11"><? echo $direx; ?>, Pob. <? echo $nompob; ?></span></td>
+              <td><span class="style11"><?php echo $direx; ?>, Pob. <?php echo $nompob; ?></span></td>
             </tr>
             <tr>
               <td valign="middle"><div align="left"><span class="style11">Numeraci&oacute;n</span></div></td>
               <td valign="top">                <table width="537" border="0" cellpadding="0" cellspacing="0">
                   <tr bgcolor="#efefef">
                     <td width="529" colspan="5"><div align="center" class="style11">
-                      <div align="left">N&uacute;mero: <? echo $numx; ?>, Block <? echo $blockx; ?>, Depto. <? echo $deptox; ?>, Sitio <? echo $sitiox; ?>, Manzana <? echo $manx; ?></div>
+                      <div align="left">N&uacute;mero: <?php echo $numx; ?>, Block <?php echo $blockx; ?>, Depto. <?php echo $deptox; ?>, Sitio <?php echo $sitiox; ?>, Manzana <?php echo $manx; ?></div>
                     </div></td>
                     </tr>
               </table></td>
             </tr>
             <tr>
               <td><span class="style11">Zona</span></td>
-              <td class="style11"><strong>(<? echo $zonax; ?>)</strong> <? echo $zonainfo; ?></td>
+              <td class="style11"><strong>(<?php echo $zonax; ?>)</strong> <?php echo $zonainfo; ?></td>
             </tr>
             <tr>
-              <td><? echo $oa; ?></td>
-              <td><? echo $mas; ?></td>
+              <td><?php echo $oa; ?></td>
+              <td><?php echo $mas; ?></td>
             </tr>
           </table></td>
         </tr>
@@ -243,19 +243,19 @@ window.open('zonas/zm1.pdf','','toolbar=0,location=0,menubar=0,resizable=0,top=0
                   </tr>
                   <tr>
                     <td colspan="2"><div align="right" class="style11">
-                        <div align="left">Nombre de V&iacute;a , <? echo $n1x; ?></div>
+                        <div align="left">Nombre de V&iacute;a , <?php echo $n1x; ?></div>
                     </div>                      </td>
                     </tr>
                   <tr>
                     <td colspan="2"><div align="right" class="style11">
-                        <div align="left">Antejard&iacute;n De: <? echo $a1x; ?></div>
+                        <div align="left">Antejard&iacute;n De: <?php echo $a1x; ?></div>
                     </div>                      </td>
                     </tr>
                   <tr>
-                    <td colspan="2"><div align="left" class="style11">L&iacute;nea oficial se encuentra a ,<? echo $l1x; ?></div>                      </td>
+                    <td colspan="2"><div align="left" class="style11">L&iacute;nea oficial se encuentra a ,<?php echo $l1x; ?></div>                      </td>
                     </tr>
                   <tr>
-                    <td colspan="2"><div align="left"><span class="style11">Derecho a V&iacute;a , <? echo $d1x; ?></span></div>                      </td>
+                    <td colspan="2"><div align="left"><span class="style11">Derecho a V&iacute;a , <?php echo $d1x; ?></span></div>                      </td>
                     </tr>
                   <tr>
                     <td width="165"><div align="left"></div></td>
@@ -266,19 +266,19 @@ window.open('zonas/zm1.pdf','','toolbar=0,location=0,menubar=0,resizable=0,top=0
                   </tr>
                   <tr>
                     <td colspan="2"><div align="right" class="style11">
-                        <div align="left">Nombre de V&iacute;a , <? echo $n2x; ?></div>
+                        <div align="left">Nombre de V&iacute;a , <?php echo $n2x; ?></div>
                     </div>                      </td>
                     </tr>
                   <tr>
                     <td colspan="2"><div align="right" class="style11">
-                        <div align="left">Antejard&iacute;n De: <? echo $a2x; ?></div>
+                        <div align="left">Antejard&iacute;n De: <?php echo $a2x; ?></div>
                     </div>                      </td>
                     </tr>
                   <tr>
-                    <td colspan="2"><div align="left"><span class="style11">L&iacute;nea oficial se encuentra a , <? echo $l2x; ?></span></div>                      </td>
+                    <td colspan="2"><div align="left"><span class="style11">L&iacute;nea oficial se encuentra a , <?php echo $l2x; ?></span></div>                      </td>
                     </tr>
                   <tr>
-                    <td colspan="2"><div align="left"><span class="style11">Derecho a V&iacute;a , <? echo $d2x; ?></span></div>                      </td>
+                    <td colspan="2"><div align="left"><span class="style11">Derecho a V&iacute;a , <?php echo $d2x; ?></span></div>                      </td>
                     </tr>
               </table></td>
               <td width="317" valign="top"><table width="314" border="0" cellspacing="0" cellpadding="0">
@@ -287,19 +287,19 @@ window.open('zonas/zm1.pdf','','toolbar=0,location=0,menubar=0,resizable=0,top=0
                   </tr>
                   <tr>
                     <td colspan="2"><div align="right" class="style11">
-                        <div align="left">Nombre de V&iacute;a , <? echo $n3x; ?></div>
+                        <div align="left">Nombre de V&iacute;a , <?php echo $n3x; ?></div>
                     </div>                      </td>
                     </tr>
                   <tr>
                     <td colspan="2"><div align="right" class="style11">
-                        <div align="left">Antejard&iacute;n De: <? echo $a3x; ?></div>
+                        <div align="left">Antejard&iacute;n De: <?php echo $a3x; ?></div>
                     </div>                      </td>
                     </tr>
                   <tr>
-                    <td colspan="2"><div align="left"><span class="style11">L&iacute;nea oficial se encuentra a , <? echo $l3x; ?></span></div>                      </td>
+                    <td colspan="2"><div align="left"><span class="style11">L&iacute;nea oficial se encuentra a , <?php echo $l3x; ?></span></div>                      </td>
                     </tr>
                   <tr>
-                    <td colspan="2"><div align="left"><span class="style11">Derecho a V&iacute;a , <? echo $d3x; ?></span></div>                      </td>
+                    <td colspan="2"><div align="left"><span class="style11">Derecho a V&iacute;a , <?php echo $d3x; ?></span></div>                      </td>
                     </tr>
                   <tr>
                     <td width="154"><div align="left"></div></td>
@@ -310,19 +310,19 @@ window.open('zonas/zm1.pdf','','toolbar=0,location=0,menubar=0,resizable=0,top=0
                   </tr>
                   <tr>
                     <td colspan="2"><div align="right" class="style11">
-                        <div align="left">Nombre de V&iacute;a , <? echo $n4x; ?></div>
+                        <div align="left">Nombre de V&iacute;a , <?php echo $n4x; ?></div>
                     </div>                      </td>
                     </tr>
                   <tr>
                     <td colspan="2"><div align="right" class="style11">
-                        <div align="left">Antejard&iacute;n De: <? echo $a4x; ?></div>
+                        <div align="left">Antejard&iacute;n De: <?php echo $a4x; ?></div>
                     </div>                      </td>
                     </tr>
                   <tr>
-                    <td colspan="2"><div align="left"><span class="style11">L&iacute;nea oficial se encuentra a , <? echo $l4x; ?></span></div>                      </td>
+                    <td colspan="2"><div align="left"><span class="style11">L&iacute;nea oficial se encuentra a , <?php echo $l4x; ?></span></div>                      </td>
                     </tr>
                   <tr>
-                    <td colspan="2"><div align="left"><span class="style11">Derecho a V&iacute;a , <? echo $d4x; ?></span></div>                      </td>
+                    <td colspan="2"><div align="left"><span class="style11">Derecho a V&iacute;a , <?php echo $d4x; ?></span></div>                      </td>
                     </tr>
               </table></td>
             </tr>
@@ -348,12 +348,12 @@ window.open('zonas/zm1.pdf','','toolbar=0,location=0,menubar=0,resizable=0,top=0
               <td width="129"><div align="center" class="style11"><strong>RUT Solicitante </strong></div></td>
             </tr>
             <tr>
-              <td><div align="center" class="style11"><? echo $fecha_sol; ?></div></td>
-              <td><div align="center" class="style11"><? echo $girox; ?></div></td>
-              <td><div align="center" class="style11"><? echo $gfechax; ?></div></td>
-              <td><div align="center" class="style11"><? echo $ordenx; ?></div></td>
-              <td><div align="center" class="style11">$ <? echo $totalx; ?></div></td>
-              <td><div align="center" class="style11"><? echo $rutx; ?></div></td>
+              <td><div align="center" class="style11"><?php echo $fecha_sol; ?></div></td>
+              <td><div align="center" class="style11"><?php echo $girox; ?></div></td>
+              <td><div align="center" class="style11"><?php echo $gfechax; ?></div></td>
+              <td><div align="center" class="style11"><?php echo $ordenx; ?></div></td>
+              <td><div align="center" class="style11">$ <?php echo $totalx; ?></div></td>
+              <td><div align="center" class="style11"><?php echo $rutx; ?></div></td>
             </tr>
           </table></td>
         </tr>
@@ -368,12 +368,12 @@ window.open('zonas/zm1.pdf','','toolbar=0,location=0,menubar=0,resizable=0,top=0
       </tr>
       <tr>
         <td>&nbsp;</td>
-        <td><div align="center" class="style11"><strong><? echo $linea_fin1;?><br>
-          <? echo $linea_fin2;?><br>
-          <? echo $linea_fin3;?>        </strong></div></td>
+        <td><div align="center" class="style11"><strong><?php echo $linea_fin1;?><br>
+          <?php echo $linea_fin2;?><br>
+          <?php echo $linea_fin3;?>        </strong></div></td>
       </tr>
     </table>    <p>&nbsp;</p>
-    <p>Usuario: <? echo $idusuario; ?> </p></td>
+    <p>Usuario: <?php echo $idusuario; ?> </p></td>
   </tr>
 </table>
 <p>&nbsp; </p>

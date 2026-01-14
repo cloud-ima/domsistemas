@@ -13,7 +13,7 @@ $bd_base = "domsistema";
 $con = mysql_connect($bd_host, $bd_usuario, $bd_password); 
 
 mysql_select_db($bd_base, $con); 
-$idtest=$_GET['rol'];
+$idtest=$_GET['rol'] ?? '';
 //$idtest = 1471;
 //echo $idtest;
 

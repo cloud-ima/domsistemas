@@ -4,9 +4,9 @@
   <tr> 
     <td width="78%"><table width="91%" border="0" align="left" cellpadding="0" cellspacing="3">
         <tr> 
-          <td width="95%"> <div align="left">Usuario: <font color="#990000"><strong><? echo $nombreusuario ?> 
-              (<font color="#990000"><strong><font color="#000000"><? echo $nombredire ?></font></strong></font> 
-              , <font color="#000000"><? echo $nombredepto ?></font>) </strong></font></div></td>
+          <td width="95%"> <div align="left">Usuario: <font color="#990000"><strong><?php echo $nombreusuario ?> 
+              (<font color="#990000"><strong><font color="#000000"><?php echo $nombredire ?></font></strong></font> 
+              , <font color="#000000"><?php echo $nombredepto ?></font>) </strong></font></div></td>
         </tr>
       </table></td>
     <td colspan="2">&nbsp;</td>
@@ -14,12 +14,12 @@
   <tr> 
     <td colspan="2"><table width="95%" border="0" align="left" cellpadding="0" cellspacing="0">
         <tr>
-          <td><font size="4"><? echo $mensajetitulo ?></font></td>
+          <td><font size="4"><?php echo $mensajetitulo ?></font></td>
         </tr>
       </table> </td>
     <td width="11%"><div align="left"><a 
       href="ingresa.php"><img 
-      height=40 alt=Nuevo src="Images/nuevo.gif" width=50 
+      height=40 alt=Nuevo src="images/nuevo.gif" width=50 
       border=0></a><a 
       href="principal.php"><img height=40 
       alt=Inicio src="images/inicio.gif" width=50 

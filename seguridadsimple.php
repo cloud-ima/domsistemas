@@ -1,5 +1,4 @@
-<?
-session_start();
+<?php session_start();
 $id = session_id();
 include("conexion.php");
 $link=conectarse();

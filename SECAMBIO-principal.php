@@ -35,7 +35,7 @@ $hoy = date('Y')."-".date('m')."-".date('d');
           <tr>
             <td width="8">&nbsp;</td>
             <td width="30">&nbsp;</td>
-            <td width="842"><span class="style2">Informaci&oacute;n de Estad&iacute;stica Diaria : <? echo $fecha_hoy ?></span></td>
+            <td width="842"><span class="style2">Informaci&oacute;n de Estad&iacute;stica Diaria : <?php echo $fecha_hoy ?></span></td>
           </tr>
           <tr>
             <td>&nbsp;</td>
@@ -48,7 +48,7 @@ $hoy = date('Y')."-".date('m')."-".date('d');
                           <tr>
                             <td height="29" valign="top"><table width="96%" height="26" border="0" cellpadding="2" cellspacing="2">
                               <tr>
-                                <? 
+                                <?php 
                     $color2 = "#A6E2FF";
 				if ($a == 0) {
                     $color = "#EFEF99";
@@ -70,8 +70,7 @@ $hoy = date('Y')."-".date('m')."-".date('d');
                             <td height="56" valign="top"><table width="43" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
                                   <td width="43"><font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-                                    <?
-		  //include("conexion.php");
+                                    <?php 		  //include("conexion.php");
 		  $link=Conectarse(); 
 		  $qry = "SELECT * from parametros where id = 1";
 		  $res = mysql_query($qry);
@@ -110,7 +109,7 @@ while ($row = mysql_fetch_array($result)){
                               </table>
                                 <table width="96%" height="26" border="0" cellpadding="2" cellspacing="2">
                                   <tr>
-                                    <? 
+                                    <?php 
                     $color2 = "#A6E2FF";
 				if ($a == 0) {
                     $color = "#EFEF99";
@@ -122,20 +121,20 @@ while ($row = mysql_fetch_array($result)){
 		        }	 
 				?>
                                     <td width="20" height="22" align="center"><div align="center"></div>                                      </td>
-                                    <td width="226" align="left" bgcolor="<? echo $color ?>" ><? echo $row["nombre"] ?> </td>
-									<td width="72" align="center" bgcolor="<? echo $color ?>" ><? echo $total_year ?></td>
-									<td width="83" align="center" bgcolor="<? echo $color ?>" ><? echo $num_total_registros ?></td>
+                                    <td width="226" align="left" bgcolor="<?php echo $color ?>" ><?php echo $row["nombre"] ?> </td>
+									<td width="72" align="center" bgcolor="<?php echo $color ?>" ><?php echo $total_year ?></td>
+									<td width="83" align="center" bgcolor="<?php echo $color ?>" ><?php echo $num_total_registros ?></td>
                                   </tr>
                                 </table>
                                 <table width="41" border="0" cellspacing="0" cellpadding="0">
                                   <tr>
-                                    <td width="41"><? }?>
+                                    <td width="41"><?php }?>
                                     </td>
                                   </tr>
                               </table>
                                 <table width="96%" height="26" border="0" cellpadding="2" cellspacing="2">
                                   <tr>
-                                    <? 
+                                    <?php 
                     $color2 = "#A6E2FF";
 				if ($a == 0) {
                     $color = "#EFEF99";
@@ -147,9 +146,9 @@ while ($row = mysql_fetch_array($result)){
 		        }	 
 				?>
                                     <td width="20" height="22" align="center"><div align="center"></div></td>
-                                    <td width="226" align="right" bgcolor="<? echo $color ?>" ><div align="justify" class="style2">ACUMULADO</div></td>
-                                    <td width="72" align="center" bgcolor="<? echo $color ?>" ><strong class="style2"><? echo $tot1 ?></strong></td>
-                                    <td width="83" align="center" bgcolor="<? echo $color ?>" class="style2" ><strong><? echo $tot2 ?></strong></td>
+                                    <td width="226" align="right" bgcolor="<?php echo $color ?>" ><div align="justify" class="style2">ACUMULADO</div></td>
+                                    <td width="72" align="center" bgcolor="<?php echo $color ?>" ><strong class="style2"><?php echo $tot1 ?></strong></td>
+                                    <td width="83" align="center" bgcolor="<?php echo $color ?>" class="style2" ><strong><?php echo $tot2 ?></strong></td>
                                   </tr>
                                 </table>
                               <br></td>
@@ -160,23 +159,23 @@ while ($row = mysql_fetch_array($result)){
                 <td width="38%" valign="top"><br>
                   <table width="300" border="0" cellspacing="2" cellpadding="2">
                   <tr>
-                    <td width="47"><div align="left"><img src="Images/form-ico.jpg" width="40" height="39"></div></td>
+                    <td width="47"><div align="left"><img src="images/form-ico.jpg" width="40" height="39"></div></td>
                     <td width="253" valign="middle"><a href="solicitud/ingresa.php">Ingresar Solicitud de Certificado </a></td>
                   </tr>
                   <tr>
-                    <td><div align="left"><img src="Images/list-solicitudes.jpg" width="40" height="39"></div></td>
+                    <td><div align="left"><img src="images/list-solicitudes.jpg" width="40" height="39"></div></td>
                     <td valign="middle"><a href="solicitud/list_solicitudes.php">Consultar Solictudes </a>(<span class="style3">Tramite</span>) </td>
                   </tr>
                   <tr>
-                    <td><img src="Images/list-solicitudes-ok.jpg" width="40" height="39"></td>
+                    <td><img src="images/list-solicitudes-ok.jpg" width="40" height="39"></td>
                     <td valign="middle"><a href="solicitud/list_solicitudes_ok.php">Consultar Canceladas</a> (<span class="style3">Giro y Pago</span>) </td>
                   </tr>
                   <tr>
-                    <td><img src="Images/entregar.jpg" width="40" height="40"></td>
+                    <td><img src="images/entregar.jpg" width="40" height="40"></td>
                     <td valign="middle"><a href="solicitud/entregar.php">Entrega de Certificados</a></td>
                   </tr>
                   <tr>
-                    <td><img src="Images/excel.jpg" width="40" height="39"></td>
+                    <td><img src="images/excel.jpg" width="40" height="39"></td>
                     <td valign="middle"><a href="solicitud/centro_exportacion.php">Reporte Listado Diario</a> </td>
                   </tr>
                 </table></td>
@@ -188,6 +187,6 @@ while ($row = mysql_fetch_array($result)){
   </tr>
 </table>
 <br>
-<? include("footer.php"); ?>
+<?php include("footer.php"); ?>
 </body>
 </html>

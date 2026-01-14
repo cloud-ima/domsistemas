@@ -4,8 +4,8 @@ include("../conexion.php");
 include("../fechaclasss.php");
 
 $hoy = date('Y')."-".date('m')."-".date('d');
-$rut_id=$_GET['rut'];
-$sol_id=$_GET['id'];
+$rut_id=$_GET['rut'] ?? '';
+$sol_id=$_GET['id'] ?? '';
 
 $link=Conectarse();
 $qry = "SELECT * FROM rut where rut ='$rut_id'";
@@ -110,9 +110,9 @@ document.onkeypress = stopRKey;
             <tr>
               <td><table width="646" border="0" cellspacing="0" cellpadding="0">
                   <tr>
-                    <td width="646" height="82" valign="middle"><div align="center" class="style1"> <font size="5"><strong>Orden de Atenci&oacute;n Nr.</strong></font><strong> <font size="5" face="Geneva, Arial, Helvetica, sans-serif"><? echo $sol_id
+                    <td width="646" height="82" valign="middle"><div align="center" class="style1"> <font size="5"><strong>Orden de Atenci&oacute;n Nr.</strong></font><strong> <font size="5" face="Geneva, Arial, Helvetica, sans-serif"><?php echo $sol_id
  ?><br>
-                                <font size="3">(<? echo $nombreestado ?>)</font></font></strong></div></td>
+                                <font size="3">(<?php echo $nombreestado ?>)</font></font></strong></div></td>
                   </tr>
                 </table>
                   <table width="650" border="0" cellspacing="2" cellpadding="2">
@@ -123,19 +123,19 @@ document.onkeypress = stopRKey;
                   <table width="646" border="0" cellpadding="2" cellspacing="1">
                     <tr>
                       <td><span class="style1">Se&ntilde;or(a) </span></td>
-                      <td><strong><font color="#990000"><? echo $rut_id
- ?></font> , <font color="#333333"><? echo $nombre
+                      <td><strong><font color="#990000"><?php echo $rut_id
+ ?></font> , <font color="#333333"><?php echo $nombre
  ?></font></strong></td>
                     </tr>
                     <tr>
                       <td height="22">Direcci&oacute;n</td>
-                      <td><? echo $dom
+                      <td><?php echo $dom
  ?></td>
                     </tr>
                     <tr>
                       <td width="141" height="22"><span class="style1">Fono/Email </span></td>
-                      <td width="491"><? echo $tel
- ?> ------- <? echo $mail;
+                      <td width="491"><?php echo $tel
+ ?> ------- <?php echo $mail;
 
  ?></td>
                     </tr>
@@ -154,38 +154,38 @@ document.onkeypress = stopRKey;
                     <table width="650" border="0" cellpadding="4" cellspacing="2">
                       <tr>
                         <td><span class="style1">Tipo de Certificado</span></td>
-                        <td colspan="2"><? echo $nombrecerti ?></td>
+                        <td colspan="2"><?php echo $nombrecerti ?></td>
                       </tr>
                       <tr>
                         <td><span class="style1">* Solo para BNUP</span></td>
-                        <td width="186"><span class="style1">Metros Lineales: <? echo $mt ?></span></td>
-                        <td width="277"><span class="style1">Dias :<? echo $dias ?></span></td>
+                        <td width="186"><span class="style1">Metros Lineales: <?php echo $mt ?></span></td>
+                        <td width="277"><span class="style1">Dias :<?php echo $dias ?></span></td>
                       </tr>
                       <tr>
                         <td><span class="style1">Direcci&oacute;n</span></td>
-                        <td colspan="2"><span class="style1"><? echo $direccion ?> , ROL: <? echo $rol ?></span></td>
+                        <td colspan="2"><span class="style1"><?php echo $direccion ?> , ROL: <?php echo $rol ?></span></td>
                       </tr>
                       <tr>
                         <td><span class="style1">Rubro</span></td>
-                        <td colspan="2"><span class="style1"><? echo $rub ?></span></td>
+                        <td colspan="2"><span class="style1"><?php echo $rub ?></span></td>
                       </tr>
                       <tr>
                         <td width="137"><span class="style1">Fecha Solicitud</span></td>
-                        <td colspan="2"><span class="style1"><? echo $fecha_sol ?>
+                        <td colspan="2"><span class="style1"><?php echo $fecha_sol ?>
                           </span>
                         <div align="justify" class="style1"></div></td>
                       </tr>
                       <tr>
                         <td><span class="style1">Fecha Entrega</span></td>
-                        <td colspan="2"><span class="style1"><? echo $fecha_ent ?></span></td>
+                        <td colspan="2"><span class="style1"><?php echo $fecha_ent ?></span></td>
                       </tr>
                       <tr>
                         <td><span class="style1">Atendido por</span></td>
-                        <td colspan="2"><span class="style1"><? echo $atendido ?></span></td>
+                        <td colspan="2"><span class="style1"><?php echo $atendido ?></span></td>
                       </tr>
                       <tr>
                         <td><span class="style1">TOTAL $</span></td>
-                        <td colspan="2"><span class="style1"><? echo $total ?></span></td>
+                        <td colspan="2"><span class="style1"><?php echo $total ?></span></td>
                       </tr>
                       <tr>
                         <td height="18" colspan="3" bgcolor="#666666"><font color="#FFFFFF"><strong>DATOS CONTABLES </strong></font></td>

@@ -4,7 +4,7 @@ include("../fechaclasss.php");
 
 if ($tipousuario <> 1 ) {
 			 echo '<script language="javascript">';
-			 echo "alert('Sr. usuario no tiene los permisos para ingresar a esta sección');";
+			 echo "alert('Sr. usuario no tiene los permisos para ingresar a esta secciï¿½n');";
 			 echo "location.href='list_solicitudes.php';";
  		     echo "</script>";
 }			 
@@ -39,7 +39,7 @@ if ($tipousuario <> 1 ) {
                 <tr> 
                   <td width="90" valign="bottom"><input name="id" type="text" id="id" size="15" maxlength="15"></td>
                   <td width="10" valign="middle">&nbsp;                  </td>
-                  <td width="47" valign="middle"><input name="imageField" type="image" onClick="nombreFormulario.send();return false" src="../Images/zoom.gif" width="24" height="22" border="0"></td>
+                  <td width="47" valign="middle"><input name="imageField" type="image" onClick="nombreFormulario.send();return false" src="../images/zoom.gif" width="24" height="22" border="0"></td>
                 </tr>
               </table>
             </form></td>

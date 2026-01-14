@@ -27,10 +27,10 @@ $hoy = date('Y')."-".date('m')."-".date('d');
 
 <table width="900" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
-    <td><? if ($tipousuario == 1 ) { include ("menu-adm.php"); } else { include ("menu-normal.php"); }?></td>
+    <td><?php if ($tipousuario == 1 ) { include ("menu-adm.php"); } else { include ("menu-normal.php"); }?></td>
   </tr>
 </table>
 <br>
-<? include("footer.php"); ?>
+<?php include("footer.php"); ?>
 </body>
 </html>

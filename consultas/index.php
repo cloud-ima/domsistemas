@@ -6,8 +6,8 @@ $mensajetitulo = "Consultando Registro de Propiedades";
 $hoy = date('Y')."-".date('m')."-".date('d');
 $x_rut = '';
 $x_rol = '';
-$x_rol = $_POST["rol"];
-$x_rut = $_POST["rut"];
+$x_rol = $_POST["rol"] ?? '';
+$x_rut = $_POST["rut"] ?? '';
 $x_rut = strtoupper($_POST["rut"]);
 
 if ( $x_rol == '' and $x_rut == '' ){
@@ -55,7 +55,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr> 
     <td> 
-      <? //include "botones.php"; ?>
+      <?php //include "botones.php"; ?>
     </td>
   </tr>
   <tr> 
@@ -69,13 +69,13 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
                   </tr>
                   <tr> 
                     <td width="220">RUT Solicitante </td>
-                    <td colspan="2"><input name="rut" type="text" id="num3" value="<? echo $x_rut; ?>" size="30">
+                    <td colspan="2"><input name="rut" type="text" id="num3" value="<?php echo $x_rut; ?>" size="30">
                       * Solo para busqueda por n&uacute;mero</td>
                   </tr>
                   <tr> 
                     <td>N&uacute;mero de Rol</td>
-                    <td width="194"><input name="rol" type="text" id="rol2" value="<? echo $x_rol ?>" size="30"></td>
-                    <td width="408"><input name="imageField" type="image" onClick="nombreFormulario.send();return false" src="../Images/zoom.gif" width="24" height="22" border="0"></td>
+                    <td width="194"><input name="rol" type="text" id="rol2" value="<?php echo $x_rol ?>" size="30"></td>
+                    <td width="408"><input name="imageField" type="image" onClick="nombreFormulario.send();return false" src="../images/zoom.gif" width="24" height="22" border="0"></td>
                   </tr>
                 </table>
               </td>
@@ -174,7 +174,7 @@ width=13></td>
               </table>
                 <table width="99%" height="35" border="0" cellpadding="0" cellspacing="0">
                   <tr>
-                    <? 
+                    <?php 
                     $color2 = "#A6E2FF";
 				if ($a == 0) {
                     $color = "#f1f1f1";
@@ -188,25 +188,25 @@ width=13></td>
 				    $color = "#FFCC66";
 					 } */
 				?>
-                    <td width="100" height="35" align="center" bgcolor="<? echo $color ?>" ><? echo $fechaed;
+                    <td width="100" height="35" align="center" bgcolor="<?php echo $color ?>" ><?php echo $fechaed;
  ?> <br />
                     </td>
-                    <td width="199" bgcolor="<? echo $color ?>" ><font color="#0066CC"><? echo $nombre; ?></font></td>
-                    <td width="237" bgcolor="<? echo $color ?>" ><? echo $nombrecerti
- ?> (<font color="#990000"><? echo $row["id"] ?></font>)</td>
-                    <td width="119" bgcolor="<? echo $color ?>" ><? echo $nombreestado ?></td>
-                    <td width="100" align="right" bgcolor="<? echo $color ?>" ><? echo number_format($row["total"], 0, ",", ".");
+                    <td width="199" bgcolor="<?php echo $color ?>" ><font color="#0066CC"><?php echo $nombre; ?></font></td>
+                    <td width="237" bgcolor="<?php echo $color ?>" ><?php echo $nombrecerti
+ ?> (<font color="#990000"><?php echo $row["id"] ?></font>)</td>
+                    <td width="119" bgcolor="<?php echo $color ?>" ><?php echo $nombreestado ?></td>
+                    <td width="100" align="right" bgcolor="<?php echo $color ?>" ><?php echo number_format($row["total"], 0, ",", ".");
  ?> </td>
-                    <td width="52" bgcolor="<? echo $color ?>" ><div align="right"><A onclick="MM_openBrWindow('../solicitud/mostrar_solicitud.php?id=<? echo $row["id"]. "&rut=". $row["rut"] ?>','','scrollbars=yes,width=650,height=500')" 
-            href="javascript:;"><img src="../Images/zoom.gif" title="Consultar Solicitud" width="20" border="0"></a></div></td>
-                    <td width="24" bgcolor="<? echo $color ?>"><div align="center"> </div></td>
-                    <td width="18" bgcolor="<? echo $color ?>"><div align="center"> </div>
-                    <td width="13" bgcolor="<? echo $color ?>"><div align="center"> </div></td>
+                    <td width="52" bgcolor="<?php echo $color ?>" ><div align="right"><A onclick="MM_openBrWindow('../solicitud/mostrar_solicitud.php?id=<?php echo $row["id"]. "&rut=". $row["rut"] ?>','','scrollbars=yes,width=650,height=500')" 
+            href="javascript:;"><img src="../images/zoom.gif" title="Consultar Solicitud" width="20" border="0"></a></div></td>
+                    <td width="24" bgcolor="<?php echo $color ?>"><div align="center"> </div></td>
+                    <td width="18" bgcolor="<?php echo $color ?>"><div align="center"> </div>
+                    <td width="13" bgcolor="<?php echo $color ?>"><div align="center"> </div></td>
                   </tr>
                 </table>
                 <table width="41" border="0" cellspacing="0" cellpadding="0">
                   <tr>
-                    <td width="41"><? }?>
+                    <td width="41"><?php }?>
                     </td>
                   </tr>
               </table></td>

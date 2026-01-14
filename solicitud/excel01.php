@@ -7,13 +7,13 @@ header("Content-Disposition: attachment; filename=$filename");
 header("Pragma: no-cache");
 header("Expires: 0");
 //echo "Listado de Solicitudes Pendientes Fecha Consulta Desde : ". $inicio. " al ". $hasta;
-$inicio = $_POST["desde"];
-$termino = $_POST["hasta"];
+$inicio = $_POST["desde"] ?? '';
+$termino = $_POST["hasta"] ?? '';
 if ( $termino == "" )
 {
     $termino = $inicio ;
 }
-$lugar = $_POST["lugar"];
+$lugar = $_POST["lugar"] ?? '';
 
 echo "Solicitudes Comprendidas, Desde : ". $inicio. " al ". $termino;
 

@@ -1,12 +1,11 @@
-<?
-   include("../seguridadsimple.php");
+<?php    include("../seguridadsimple.php");
    include("../fechaclasss.php");
    
    if ( isset($_GET["param"]) ) {
-      $x_param = $_GET["param"]; }
+      $x_param = $_GET["param"] ?? ''; }
 	  
    if ( isset($_POST["param"]) ) {
-      $x_param = $_POST["param"]; }
+      $x_param = $_POST["param"] ?? ''; }
 	  
 $link=Conectarse();
 $qry = "SELECT * from parametros where id = 1";
@@ -23,11 +22,11 @@ if ( $x_param == 1 ){
 	  		 $fec1 = cambiaf_a_mysql($_POST["fecha"]);
 			 $fec2 = cambiaf_a_mysql($_POST["fentrega"]);
  		     $dirx = strtoupper($_POST["direccion"]);
-			 $rolx = $_POST["rol"];
-  		     $mtx = $_POST["mt"];
-  		     $diasx = $_POST["dias"];
-  		     $certx = $_POST["certificado"];
-  		     $rutx = $_POST["rut"];
+			 $rolx = $_POST["rol"] ?? '';
+  		     $mtx = $_POST["mt"] ?? '';
+  		     $diasx = $_POST["dias"] ?? '';
+  		     $certx = $_POST["certificado"] ?? '';
+  		     $rutx = $_POST["rut"] ?? '';
   		     $rubx = strtoupper($_POST["rubro"]);
 			 
 			 $qry = "SELECT * from tipocertificado where id =$certx";
@@ -62,13 +61,13 @@ else
 
 if ( $x_param == 2 ){
            
-			 $idx = $_POST["codigo"];
+			 $idx = $_POST["codigo"] ?? '';
 			 $fec1 = cambiaf_a_mysql($_POST["fgiro"]);
 		 
-			 $girx = $_POST["giro"];
-  		     $otx = $_POST["ot"];
-			 $acx = $_POST["responsable"];
-			 $rolx = $_POST["rol_aux"];
+			 $girx = $_POST["giro"] ?? '';
+  		     $otx = $_POST["ot"] ?? '';
+			 $acx = $_POST["responsable"] ?? '';
+			 $rolx = $_POST["rol_aux"] ?? '';
 			 $esx = '1';
 			 
 			 if ( $otx <> "" ) { $esx = '2'; }
@@ -86,7 +85,7 @@ if ( $x_param == 2 ){
 
 if ( $x_param == 3 ){
 	if ($tipousuario == 1 ) {
-		     $idx  = $_GET["id"];
+		     $idx  = $_GET["id"] ?? '';
              $link=conectarse();
 			 $sql= "UPDATE $tablaperiodo SET estado='5' WHERE id='$idx'";
    		     $result2=mysql_query($sql);
@@ -109,14 +108,14 @@ else {
 
 if ( $x_param == 4 ){
            
-			 $idx = $_POST["codigo"];
+			 $idx = $_POST["codigo"] ?? '';
 		//	 $fec1 = cambiaf_a_mysql($_POST["fgiro"]);
 		 
-			 $girx = $_POST["giro"];
-  		     $otx = $_POST["ot"];
-			 $acx = $_POST["responsable"];
-			 $rolx = $_POST["rol_aux"];
-			 $esx = $_POST["estado"];
+			 $girx = $_POST["giro"] ?? '';
+  		     $otx = $_POST["ot"] ?? '';
+			 $acx = $_POST["responsable"] ?? '';
+			 $rolx = $_POST["rol_aux"] ?? '';
+			 $esx = $_POST["estado"] ?? '';
 			 
 		 	 $link=conectarse();
 //    	     $sql= "UPDATE $tablaperiodo SET rol='$rolx', giro_fecha='$fec1',giro_numero='$girx',orden_numero='$otx',estado='$esx',responsable='$acx' WHERE id='$idx'";

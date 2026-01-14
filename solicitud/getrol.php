@@ -1,6 +1,6 @@
 <?php
 include("../conexion.php");
-$q=$_GET["q"];
+$q=$_GET["q"] ?? '';
 //$q='1718-10';
 
 	$link=conectarse();

@@ -1,9 +1,8 @@
-<?
-session_start();
+<?php session_start();
 $id = session_id();
 include("conexion.php");
-$user=$_POST['txtLogin'];
-$pass=$_POST['txtClave'];
+$user=$_POST['txtLogin'] ?? '';
+$pass=$_POST['txtClave'] ?? '';
 
      // $link=conectarse();
      // $sql= "select * from usuarios where session='$id' ";

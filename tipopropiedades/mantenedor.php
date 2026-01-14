@@ -1,14 +1,13 @@
-<?
-   include("../conexion.php");
+<?php    include("../conexion.php");
    
    if ( isset($_GET["param"]) ) {
-      $x_param = $_GET["param"]; }
+      $x_param = $_GET["param"] ?? ''; }
 	  
    if ( isset($_POST["param"]) ) {
-      $x_param = $_POST["param"]; }
+      $x_param = $_POST["param"] ?? ''; }
    
 if ( $x_param == 1 ){
-			 $desx = $_POST["nom"];
+			 $desx = $_POST["nom"] ?? '';
 			 $link=conectarse();
 			 $sql = "INSERT INTO tipo (nombre) VALUES ('$desx')";
 			 $result2=mysql_query($sql);
@@ -21,8 +20,8 @@ if ( $x_param == 1 ){
 }
 
 if ( $x_param == 2 ){
-			 $desx = $_POST["nom"];
-			 $idx  = $_POST["codigo"];
+			 $desx = $_POST["nom"] ?? '';
+			 $idx  = $_POST["codigo"] ?? '';
 		 
 		 	 $link=conectarse();
     	     $sql= "UPDATE tipo SET nombre='$desx' WHERE id='$idx'";
@@ -38,7 +37,7 @@ if ( $x_param == 2 ){
 }
 
 if ( $x_param == 3 ){
-			 $idx  = $_GET["id"];
+			 $idx  = $_GET["id"] ?? '';
              $link=conectarse();
    	         $sql="DELETE FROM clases where id = '$idx'";
       	     $result = mysql_query($sql);

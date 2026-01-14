@@ -1,4 +1,4 @@
-<? include("../seguridad.php");
+<?php include("../seguridad.php");
 /*if ($tipousuario == 2 or $tipousuario == 3 ) {
  			 echo '<script language="javascript">';
 			 echo "alert('Sr. Usuario, no tiene acceso a Este módulo!');";
@@ -33,7 +33,7 @@
   </tr>
   <tr>
     <td>
-      <? include("../footer.php");?>
+      <?php include("../footer.php");?>
     </td>
   </tr>
 </table>

@@ -48,7 +48,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
     <td><table width="700" border="0" align="center" cellpadding="0" cellspacing="5">
       <tr>
         <td width="661" height="12"><div align="left"><A onclick="MM_openBrWindow('formulario.php?param=1','','scrollbars=yes,width=500,height=290')" 
-            href="javascript:;"><? echo "Agregar Nuevo Registro" ?></a></div></td>
+            href="javascript:;"><?php echo "Agregar Nuevo Registro" ?></a></div></td>
         <td width="661"><div align="right"></div></td>
       </tr>
     </table>
@@ -86,7 +86,7 @@ while ($row = mysql_fetch_array($result)){
             </table>
               <table width="100%" height="20" border="0" cellpadding="2" cellspacing="2">
                 <tr>
-                  <? 
+                  <?php 
                     $color2 = "#A6E2FF";
 				if ($a == 0) {
                     $color = "#f1f1f1";
@@ -97,25 +97,25 @@ while ($row = mysql_fetch_array($result)){
 					$a = 0;
 		        }	 
 				?>
-                  <td width="33" height="18" align="right" bgcolor="<? echo $color ?>"><div align="right"><? echo $row["id"]?></div></td>
-                  <td width="265" align="left" bgcolor="<? echo $color ?>" ><? echo $row["nombre"]; ?>
+                  <td width="33" height="18" align="right" bgcolor="<?php echo $color ?>"><div align="right"><?php echo $row["id"]?></div></td>
+                  <td width="265" align="left" bgcolor="<?php echo $color ?>" ><?php echo $row["nombre"]; ?>
 					   
                   </td>
-                  <td width="21" align="center" valign="middle" bgcolor="<? echo $color ?>" ><? if ( $row["reporte"] <> NULL ) {
+                  <td width="21" align="center" valign="middle" bgcolor="<?php echo $color ?>" ><?php if ( $row["reporte"] <> NULL ) {
 						echo "<img width=20 src=\"ok.png\">";
 						 } ?></td>
-                  <td width="92" align="center" bgcolor="<? echo $color ?>" ><? echo $nombremoneda; ?></td>
-                  <td width="60" bgcolor="<? echo $color ?>" ><div align="center"><? echo $row["precio"] ?></div></td>
-                  <td width="35" bgcolor="<? echo $color ?>" ><div align="center"><? echo $row["plazo"] ?></div></td>
-                  <td width="75" bgcolor="<? echo $color ?>"><div align="center"><? echo $row["copias"] ?></div></td>
-                  <td width="17" bgcolor="<? echo $color ?>"><div align="center"><A onclick="MM_openBrWindow('formulario.php?id=<? echo $row["id"]. "&flag=1"?>','','scrollbars=yes,width=500,height=290')" 
+                  <td width="92" align="center" bgcolor="<?php echo $color ?>" ><?php echo $nombremoneda; ?></td>
+                  <td width="60" bgcolor="<?php echo $color ?>" ><div align="center"><?php echo $row["precio"] ?></div></td>
+                  <td width="35" bgcolor="<?php echo $color ?>" ><div align="center"><?php echo $row["plazo"] ?></div></td>
+                  <td width="75" bgcolor="<?php echo $color ?>"><div align="center"><?php echo $row["copias"] ?></div></td>
+                  <td width="17" bgcolor="<?php echo $color ?>"><div align="center"><A onclick="MM_openBrWindow('formulario.php?id=<?php echo $row["id"]. "&flag=1"?>','','scrollbars=yes,width=500,height=290')" 
             href="javascript:;"><img src="../css/modificar.gif" alt="Modificar Ficha" width="17" height="12" border="0"></a></div></td>
-                  <td width="44" bgcolor="<? echo $color ?>"><div align="center"><a href="mantenedor.php?id=<?php echo $row['id']."&param=3"; ?>"class="bot" onClick="if(!confirm('&iquest;Deseas realmente borrar el Registro, ID N&uacute;mero : <?php echo strtolower($row['id']); ?>?'))return false"><img src="../css/action_stop.gif" title="Eliminar Par&aacute;metro" width="16" height="16" border="0"></a></div></td>
+                  <td width="44" bgcolor="<?php echo $color ?>"><div align="center"><a href="mantenedor.php?id=<?php echo $row['id']."&param=3"; ?>"class="bot" onClick="if(!confirm('&iquest;Deseas realmente borrar el Registro, ID N&uacute;mero : <?php echo strtolower($row['id']); ?>?'))return false"><img src="../css/action_stop.gif" title="Eliminar Par&aacute;metro" width="16" height="16" border="0"></a></div></td>
                 </tr>
               </table>
               <table width="41" border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                  <td width="41"><? }?>
+                  <td width="41"><?php }?>
                   </td>
                 </tr>
             </table></td>
