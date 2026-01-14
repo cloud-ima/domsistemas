@@ -1,33 +1,48 @@
 <?php
 
 include("../conexion.php");
+include("../debug.php");
 
-$x_flag = $_GET["flag"] ?? '';
+// Inicializar variables
+$parz = 1;
+$nomz = "";
+$idz = "";
+$idestado = "Estado(Ingresando Nuevo Registro)";
 
-if ( $x_flag == 0 ) {
-   $idestado = "Nuevo Registro";
+$x_flag = $_GET["flag"] ?? "";
+$x_param = $_GET["param"] ?? "";
+
+debug_log("=== FORMULARIO POB ===");
+debug_log("flag", $x_flag);
+debug_log("param", $x_param);
+
+if ( $x_param == 1 || $x_flag == "" || $x_flag == 0 ) {
+   $idestado = "Estado(Ingresando Nuevo Registro)";
    $parz = 1;
    $nomz = "";
-}   
+   $idz = "";
+   debug_log("Modo: NUEVO REGISTRO, parz=", $parz);
+}
 
 if ( $x_flag == 1 ) {
-    $idestado = "Modificando Registro";
-	$link=conectarse();
-    $idz=$_GET['id'] ?? '';
+    $idestado = "Estado(Modificacion del Registro)";
+    $link=conectarse();
+    $idz=$_GET["id"] ?? "";
     $ssql = "select * from pob where id ='$idz'";
     $rs = mysql_query($ssql,$link);
-    $num_registros = mysql_num_rows($rs); 
-	if ($num_registros == 0){
-		   header("location: index.php");
-	}else{
-		   while ($row = mysql_fetch_array($rs)){
-		       $nomz = $row["nombre"];
-  			   $idz  = $row["id"];
-			   $parz = 2;
-          }
-	}
-				  mysql_close($link);
-}   
+    $num_registros = mysql_num_rows($rs);
+    if ($num_registros == 0){
+        header("location: index.php");
+    }else{
+        while ($row = mysql_fetch_array($rs)){
+            $nomz = $row["nombre"];
+            $idz = $row["id"];
+            $parz = 2;
+        }
+    }
+    mysql_close($link);
+    debug_log("Modo: EDICION, parz=", $parz);
+}
 ?>
 <html>
 <head>
@@ -35,53 +50,52 @@ if ( $x_flag == 1 ) {
 <title></title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 </head>
-<body leftmargin="0" topmargin="0">
-<TABLE cellSpacing=0 cellPadding=0 width="500" 
-border=0>
-  <TBODY>
-    <TR> 
-      <TD 
-    style="BORDER-RIGHT: #cccccc 1px; BORDER-TOP: #cccccc 1px solid; BORDER-LEFT: #cccccc 1px; BORDER-BOTTOM: #cccccc 1px solid" 
-    vAlign=center align=left width="473" bgColor=#ffffff 
-      height=42>&nbsp;&nbsp;<font color="#333333" size="3" face="Georgia, Times New Roman, Times, serif"><strong>Crear 
-        Juntas Vecinales(<?php echo $idestado ?>)</strong></font></TD>
-      <TD 
-    style="BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; BORDER-LEFT: #cccccc 1px; BORDER-BOTTOM: #cccccc 1px solid" 
-    vAlign=center align=right width="534" bgColor=#ffffff> 
-        <IMG height=40 alt=separador 
-      src="images/puntos.gif" width=1></TD>
-    </TR>
-  </TBODY>
-</TABLE>
-<form action="mantenedor.php" method="POST" enctype="multipart/form-data" >
-  <table width="500" border="0" cellpadding="0" cellspacing="9">
+<body>
+<form action="mantenedor.php" method="POST" enctype="multipart/form-data">
+  <br><br>
+  <table width="467" border="0" align="center" cellpadding="0" cellspacing="0">
     <tr>
-      <td width="790" height="114" valign="top"> 
-        <TABLE cellSpacing=6 cellPadding=2 width=100% align=left 
-border=0>
-          <TBODY>
-            <TR> 
-              <TD width="96" bgColor=#ffffff><SPAN > Junta Vecinal</SPAN></TD>
-              <TD width="360" bgColor=#ffffff><input class=bordecampos name="nombre" type="text" id="nombre" value="<?php echo $nomz ?>" size="60" maxlength="100"></TD>
-            </TR>
-            <TR> 
-              <TD bgColor=#ffffff>&nbsp;</TD>
-              <TD bgColor=#ffffff> <DIV> 
-                  <div align="left"> 
-                    <input class=bordecampos name="enviar" type="submit" id="enviar3" value="Grabar">
-                  </div>
-                </DIV></TD>
-            </TR>
-            <TR> 
-              <TD bgColor=#ffffff><input name="param" type="hidden" id="param" value="<?php echo $parz ?>"> 
-                <input name="codigo" type="hidden" id="codigo" value="<?php echo $idz ?>"></TD>
-              <TD bgColor=#ffffff>&nbsp;</TD>
-            </TR>
-          </TBODY>
-        </TABLE>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
+      <td width="467" height="200" valign="top">
+        <table width="461" border="0" cellpadding="2" cellspacing="0">
+          <tr><td width="461" align="center"><div align="left"><strong>Poblaciones</strong></div></td></tr>
+          <tr><td align="center"><div align="left"><?php echo $idestado ?></div></td></tr>
+        </table>
+        <table width="459" border="0" cellpadding="0" cellspacing="0" bordercolor="#cccccc">
+          <tr>
+            <td width="616" height="68">
+              <table width="454" border="0" cellpadding="2" cellspacing="2">
+                <tr>
+                  <td width="146" height="26" bgcolor="#efefef" class="estilo_titulo">Descripcion</td>
+                  <td width="294" bgcolor="#efefef">
+                    <input name="nom" type="text" id="titulo2" value="<?php echo $nomz ?>" size="50" maxlength="100">
+                  </td>
+                </tr>
+                <tr>
+                  <td height="19" class="estilo_titulo">
+                    <input name="param" type="hidden" value="<?php echo $parz ?>">
+                    <input name="codigo" type="hidden" value="<?php echo $idz ?>">
+                  </td>
+                  <td bgcolor="#FFFFFF">&nbsp;</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <table width="454" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td height="39" class="estilo_titulo">
+              <table width="178" border="0" align="left">
+                <tr>
+                  <td width="73" valign="top"><div align="center"><input name="enviar" type="submit" value="Grabar"></div></td>
+                  <td width="95" valign="top">
+                    <input type="reset" name="Submit3" value="Cancelar" onClick="cerrar()">
+                    <script>function cerrar(){opener.window.location.reload(false);window.close();}</script>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
       </td>
     </tr>
   </table>

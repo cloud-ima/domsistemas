@@ -1,22 +1,43 @@
-<?php    include("../conexion.php");
-   
-   if ( isset($_GET["param"]) ) {
-      $x_param = $_GET["param"] ?? ''; }
-	  
-   if ( isset($_POST["param"]) ) {
-      $x_param = $_POST["param"] ?? ''; }
-   
+<?php    
+include("../conexion.php");
+include("../debug.php");
+
+// Debug: mostrar datos recibidos
+debug_log('=== MANTENEDOR CLASES ===');
+debug_request();
+
+$x_param = '';
+if ( isset($_GET["param"]) ) {
+    $x_param = $_GET["param"] ?? ''; 
+}
+if ( isset($_POST["param"]) ) {
+    $x_param = $_POST["param"] ?? ''; 
+}
+
+debug_log('Parametro recibido', $x_param);
+
 if ( $x_param == 1 ){
-			 $desx = $_POST["nom"] ?? '';
-			 $link=conectarse();
-			 $sql = "INSERT INTO clases (nombre) VALUES ('$desx')";
-			 $result2=mysql_query($sql);
-			 mysql_close($link);
-			 echo '<script language="javascript">';
-			 echo "alert('Registro Agregado Correctamente!');";
-			 echo "opener.window.location.reload( false );";
-	         echo "window.close();";
-			 echo "</script>";
+    debug_log('Ejecutando INSERT');
+    $desx = $_POST["nom"] ?? '';
+    debug_log('Valor a insertar (nom)', $desx);
+    
+    $link=conectarse();
+    $sql = "INSERT INTO clases (nombre) VALUES ('$desx')";
+    debug_query($sql);
+    
+    $result2=mysql_query($sql);
+    debug_log('Resultado INSERT', $result2 ? 'SUCCESS' : 'FAILED');
+    
+    if (!$result2) {
+        debug_log('Error MySQL', mysql_error());
+    }
+    
+    mysql_close($link);
+    echo '<script language="javascript">';
+    echo "alert('Registro Agregado Correctamente!');";
+    echo "opener.window.location.reload( false );";
+    echo "window.close();";
+    echo "</script>";
 }
 
 if ( $x_param == 2 ){

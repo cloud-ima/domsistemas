@@ -1,4 +1,9 @@
 <?php    include("../conexion.php");
+include("../debug.php");
+
+// Debug: mostrar datos recibidos
+debug_log("=== MANTENEDOR: destino ===");
+debug_request();
    
    if ( isset($_GET["param"]) ) {
       $x_param = $_GET["param"] ?? ''; }

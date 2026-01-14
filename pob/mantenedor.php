@@ -1,4 +1,9 @@
-<?php include("../conexion.php");   
+<?php include("../conexion.php");
+include("../debug.php");
+
+// Debug: mostrar datos recibidos
+debug_log("=== MANTENEDOR: pob ===");
+debug_request();   
    
    if ( isset($_GET["param"]) ) {
       $x_param = $_GET["param"] ?? ''; }
