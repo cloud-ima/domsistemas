@@ -4,7 +4,7 @@ include("../fechaclasss.php");
 include("fckeditor/fckeditor.php");
 
 //******************************************************
-// Validaci�n del Ingreso (Nuevo,edici�n)
+// Validacion del Ingreso (Nuevo, edicion)
 
 
 $x_flag = $_GET["flag"] ?? '';
@@ -104,7 +104,7 @@ mkdir($dire, 0777, true);
 
 /*if ($tipousuario == 2 or $tipousuario == 3 ) {
  			 echo '<script language="javascript">';
-			 echo "alert('Sr. Usuario, no tiene acceso a Este m�dulo!');";
+			 echo "alert('Sr. Usuario, no tiene acceso a Este modulo!');";
 			 echo "location.href='principal.php';";
 			 echo "</script>";
 }*/
@@ -112,10 +112,10 @@ mkdir($dire, 0777, true);
 function suma_fechas($fecha,$ndias)
 {
       if (preg_match("/[0-9]{1,2}\/[0-9]{1,2}\/([0-9][0-9]){1,2}/",$fecha))
-              list($dia,$mes,$a�o)=split("/", $fecha);
+              list($dia,$mes,$anio)=explode("/", $fecha);
       if (preg_match("/[0-9]{1,2}-[0-9]{1,2}-([0-9][0-9]){1,2}/",$fecha))
-              list($dia,$mes,$a�o)=split("-",$fecha);
-              $nueva = mktime(0,0,0, $mes,$dia,$a�o) + $ndias * 24 * 60 * 60;
+              list($dia,$mes,$anio)=explode("-",$fecha);
+              $nueva = mktime(0,0,0, $mes,$dia,$anio) + $ndias * 24 * 60 * 60;
               $nuevafecha=date("Y-m-d",$nueva);
 	  return ($nuevafecha);
 }

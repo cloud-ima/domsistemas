@@ -4,7 +4,7 @@ include("seguridad.php");
 
 if ( $tipousuario <> 1 ) { 
 			 echo '<script language="javascript">';
-			 echo "alert('Sr. Usuario no tiene acceso a este m�dulo');";
+			 echo "alert('Sr. Usuario no tiene acceso a este modulo');";
 			 echo "location.href='principal.php';";
 			 echo "</script>";
 }

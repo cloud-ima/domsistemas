@@ -4,7 +4,7 @@ include("../fechaclasss.php");
 
 if ($tipousuario <> 1 ) {
 			 echo '<script language="javascript">';
-			 echo "alert('Sr. usuario no tiene los permisos para ingresar a esta secci�n');";
+			 echo "alert('Sr. usuario no tiene los permisos para ingresar a esta seccion');";
 			 echo "location.href='list_solicitudes.php';";
  		     echo "</script>";
 }			 
