@@ -3,11 +3,15 @@
 include("../conexion.php");
 include("../debug.php");
 
-// Inicializar variables
+// Inicializar variables - tipocertificado usa: nombre, moneda, precio, plazo, copias, cuenta
 $parz = 1;
-$nomz = "";
+$nombrez = "";
 $idz = "";
-$colorz = "#FFFFFF";
+$monedaz = "";
+$precioz = "";
+$plazoz = "";
+$copiasz = "";
+$cuentaz = "";
 $idestado = "Estado(Ingresando Nuevo Registro)";
 
 $x_flag = $_GET["flag"] ?? "";
@@ -20,7 +24,7 @@ debug_log("param", $x_param);
 if ( $x_param == 1 || $x_flag == "" || $x_flag == 0 ) {
    $idestado = "Estado(Ingresando Nuevo Registro)";
    $parz = 1;
-   $nomz = "";
+   $nombrez = "";
    $idz = "";
    debug_log("Modo: NUEVO REGISTRO, parz=", $parz);
 }
@@ -36,9 +40,13 @@ if ( $x_flag == 1 ) {
         header("location: index.php");
     }else{
         while ($row = mysql_fetch_array($rs)){
-            $nomz = $row["nombre"];
+            $nombrez = $row["nombre"];
             $idz = $row["id"];
-            $colorz = $row["color"] ?? "#FFFFFF";
+            $monedaz = $row["moneda"] ?? "";
+            $precioz = $row["precio"] ?? "";
+            $plazoz = $row["plazo"] ?? "";
+            $copiasz = $row["copias"] ?? "";
+            $cuentaz = $row["imputacion"] ?? "";
             $parz = 2;
         }
     }
@@ -67,15 +75,39 @@ if ( $x_flag == 1 ) {
             <td width="616" height="68">
               <table width="454" border="0" cellpadding="2" cellspacing="2">
                 <tr>
-                  <td width="146" height="26" bgcolor="#efefef" class="estilo_titulo">Descripcion</td>
+                  <td width="146" height="26" bgcolor="#efefef" class="estilo_titulo">Nombre</td>
                   <td width="294" bgcolor="#efefef">
-                    <input name="nom" type="text" value="<?php echo $nomz ?>" size="50" maxlength="100">
+                    <input name="nombre" type="text" value="<?php echo $nombrez ?>" size="50" maxlength="100">
                   </td>
                 </tr>
                 <tr>
-                  <td width="146" height="26" bgcolor="#efefef" class="estilo_titulo">Color</td>
+                  <td width="146" height="26" bgcolor="#efefef" class="estilo_titulo">Moneda</td>
                   <td width="294" bgcolor="#efefef">
-                    <input name="color" type="text" value="<?php echo $colorz ?>" size="20" maxlength="20">
+                    <input name="moneda" type="text" value="<?php echo $monedaz ?>" size="20" maxlength="20">
+                  </td>
+                </tr>
+                <tr>
+                  <td width="146" height="26" bgcolor="#efefef" class="estilo_titulo">Precio</td>
+                  <td width="294" bgcolor="#efefef">
+                    <input name="precio" type="text" value="<?php echo $precioz ?>" size="20" maxlength="20">
+                  </td>
+                </tr>
+                <tr>
+                  <td width="146" height="26" bgcolor="#efefef" class="estilo_titulo">Plazo</td>
+                  <td width="294" bgcolor="#efefef">
+                    <input name="plazo" type="text" value="<?php echo $plazoz ?>" size="20" maxlength="20">
+                  </td>
+                </tr>
+                <tr>
+                  <td width="146" height="26" bgcolor="#efefef" class="estilo_titulo">Copias</td>
+                  <td width="294" bgcolor="#efefef">
+                    <input name="copias" type="text" value="<?php echo $copiasz ?>" size="20" maxlength="20">
+                  </td>
+                </tr>
+                <tr>
+                  <td width="146" height="26" bgcolor="#efefef" class="estilo_titulo">Cuenta</td>
+                  <td width="294" bgcolor="#efefef">
+                    <input name="cuenta" type="text" value="<?php echo $cuentaz ?>" size="20" maxlength="50">
                   </td>
                 </tr>
                 <tr>

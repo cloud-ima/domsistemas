@@ -67,7 +67,7 @@ if ( $x_flag == 1 ) {
                 <tr>
                   <td width="146" height="26" bgcolor="#efefef" class="estilo_titulo">Descripcion</td>
                   <td width="294" bgcolor="#efefef">
-                    <input name="nom" type="text" id="titulo2" value="<?php echo $nomz ?>" size="50" maxlength="100">
+                    <input name="nombre" type="text" id="titulo2" value="<?php echo $nomz ?>" size="50" maxlength="100">
                   </td>
                 </tr>
                 <tr>

@@ -3,10 +3,11 @@
 include("../conexion.php");
 include("../debug.php");
 
-// Inicializar variables
+// Inicializar variables - ZONAS usa: ide, info, file
 $parz = 1;
-$nomz = "";
-$idz = "";
+$idez = "";
+$infoz = "";
+$filez = "";
 $idestado = "Estado(Ingresando Nuevo Registro)";
 
 $x_flag = $_GET["flag"] ?? "";
@@ -20,25 +21,30 @@ debug_log("param", $x_param);
 if ( $x_param == 1 || $x_flag == "" || $x_flag == 0 ) {
    $idestado = "Estado(Ingresando Nuevo Registro)";
    $parz = 1;
-   $nomz = "";
-   $idz = "";
+   $idez = "";
+   $infoz = "";
+   $filez = "";
    debug_log("Modo: NUEVO REGISTRO, parz=", $parz);
 }
 
 if ( $x_flag == 1 ) {
     $idestado = "Estado(Modificacion del Registro)";
     $link=conectarse();
-    $idz=$_GET["id"] ?? "";
-    $ssql = "select * from zonas where id ='$idz'";
+    $idez=$_GET["id"] ?? "";
+    $ssql = "select * from zonas where id ='$idez'";
+    debug_log("SQL edicion", $ssql);
     $rs = mysql_query($ssql,$link);
     $num_registros = mysql_num_rows($rs);
+    debug_log("Registros encontrados", $num_registros);
     if ($num_registros == 0){
         header("location: index.php");
     }else{
         while ($row = mysql_fetch_array($rs)){
-            $nomz = $row["nombre"];
-            $idz = $row["id"];
+            $idez = $row["id"];
+            $infoz = $row["info"];
+            $filez = $row["file"] ?? "";
             $parz = 2;
+            debug_log("Datos cargados", ["id"=>$idez, "info"=>$infoz, "file"=>$filez]);
         }
     }
     mysql_close($link);
@@ -72,17 +78,27 @@ $fechaactualed = date("d")."/".date("n")."/".date("Y");
           <tr>
             <td width="616" height="68">
               <table width="454" border="0" cellpadding="2" cellspacing="2">
-                <input type="hidden" class="estilo_text" name="t08_cod" value="">
+                <tr>
+                  <td width="146" height="26" bgcolor="#efefef" class="estilo_titulo">Codigo Zona</td>
+                  <td width="294" bgcolor="#efefef">
+                    <input name="ide" type="text" value="<?php echo $idez ?>" size="20" maxlength="50">
+                  </td>
+                </tr>
                 <tr>
                   <td width="146" height="26" bgcolor="#efefef" class="estilo_titulo">Descripcion</td>
                   <td width="294" bgcolor="#efefef">
-                    <input name="nom" type="text" id="titulo2" value="<?php echo $nomz ?>" size="50" maxlength="100">
+                    <input name="info" type="text" value="<?php echo $infoz ?>" size="50" maxlength="100">
+                  </td>
+                </tr>
+                <tr>
+                  <td width="146" height="26" bgcolor="#efefef" class="estilo_titulo">Archivo</td>
+                  <td width="294" bgcolor="#efefef">
+                    <input name="file" type="text" value="<?php echo $filez ?>" size="50" maxlength="100">
                   </td>
                 </tr>
                 <tr>
                   <td height="19" class="estilo_titulo">
-                    <input name="param" type="hidden" id="param4" value="<?php echo $parz ?>">
-                    <input name="codigo" type="hidden" id="param5" value="<?php echo $idz ?>">
+                    <input name="param" type="hidden" value="<?php echo $parz ?>">
                   </td>
                   <td bgcolor="#FFFFFF">&nbsp;</td>
                 </tr>
@@ -91,7 +107,6 @@ $fechaactualed = date("d")."/".date("n")."/".date("Y");
           </tr>
         </table>
         <table width="454" border="0" cellpadding="0" cellspacing="0">
-          <input type="hidden" class="estilo_text" name="t08_cod2" value="">
           <tr>
             <td height="39" class="estilo_titulo">
               <table width="178" border="0" align="left">
