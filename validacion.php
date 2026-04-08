@@ -1,49 +1,69 @@
-<?php session_start();
+﻿<?php session_start();
 $id = session_id();
 include("conexion.php");
-$user=$_POST['txtLogin'] ?? '';
-$pass=$_POST['txtClave'] ?? '';
 
-      $link=conectarse();
-      $sql= "select * from usuarios where session='$id' ";
-      $result2=mysql_query($sql);
-	  if ($row = mysql_fetch_array($result2)){
-	        $nada="";
-	  		$link=conectarse();
-		    $sql= "UPDATE usuarios SET session='$nada' where session='$id' ";
-		    $result2=mysql_query($sql);
-	        mysql_close($link);
-	  }
+$user = $_POST['txtLogin'] ?? '';
+$pass = $_POST['txtClave'] ?? '';
+
+$link = Conectarse();
+
+// Limpiar sesión previa asociada al id actual
+$stmt = $link->prepare("SELECT id FROM usuarios WHERE session = ?");
+if ($stmt) {
+    $stmt->bind_param("s", $id);
+    $stmt->execute();
+    $result2 = $stmt->get_result();
+    if ($result2 && $result2->fetch_assoc()) {
+        $nada = "";
+        $stmtUpdate = $link->prepare("UPDATE usuarios SET session = ? WHERE session = ?");
+        if ($stmtUpdate) {
+            $stmtUpdate->bind_param("ss", $nada, $id);
+            $stmtUpdate->execute();
+            $stmtUpdate->close();
+        }
+    }
+    $stmt->close();
+}
 
 //********************************************************
 
-$link=conectarse();
-$result=mysql_query("select * from usuarios where usuario like '$user' and password like '$pass'", $link);
-if ($row = mysql_fetch_array($result)){
-    $tipx=$row["tipo"];
-do {
+$stmtLogin = $link->prepare("SELECT * FROM usuarios WHERE usuario = ?");
+if ($stmtLogin) {
+    $stmtLogin->bind_param("s", $user);
+    $stmtLogin->execute();
+    $result = $stmtLogin->get_result();
 
-   if ($row["estado"] == 1) {
-      session_start();
-	  $id = session_id();
-	  /*
-      $_SESSION['acceso']=$row["tipo"];
-      $_SESSION['user']=$row["usuario"];
-	  $_SESSION['idnom']=$row["nombre"];*/
-	  $link=conectarse();
-      $sql= "UPDATE usuarios SET session='$id' WHERE usuario = '$user'";
-      $result2=mysql_query($sql);
-      mysql_close($link);
-      header ("location: principal.php");
-   }
+    if ($row = $result->fetch_assoc()) {
+        if (password_verify($pass, $row["password"])) {
+            $tipx = $row["tipo"];
+            
+            if ($row["estado"] == 1) {
+                session_start();
+                $id = session_id();
+                /*
+                $_SESSION['acceso']=$row["tipo"];
+                $_SESSION['user']=$row["usuario"];
+                $_SESSION['idnom']=$row["nombre"];
+                */
+                $stmtSession = $link->prepare("UPDATE usuarios SET session = ? WHERE usuario = ?");
+                if ($stmtSession) {
+                    $stmtSession->bind_param("ss", $id, $user);
+                    $stmtSession->execute();
+                    $stmtSession->close();
+                }
+                header("location: principal.php");
+            } elseif ($row["estado"] == 0) {
+                header("location: login.php?error=El Usuario ingresado ha sido desabilitado...!!");
+            }
+        } else {
+            header("location: login.php?error=Usuario o Contraseña Incorrecto!!");
+        }
+    } else {
+        header("location: login.php?error=Usuario o Contraseña Incorrecto!!");
+    }
 
-   if ($row["estado"] == 0) {
-      header ("location: login.php?error=El Usuario ingresado ha sido desabilitado...!!");
-   }
-   
-} while ($row= mysql_fetch_array($result));
-} else {
-   header ("location: login.php?error=Usuario o Contrase�a Incorrecto!!");
+    $stmtLogin->close();
 }
-mysql_close($link);
+
+$link->close();
 ?>

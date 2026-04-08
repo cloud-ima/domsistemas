@@ -1,0 +1,81 @@
+# ============================================================
+# HARDENING DE SEGURIDAD - DOMSISTEMAS
+# ============================================================
+
+# ------------------------------------------------------------
+# 1. PROTECCIÓN DE ARCHIVOS DE LOG Y SENSIBLES
+# ------------------------------------------------------------
+<FilesMatch "(error_log|access_log|\.log|debug\.txt)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Proteger archivos de configuración
+<FilesMatch "(conexion\.php|config\.php|\.env|\.ini)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Proteger archivos de backup
+<FilesMatch "\.(bak|backup|old|sql|gz|tar|zip)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# ------------------------------------------------------------
+# 2. DESHABILITAR LISTADO DE DIRECTORIOS
+# ------------------------------------------------------------
+Options -Indexes
+
+# ------------------------------------------------------------
+# 3. PROTECCIÓN DE ARCHIVOS DEL SISTEMA
+# ------------------------------------------------------------
+# Bloquear acceso a archivos .htaccess y .htpasswd
+<FilesMatch "^\.ht">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# ------------------------------------------------------------
+# 4. HEADERS DE SEGURIDAD
+# ------------------------------------------------------------
+<IfModule mod_headers.c>
+    # Prevenir clickjacking
+    Header always set X-Frame-Options "SAMEORIGIN"
+    
+    # Prevenir MIME sniffing
+    Header always set X-Content-Type-Options "nosniff"
+    
+    # Habilitar XSS protection
+    Header always set X-XSS-Protection "1; mode=block"
+    
+    # Referrer policy
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Eliminar header que expone versión de PHP
+    Header unset X-Powered-By
+</IfModule>
+
+# ------------------------------------------------------------
+# 5. DESHABILITAR SIGNATURE DE SERVIDOR
+# ------------------------------------------------------------
+ServerSignature Off
+
+# ------------------------------------------------------------
+# 6. PROTECCIÓN CONTRA HOTLINKING
+# ------------------------------------------------------------
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Bloquear acceso directo a archivos PHP en carpetas específicas
+    RewriteCond %{REQUEST_URI} ^.*(uploads|temp|cache)/.*\.php$ [NC]
+    RewriteRule .* - [F,L]
+</IfModule>
+
+# ------------------------------------------------------------
+# 7. LÍMITES DE TAMAÑO DE REQUEST
+# ------------------------------------------------------------
+<IfModule mod_security.c>
+    # Limitar tamaño de body request (10MB)
+    SecRequestBodyLimit 10485760
+</IfModule>
