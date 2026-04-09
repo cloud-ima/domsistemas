@@ -1,11 +1,12 @@
 <?php include "../seguridad.php";
 $fecha_hoy = date('d')."/".date('m')."/".date('Y');
 $hoy = date('Y')."-".date('m')."-".date('d');
-if ( $tipousuario <> 1 ) { 
-			 echo '<script language="javascript">';
-			 echo "alert('Sr. Usuario no tiene acceso a este módulo');";
-			 echo "location.href='../principal.php';";
-			 echo "</script>";
+$anio = date('Y');
+if ( $tipousuario <> 1 ) {
+                         echo '<script language="javascript">';
+                         echo "alert('Sr. Usuario no tiene acceso a este modulo');";
+                         echo "location.href='../principal.php';";
+                         echo "</script>";
 }
 
 ?>
@@ -26,8 +27,8 @@ z-index:100;
 }
 .style2 {font-size: 12}
 .style5 {
-	font-size: 24px;
-	font-weight: bold;
+        font-size: 24px;
+        font-weight: bold;
 }
 </style>
 </head>
@@ -40,20 +41,19 @@ z-index:100;
 <table width="713" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td width="713" height="29" valign="top"><table width="695" height="26" border="0" cellpadding="2" cellspacing="2">
-        <tr>
-          <?php 
+          <tr>
+          <?php
                     $color2 = "#A6E2FF";
-				if ($a == 0) {
+                                if ($a == 0) {
                     $color = "#EFEF99";
-					//$color = "#ffffff";
-					$a = 1;
+                                        //$color = "#ffffff";
+                                        $a = 1;
                 }else{
                     $color = "#ffffff";
-					$a = 0;
-		        }	 
-				?>
-          <td width="384" height="22" align="center" bgcolor="#EFEFEF"><div align="center"></div>
-              <strong>Tipo de Certificados valorizados en $ </strong></td>
+                                        $a = 0;
+                        }
+                                ?>
+          <td width="384" height="22" align="center" bgcolor="#EFEFEF"><div align="center"></div>  <strong>Tipo de Certificados valorizados en $ </strong></td>
           <td width="144" align="left" bgcolor="#EFEFEF" ><div align="center"><strong>Total A&ntilde;o</strong></div></td>
           <td width="147" align="right" bgcolor="#EFEFEF" ><div align="center"><strong><?php echo $fecha_hoy ?></strong></div></td>
         </tr>
@@ -63,73 +63,70 @@ z-index:100;
     <td height="56" valign="top"><table width="43" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td width="43"><font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-            <?php 		  $link=Conectarse(); 
-		  
-          $result=mysql_query("SELECT * FROM tipocertificado order by id ",$link); 
+            <?php
+                  $link=Conectarse();
+
+          $result=mysql_query("SELECT * FROM tipocertificado order by id ",$link);
           $a=0;
-		  $total_year_acum =0;
-		  $num_total_registros_acum = 0;
+                  $total_year_acum =0;
+                  $num_total_registros_acum = 0;
 
-		  $sql2= "select * from cert2009 where estado > 1 ";
-		   		  $ressum = mysql_query($sql2);
-			      $total_year_acum = mysql_num_rows($ressum);
+                  // OPTIMIZADO: Una sola consulta para totales generales del anio
+                  $sql2= "SELECT COUNT(*) as cnt, COALESCE(SUM(total),0) as total_acum FROM cert2009 WHERE estado > 1";
+                  $ressum = mysql_query($sql2);
+                  $row_tmp = mysql_fetch_array($ressum);
+                  $total_year_acum = $row_tmp['cnt'];
+                  $tot1 = $row_tmp['total_acum'];
 
-		  $sql2= "select SUM(total) as total_acum from cert2009 where estado > 1 ";
-		   		  $ressum = mysql_query($sql2);
-				  $tot1 = mysql_result($ressum, 0, "total_acum");				  
+                  // OPTIMIZADO: Una sola consulta para totales del dia
+                  $sql2= "SELECT COUNT(*) as cnt, COALESCE(SUM(total),0) as total_acum FROM cert2009 WHERE estado > 1 AND fecha_solicitud = '$hoy'";
+                  $ressum = mysql_query($sql2);
+                  $row_tmp = mysql_fetch_array($ressum);
+                  $num_total_registros_acum = $row_tmp['cnt'];
+                  $tot2 = $row_tmp['total_acum'];
 
-   	       $sql2= "select * from cert2009 WHERE estado > 1 and fecha_solicitud = '$hoy' ";
-		   		  $ressum = mysql_query($sql2);
-			      $num_total_registros_acum = mysql_num_rows($ressum);
-				  
-   	       $sql2= "select sum(total) as total_acum from cert2009 WHERE estado > 1 and fecha_solicitud = '$hoy' ";
-		   		  $ressum = mysql_query($sql2);
-				  $tot2 = mysql_result($ressum, 0, "total_acum");
+                  // OPTIMIZADO: Una sola consulta agrupada por idcert para totales del anio
+                  $sql2 = "SELECT idcert, COUNT(*) as cnt, COALESCE(SUM(total),0) as total_acum FROM cert2009 WHERE estado > 1 GROUP BY idcert";
+                  $ressum = mysql_query($sql2);
+                  $stats_year = array();
+                  while ($row_tmp = mysql_fetch_array($ressum)) {
+                      $stats_year[$row_tmp['idcert']] = array('cnt' => $row_tmp['cnt'], 'total' => $row_tmp['total_acum']);
+                  }
 
+                  // OPTIMIZADO: Una sola consulta agrupada por idcert para totales del dia
+                  $sql2 = "SELECT idcert, COUNT(*) as cnt, COALESCE(SUM(total),0) as total_acum FROM cert2009 WHERE estado > 1 AND fecha_solicitud = '$hoy' GROUP BY idcert";
+                  $ressum = mysql_query($sql2);
+                  $stats_day = array();
+                  while ($row_tmp = mysql_fetch_array($ressum)) {
+                      $stats_day[$row_tmp['idcert']] = array('cnt' => $row_tmp['cnt'], 'total' => $row_tmp['total_acum']);
+                  }
 
 while ($row = mysql_fetch_array($result)){
-           
+
            $cod= $row["id"];
-		   $total_year = 0;
-		   $porcentaje =0;
-		   $link=Conectarse();
-   	       $sql2= "select * from cert2009 WHERE idcert = '$cod' and estado > 1";
-		   		  $ressum = mysql_query($sql2);
-			      $total_year = mysql_num_rows($ressum);
-				  if ( $total_year_acum > 0 ) {
-				  $porcentaje = round((( $total_year / $total_year_acum ) * 100),2); }
-				  
-		   $sql2= "select SUM(total) as total_acum from cert2009 where idcert = '$cod' and estado > 1 ";
-		   		  $ressum = mysql_query($sql2);
-				  $acum1 = mysql_result($ressum, 0, "total_acum");
-		   
-           $link=Conectarse();
-   	       $sql2= "select * from cert2009 WHERE fecha_solicitud = '$hoy' and idcert='$cod' and estado > 1";
-		   		  $ressum = mysql_query($sql2);
-			      $num_total_registros = mysql_num_rows($ressum);
-				  
-		   $sql2= "select SUM(total) as total_acum from cert2009 where fecha_solicitud = '$hoy' and idcert='$cod' and estado > 1 ";
-		   		  $ressum = mysql_query($sql2);
-				  $acum2 = mysql_result($ressum, 0, "total_acum");
-				  
+                   $total_year = 0;
+                   $porcentaje =0;
+
+                   // Usar datos precalculados en vez de consultas individuales
+                   $total_year = isset($stats_year[$cod]) ? $stats_year[$cod]['cnt'] : 0;
+                   $acum1 = isset($stats_year[$cod]) ? $stats_year[$cod]['total'] : 0;
+
+                   if ( $total_year_acum > 0 ) {
+                       $porcentaje = round((( $total_year / $total_year_acum ) * 100),2);
+                   }
+
+                   $num_total_registros = isset($stats_day[$cod]) ? $stats_day[$cod]['cnt'] : 0;
+                   $acum2 = isset($stats_day[$cod]) ? $stats_day[$cod]['total'] : 0;
+
 ?>
           </font></td>
         </tr>
       </table>
         <table width="695" height="26" border="0" cellpadding="2" cellspacing="2">
           <tr>
-            <?php 
-										  $color = "#ffffff";
-/*                    $color2 = "#A6E2FF";
-				if ($a == 0) {
-                    $color = "#EFEF99";
-					//$color = "#ffffff";
-					$a = 1;
-                }else{
-                    $color = "#ffffff";
-					$a = 0;
-		        }	 */
-				?>
+            <?php
+                $color = "#ffffff";
+                                ?>
             <td width="11" height="22" align="center"><div align="center"></div></td>
             <td width="365" align="left" bgcolor="<?php echo $color ?>" ><table width="365" border="0" cellspacing="0" cellpadding="0">
                 <tr>
@@ -144,10 +141,8 @@ while ($row = mysql_fetch_array($result)){
                   </table></td>
                 </tr>
             </table></td>
-            <td width="146" align="right" bgcolor="<?php echo $color ?>" ><span class="style2"><?php echo number_format($acum1, 0, ",", ".");
- ?> ---&gt;(<?php echo $total_year ?>)</span></td>
-            <td width="147" align="right" bgcolor="<?php echo $color ?>" ><span class="style2"><?php echo number_format($acum2, 0, ",", ".");
- ?> ---&gt;(<?php echo $num_total_registros ?>) </span></td>
+            <td width="146" align="right" bgcolor="<?php echo $color ?>" ><span class="style2"><?php echo number_format($acum1, 0, ",", "."); ?> ---&gt;(<?php echo $total_year ?>)</span></td>
+            <td width="147" align="right" bgcolor="<?php echo $color ?>" ><span class="style2"><?php echo number_format($acum2, 0, ",", "."); ?> ---&gt;(<?php echo $num_total_registros ?>) </span></td>
           </tr>
         </table>
         <table width="41" border="0" cellspacing="0" cellpadding="0">
@@ -158,23 +153,12 @@ while ($row = mysql_fetch_array($result)){
         </table>
         <table width="694" height="27" border="0" cellpadding="2" cellspacing="2">
           <tr>
-            <?php 
-									                      $color = "#ffffff";
-/*                    $color2 = "#A6E2FF";
-					                    $color = "#ffffff";
-				if ($a == 0) {
-                    $color = "#EFEF99";
-					//$color = "#ffffff";
-					$a = 1;
-                }else{
-                    $color = "#ffffff";
-					$a = 0;
-		        }	 */
-				?>
+            <?php
+                $color = "#ffffff";
+                                ?>
             <td width="338" height="22" align="center" bgcolor="#EFEFEF"><div align="center"></div>
-                <div align="right"><strong>TOTALES -----------&gt;</strong></div></td>
-            <td width="190" align="right" bgcolor="#EFEFEF" ><span class="style2"><?php echo number_format($tot1, 0, ",", ".");
- ?> ---&gt;(<?php echo $total_year_acum ?>) </span></td>
+              <div align="right"><strong>TOTALES -----------&gt;</strong></div></td>
+            <td width="190" align="right" bgcolor="#EFEFEF" ><span class="style2"><?php echo number_format($tot1, 0, ",", "."); ?> ---&gt;(<?php echo $total_year_acum ?>) </span></td>
             <td width="146" align="right" bgcolor="#EFEFEF" ><span class="style2"><?php echo number_format($tot2, 0, ",", "."); ?> ---&gt;(<?php echo $num_total_registros_acum ?>) </span></td>
           </tr>
       </table></td>

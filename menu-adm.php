@@ -90,15 +90,16 @@ $anio = date('Y');
                                   $result = mysql_query("SELECT * FROM tipocertificado order by id ", $link);
                                   $a = 0;
 
-                                  $link = Conectarse();
-                                  $sql_year = "SELECT idcert, COUNT(*) as total FROM $tablaperiodo WHERE YEAR(fecha_solicitud) = '$anio' GROUP BY idcert";
+                                  $anio_inicio = $anio . '-01-01';
+                                  $anio_fin = $anio . '-12-31';
+
+                                  $sql_year = "SELECT idcert, COUNT(*) as total FROM $tablaperiodo WHERE fecha_solicitud >= '$anio_inicio' AND fecha_solicitud <= '$anio_fin' GROUP BY idcert";
                                   $res_year = mysql_query($sql_year);
                                   $totals_year = array();
                                   while ($row_year = mysql_fetch_array($res_year)) {
                                     $totals_year[$row_year['idcert']] = $row_year['total'];
                                   }
 
-                                  $link = Conectarse();
                                   $sql_day = "SELECT idcert, COUNT(*) as total FROM $tablaperiodo WHERE fecha_solicitud = '$hoy' GROUP BY idcert";
                                   $res_day = mysql_query($sql_day);
                                   $totals_day = array();
@@ -106,8 +107,7 @@ $anio = date('Y');
                                     $totals_day[$row_day['idcert']] = $row_day['total'];
                                   }
 
-                                  $link = Conectarse();
-                                  $sql_totals = "SELECT COUNT(*) as tot1 FROM $tablaperiodo WHERE YEAR(fecha_solicitud) = '$anio'";
+                                  $sql_totals = "SELECT COUNT(*) as tot1 FROM $tablaperiodo WHERE fecha_solicitud >= '$anio_inicio' AND fecha_solicitud <= '$anio_fin'";
                                   $res_totals = mysql_query($sql_totals);
                                   $tot1 = mysql_result($res_totals, 0, 'tot1');
 

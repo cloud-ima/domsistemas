@@ -17,5 +17,8 @@ ALTER TABLE cert2009 ADD INDEX idx_estado_fecha (estado, fecha_solicitud);
 -- Todos los JOINs y WHERE buscan por rut.rut, no por rut.id
 ALTER TABLE rut ADD INDEX idx_rut_rut (rut);
 
+-- rut: busqueda por rol en consultas
+ALTER TABLE cert2009 ADD INDEX idx_rol (rol);
+
 -- usuarios: se busca por campo 'usuario' sin indice
 ALTER TABLE usuarios ADD INDEX idx_usuario (usuario);

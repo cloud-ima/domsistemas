@@ -8,7 +8,7 @@ error_reporting(0);
 // ============================================================
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');      // Cambiar por tu usuario MySQL
-define('DB_PASS', 'IuhLFjxE6701iR');        // Cambiar por tu contraseña MySQL
+define('DB_PASS', 'g360Qu34hAd8');        // Cambiar por tu contraseña MySQL
 define('DB_NAME', 'domsistemas'); // Nombre de la base de datos
 
 // Conexión global mysqli
