@@ -75,13 +75,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
     <tr>
       <td><strong>
           <?php
-          $link = conectarse();
-          $result = mysql_query($consultaSQL, $link);
-          while ($row = mysql_fetch_array($result)) {
-            $totalservicio = $totalservicio + $row["total"];
-          }
-          //		$totaled = number_format($totalservicio, 0, ",", ".");
-          //	echo $totaled;
+          $totalservicio = 0;
           ?>
         </strong></td>
       <td>
@@ -157,13 +151,16 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
                 <tr>
                   <td width="693" align="center"> <strong>
                       <?php
-                      $link = conectarse();
-
                       $result = mysql_query($consultaSQL, $link);
                       $num_total_registros = mysql_num_rows($result);
-                      echo " Total Solicitudes : " . $num_total_registros . " ---> Total $ : " . number_format($totalservicio, 0, ",", ".");
                       $a = 1;
+                      $rows_data = [];
                       while ($row = mysql_fetch_array($result)) {
+                        $totalservicio += $row["total"];
+                        $rows_data[] = $row;
+                      }
+                      echo " Total Solicitudes : " . $num_total_registros . " ---> Total $ : " . number_format($totalservicio, 0, ",", ".");
+                      foreach ($rows_data as $row) {
                         $cod = $row["rut"];
                         $fecha = $row["fecha_solicitud"];
                         $est = $row["estado"];

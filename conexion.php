@@ -19,7 +19,7 @@ function Conectarse()
     global $conexion;
 
     // Si ya existe una conexión activa, retornarla
-    if ($conexion !== null && $conexion instanceof mysqli && $conexion->ping()) {
+    if ($conexion !== null && $conexion instanceof mysqli) {
         return $conexion;
     }
 
