@@ -12,14 +12,30 @@ debug_request();
       $x_param = $_POST["param"] ?? ''; }
    
 if ( $x_param == 1 ){
-			 $nomx = $_POST["nombre"] ?? '';
-			 $ctax = $_POST["cuenta"] ?? '';
+			 $nomx = trim($_POST["nombre"] ?? '');
+			 $ctax = trim($_POST["cuenta"] ?? '');
 			 $pasx = $_POST["pass"] ?? '';
-			 $tipx = $_POST["tipo"] ?? '';
+			 $tipx = trim($_POST["tipo"] ?? '');
+
+			 if ($ctax === '' || $nomx === '' || $tipx === '' || $pasx === '') {
+			 	echo '<script language="javascript">';
+			 	echo "alert('Debe completar cuenta, nombre, tipo y password.');";
+			 	echo "history.back();";
+			 	echo "</script>";
+			 	exit;
+			 }
 			 
 			 $link=conectarse();
-			 $sql = "INSERT INTO usuarios (nombre,usuario,tipo,password,unidad,estado) VALUES ('$nomx','$ctax','$tipx','$pasx','1','1')";
-			 $result2=mysql_query($sql);
+			 $passHash = password_hash($pasx, PASSWORD_DEFAULT);
+			 $sql = "INSERT INTO usuarios (nombre,usuario,tipo,password,unidad,estado) VALUES (?,?,?,?,?,?)";
+			 $stmt = $link->prepare($sql);
+			 $unidad = '1';
+			 $estado = '1';
+			 if ($stmt) {
+			 	$stmt->bind_param("ssssss", $nomx, $ctax, $tipx, $passHash, $unidad, $estado);
+			 	$stmt->execute();
+			 	$stmt->close();
+			 }
 			 mysql_close($link);
 			 echo '<script language="javascript">';
 			 echo "alert('Registro Agregado Correctamente!');";
@@ -29,15 +45,39 @@ if ( $x_param == 1 ){
 }
 
 if ( $x_param == 2 ){
-			 $nomx = $_POST["nombre"] ?? '';
-			 $ctax = $_POST["cuenta"] ?? '';
+			 $nomx = trim($_POST["nombre"] ?? '');
+			 $ctax = trim($_POST["cuenta"] ?? '');
 			 $pasx = $_POST["pass"] ?? '';
-			 $tipx = $_POST["tipo"] ?? '';
-			 $idx  = $_POST["codigo"] ?? '';
+			 $tipx = trim($_POST["tipo"] ?? '');
+			 $idx  = trim($_POST["codigo"] ?? '');
+
+			 if ($ctax === '' || $nomx === '' || $tipx === '' || $idx === '') {
+			 	echo '<script language="javascript">';
+			 	echo "alert('Datos incompletos para actualizar usuario.');";
+			 	echo "history.back();";
+			 	echo "</script>";
+			 	exit;
+			 }
 		 
 		 	 $link=conectarse();
-    	     $sql= "UPDATE usuarios SET nombre='$nomx',password='$pasx',tipo='$tipx' WHERE id='$idx'";
-   		     $result2=mysql_query($sql);
+    	     if ($pasx !== '') {
+    	     	$passHash = password_hash($pasx, PASSWORD_DEFAULT);
+    	     	$sql= "UPDATE usuarios SET nombre=?, usuario=?, password=?, tipo=? WHERE id=?";
+    	     	$stmt = $link->prepare($sql);
+    	     	if ($stmt) {
+    	     		$stmt->bind_param("ssssi", $nomx, $ctax, $passHash, $tipx, $idx);
+    	     		$stmt->execute();
+    	     		$stmt->close();
+    	     	}
+    	     } else {
+    	     	$sql= "UPDATE usuarios SET nombre=?, usuario=?, tipo=? WHERE id=?";
+    	     	$stmt = $link->prepare($sql);
+    	     	if ($stmt) {
+    	     		$stmt->bind_param("sssi", $nomx, $ctax, $tipx, $idx);
+    	     		$stmt->execute();
+    	     		$stmt->close();
+    	     	}
+    	     }
   		     mysql_close($link);
 			 echo '<script language="javascript">';
 			 echo "alert('Registro Actualizado Correctamente');";

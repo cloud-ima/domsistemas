@@ -3,6 +3,26 @@ include("../seguridadsimple.php");
 include("../topmenu2.php");
 include("../fechaclasss.php");
 
+function normalizar_texto_mojibake($txt)
+{
+    $t = (string)($txt ?? '');
+    if ($t === '') {
+        return $t;
+    }
+
+    // Corrige textos típicamente dañados: "PastÃ³n" -> "Pastón".
+    if (preg_match('/Ã.|Â.|â.|ï¿½/u', $t)) {
+        // Caso típico en este sistema: texto UTF-8 mal leído como latin1 (ej: "PastÃ³n").
+        // utf8_decode corrige estos nombres al renderizar en página UTF-8.
+        $fixed = @utf8_decode($t);
+        if ($fixed !== false && $fixed !== '') {
+            $t = $fixed;
+        }
+    }
+
+    return $t;
+}
+
 $hoy = date('Y')."-".date('m')."-".date('d');
 $rut_id=$_GET['rut'] ?? '';
 $sol_id=$_GET['id'] ?? '';
@@ -35,12 +55,31 @@ $giro = mysql_result($res, 0, "giro_numero");
 $gfecha = mysql_result($res, 0, "giro_fecha");
 $estado = mysql_result($res, 0, "estado");
 $ac = mysql_result($res, 0, "responsable");
+$responsable = $ac;
 $fecha_ent = cambiaf_a_normal(mysql_result($res, 0, "fecha_entrega"));
 $fecha_ret = cambiaf_a_normal(mysql_result($res, 0, "fecha_retiro"));
 $usuario = mysql_result($res, 0, "usuario");
 $entregado = mysql_result($res, 0, "entregado");
 $rub = mysql_result($res, 0, "rubro");
 $ot = mysql_result($res, 0, "orden_numero");
+
+// Fallback de datos históricos: algunos registros quedaron en cert2009.
+// Si faltan campos clave en la tabla activa, completar desde cert2009.
+if ($tablaperiodo !== 'cert2009' && ($rol === '' || $giro === '' || $ot === '' || $ac === '' || $ac === '0')) {
+    $qryLegacy = "SELECT * FROM cert2009 WHERE id ='$sol_id' LIMIT 1";
+    $resLegacy = mysql_query($qryLegacy);
+    if ($resLegacy && mysql_num_rows($resLegacy) > 0) {
+        if ($rol === '') { $rol = mysql_result($resLegacy, 0, "rol"); }
+        if ($giro === '') { $giro = mysql_result($resLegacy, 0, "giro_numero"); }
+        if ($gfecha === '' || $gfecha === null) { $gfecha = mysql_result($resLegacy, 0, "giro_fecha"); }
+        if ($ot === '') { $ot = mysql_result($resLegacy, 0, "orden_numero"); }
+        if ($ac === '' || $ac === '0') {
+            $ac = mysql_result($resLegacy, 0, "responsable");
+            $responsable = $ac;
+        }
+        if ($estado === '' || $estado === null) { $estado = mysql_result($resLegacy, 0, "estado"); }
+    }
+}
 
 if ( $gfecha == '' ) { $gfecha = cambiaf_a_normal($hoy); }else{$gfecha = cambiaf_a_normal($gfecha); }
 
@@ -75,6 +114,17 @@ $link=Conectarse();
 $qry = "SELECT * FROM usuarios where usuario ='$responsable'";
 $res = mysql_query($qry);
 $quienlohizo = mysql_result($res, 0, "nombre");
+}
+
+$responsables = array();
+$link=Conectarse();
+$qry = "SELECT usuario, nombre FROM usuarios WHERE usuario <> 'administrador' ORDER BY nombre";
+$res = mysql_query($qry);
+if ($res) {
+    while ($rowResp = mysql_fetch_array($res)) {
+        $rowResp['nombre'] = normalizar_texto_mojibake($rowResp['nombre']);
+        $responsables[] = $rowResp;
+    }
 }
 
 mysql_close($link);
@@ -186,21 +236,15 @@ document.onkeypress = stopRKey;
                   </tr>
                   <tr>
                     <td bgcolor="#efefef">Responsable</td>
-                    <td colspan="2"><?php
-$linkc=conectarse();
-$resultc = mysql_query("SELECT * FROM usuarios where usuario <> 'administrador' order by nombre",$linkc);
-?>
+                    <td colspan="2">
                       <select class=bordecampos name="responsable" id="select7">
                         <option value="0">Seleccione Responsable...</option>
-                        <?php
-while($rowc = mysql_fetch_array($resultc)){
-?>
-                        <option value="<?php echo $rowc["usuario"] ?>"
-<?php if($rowc["usuario"] == $ac){?>selected<?php }?>> <?php echo $rowc["nombre"]?> </option>
-                        <?php }
-mysql_close($linkc);
-?>
-                      </select></td>
+                        <?php foreach($responsables as $rowc){ ?>
+                        <option value="<?php echo htmlspecialchars($rowc["usuario"], ENT_QUOTES, 'UTF-8'); ?>"
+<?php if($rowc["usuario"] == $ac){?>selected<?php }?>> <?php echo htmlspecialchars($rowc["nombre"], ENT_QUOTES, 'UTF-8'); ?> </option>
+                        <?php } ?>
+                      </select>
+                    </td>
                   </tr>
                   <tr> 
                     <td height="18" colspan="3" bgcolor="#666666"><font color="#FFFFFF"><strong>DATOS 

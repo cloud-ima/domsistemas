@@ -6,19 +6,47 @@ include("fckeditor/fckeditor.php");
 //******************************************************
 // Validacion del Ingreso (Nuevo, edicion)
 
+// Valores por defecto para evitar cortes en modo "nuevo".
+$idestado = "Nuevo Registro";
+$parz = 1;
+$viax = 'SIN ESPECIFICAR';
+$urbax = 'SIN ESPECIFICAR';
+$expox = 'SIN ESPECIFICAR';
+$radiox = 'SIN ESPECIFICAR';
+$zonax = 'SIN ESPECIFICAR';
+$desx = 'SIN ESPECIFICAR';
+$tpx = '1';
+$classx = '1';
+$rolx = '';
+$direx = '';
+$numx = '';
+$blockx = '';
+$deptox = '';
+$sitiox = '';
+$manx = '';
+$pobx = '';
+$refx = '';
+$usox = 'SIN ESPECIFICAR';
+$karx = '';
+$mtx = '';
+$mtcx = '';
+$obsx = '';
+$newnumx = '';
+$oax = '0';
+$pcx = '';
+$pcdx = '';
+$rfx = '';
+$rfdx = '';
+$estpatx = '0';
+$fsitpatx = '';
+$obspatx = '';
+$n1x = ''; $n2x = ''; $n3x = ''; $n4x = '';
+$a1x = ''; $a2x = ''; $a3x = ''; $a4x = '';
+$l1x = ''; $l2x = ''; $l3x = ''; $l4x = '';
+$d1x = ''; $d2x = ''; $d3x = ''; $d4x = '';
 
-$x_flag = $_GET["flag"] ?? '';
-if ( $x_flag == 0 ) {
-   $idestado = "Nuevo Registro";
-   $parz = 1;
-   $viax = 'SIN ESPECIFICAR';
-   $urbax = 'SIN ESPECIFICAR';
-   $expox = 'SIN ESPECIFICAR';
-   $radiox = 'SIN ESPECIFICAR';
-   $zonax = 'SIN ESPECIFICAR';
-   $tpx = '1';
-   $classx = '1';
-}   
+// Compatibilidad: algunas rutas antiguas envían ?param=0 en lugar de ?flag=0
+$x_flag = $_GET["flag"] ?? ($_GET["param"] ?? '0');
 
 
 if ( $x_flag == 1 ) {
@@ -99,6 +127,54 @@ mkdir($dire, 0777, true);
 			  $estadocampo = "disabled";
             }
 	}
+
+    // Completar campos vacíos de líneas oficiales desde otra ficha del mismo ROL.
+    if (!empty($rolx)) {
+        $rolEsc = mysql_real_escape_string($rolx, $link);
+        $rolNorm = mysql_real_escape_string($rolx, $link);
+        $rolNormExpr = "REPLACE(REPLACE(UPPER(rol),'-',''),' ','')";
+        $rolNormVal = strtoupper(str_replace(array('-', ' '), '', $rolNorm));
+        $idEsc = mysql_real_escape_string($idz, $link);
+        $sqlFallback = "
+            SELECT n1,n2,n3,n4,a1,a2,a3,a4,l1,l2,l3,l4,d1,d2,d3,d4,otrosnum,obs
+            FROM propiedades
+            WHERE ($rolNormExpr = '$rolNormVal' OR rol = '$rolEsc')
+              AND id <> '$idEsc'
+              AND (
+                    COALESCE(n1,'') <> '' OR COALESCE(n2,'') <> '' OR COALESCE(n3,'') <> '' OR COALESCE(n4,'') <> '' OR
+                    COALESCE(a1,'') <> '' OR COALESCE(a2,'') <> '' OR COALESCE(a3,'') <> '' OR COALESCE(a4,'') <> '' OR
+                    COALESCE(l1,'') <> '' OR COALESCE(l2,'') <> '' OR COALESCE(l3,'') <> '' OR COALESCE(l4,'') <> '' OR
+                    COALESCE(d1,'') <> '' OR COALESCE(d2,'') <> '' OR COALESCE(d3,'') <> '' OR COALESCE(d4,'') <> ''
+                  )
+            ORDER BY id DESC
+            LIMIT 1";
+        $rsFallback = mysql_query($sqlFallback, $link);
+        if ($rsFallback && ($rowFallback = mysql_fetch_array($rsFallback))) {
+            if (trim((string)$n1x) === '') { $n1x = $rowFallback["n1"]; }
+            if (trim((string)$n2x) === '') { $n2x = $rowFallback["n2"]; }
+            if (trim((string)$n3x) === '') { $n3x = $rowFallback["n3"]; }
+            if (trim((string)$n4x) === '') { $n4x = $rowFallback["n4"]; }
+            if (trim((string)$a1x) === '') { $a1x = $rowFallback["a1"]; }
+            if (trim((string)$a2x) === '') { $a2x = $rowFallback["a2"]; }
+            if (trim((string)$a3x) === '') { $a3x = $rowFallback["a3"]; }
+            if (trim((string)$a4x) === '') { $a4x = $rowFallback["a4"]; }
+            if (trim((string)$l1x) === '') { $l1x = $rowFallback["l1"]; }
+            if (trim((string)$l2x) === '') { $l2x = $rowFallback["l2"]; }
+            if (trim((string)$l3x) === '') { $l3x = $rowFallback["l3"]; }
+            if (trim((string)$l4x) === '') { $l4x = $rowFallback["l4"]; }
+            if (trim((string)$d1x) === '') { $d1x = $rowFallback["d1"]; }
+            if (trim((string)$d2x) === '') { $d2x = $rowFallback["d2"]; }
+            if (trim((string)$d3x) === '') { $d3x = $rowFallback["d3"]; }
+            if (trim((string)$d4x) === '') { $d4x = $rowFallback["d4"]; }
+            if (empty($newnumx)) {
+                $newnumx = $rowFallback["otrosnum"];
+            }
+            if (empty($obsx)) {
+                $obsx = $rowFallback["obs"];
+            }
+        }
+    }
+
 				  mysql_close($link);
 }   
 

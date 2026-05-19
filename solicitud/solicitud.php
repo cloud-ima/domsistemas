@@ -23,13 +23,25 @@ $mensajetitulo="Ingreso de Solicitud";
 
 function suma_fechas($fecha,$ndias)
 {
-      if (preg_match("/[0-9]{1,2}\/[0-9]{1,2}\/([0-9][0-9]){1,2}/",$fecha))
-              list($dia,$mes,$anio)=split("/", $fecha);
-      if (preg_match("/[0-9]{1,2}-[0-9]{1,2}-([0-9][0-9]){1,2}/",$fecha))
-              list($dia,$mes,$anio)=split("-",$fecha);
-              $nueva = mktime(0,0,0, $mes,$dia,$anio) + $ndias * 24 * 60 * 60;
-              $nuevafecha=date("Y-m-d",$nueva);
-	  return ($nuevafecha);
+      $dia = null;
+      $mes = null;
+      $anio = null;
+
+      if (preg_match("/^[0-9]{1,2}\/[0-9]{1,2}\/([0-9]{2}|[0-9]{4})$/", $fecha)) {
+              list($dia, $mes, $anio) = explode("/", $fecha);
+      } elseif (preg_match("/^[0-9]{1,2}-[0-9]{1,2}-([0-9]{2}|[0-9]{4})$/", $fecha)) {
+              list($dia, $mes, $anio) = explode("-", $fecha);
+      } else {
+              return date("Y-m-d");
+      }
+
+      if (strlen((string)$anio) === 2) {
+              $anio = ((int)$anio >= 70) ? "19".$anio : "20".$anio;
+      }
+
+      $nueva = mktime(0, 0, 0, (int)$mes, (int)$dia, (int)$anio) + ((int)$ndias * 24 * 60 * 60);
+      $nuevafecha = date("Y-m-d", $nueva);
+      return $nuevafecha;
 }
 
 $fec = date('d')."/".date('m')."/".date('Y');

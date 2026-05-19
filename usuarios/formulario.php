@@ -47,7 +47,7 @@ if ( $x_flag == 1 ) {
             $nomz = $row["nombre"];
             $cuentaz = $row["usuario"];
             $tipoz = $row["tipo"];
-            $passz = $row["password"];
+            $passz = "";
             $idz = $row["id"];
             $parz = 2;
             debug_log("Datos cargados", ["nombre"=>$nomz, "cuenta"=>$cuentaz, "tipo"=>$tipoz]);
@@ -117,7 +117,10 @@ $fechaactualed = date("d")."/".date("n")."/".date("Y");
                 <tr>
                   <td height="19" bgcolor="#efefef" class="estilo_titulo">Password</td>
                   <td bgcolor="#efefef">
-                    <input name="pass" type="password" value="<?php echo $passz ?>" size="20" maxlength="100">
+                    <input name="pass" type="password" value="" size="20" maxlength="100">
+                    <?php if ($parz == 2) { ?>
+                    <br><span style="font-size:11px;color:#666;">Dejar en blanco para no cambiar contraseña</span>
+                    <?php } ?>
                   </td>
                 </tr>
                 <tr>

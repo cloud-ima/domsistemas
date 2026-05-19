@@ -3,8 +3,22 @@ include("../seguridadsimple.php");
 include("../topmenu2.php");
 include("../fechaclasss.php");
 
+function normalizar_texto_mostrado($texto)
+{
+    $texto = (string)$texto;
+    // Corrige casos tipicos de mojibake: "PastÃ©n", "DoÃ±a", etc.
+    if (preg_match('/Ã.|Â.|�/u', $texto)) {
+        $convertido = @utf8_decode($texto);
+        if (is_string($convertido) && $convertido !== '') {
+            return $convertido;
+        }
+    }
+    return $texto;
+}
+
 $hoy = date('Y')."-".date('m')."-".date('d');
 $sol_id=$_POST['id'] ?? '';
+$seguridaddecampo = 'hidden';
 
 $link=Conectarse();
 $qry = "SELECT * from parametros where id = 1";
@@ -32,6 +46,24 @@ $entregado = mysql_result($res, 0, "entregado");
 $rub = mysql_result($res, 0, "rubro");
 $ot = mysql_result($res, 0, "orden_numero");
 $rut_id=mysql_result($res, 0, "rut");
+$responsable = $ac;
+
+// Fallback de datos históricos: algunos registros quedaron en cert2009.
+if ($tablaperiodo !== 'cert2009' && ($rol === '' || $giro === '' || $ot === '' || $ac === '' || $ac === '0')) {
+    $qryLegacy = "SELECT * FROM cert2009 WHERE id ='$sol_id' LIMIT 1";
+    $resLegacy = mysql_query($qryLegacy);
+    if ($resLegacy && mysql_num_rows($resLegacy) > 0) {
+        if ($rol === '') { $rol = mysql_result($resLegacy, 0, "rol"); }
+        if ($giro === '') { $giro = mysql_result($resLegacy, 0, "giro_numero"); }
+        if ($gfecha === '' || $gfecha === null) { $gfecha = mysql_result($resLegacy, 0, "giro_fecha"); }
+        if ($ot === '') { $ot = mysql_result($resLegacy, 0, "orden_numero"); }
+        if ($ac === '' || $ac === '0') {
+            $ac = mysql_result($resLegacy, 0, "responsable");
+            $responsable = $ac;
+        }
+        if ($estadoid === '' || $estadoid === null) { $estadoid = mysql_result($resLegacy, 0, "estado"); }
+    }
+}
 
 $link=Conectarse();
 $qry = "SELECT * FROM rut where rut ='$rut_id'";
@@ -70,6 +102,27 @@ $link=Conectarse();
 $qry = "SELECT * FROM usuarios where usuario ='$responsable'";
 $res = mysql_query($qry);
 $quienlohizo = mysql_result($res, 0, "nombre");
+}
+
+$responsables = array();
+$link=Conectarse();
+$qry = "SELECT usuario, nombre FROM usuarios WHERE usuario <> 'administrador' ORDER BY nombre";
+$res = mysql_query($qry);
+if ($res) {
+    while ($rowResp = mysql_fetch_array($res)) {
+        $rowResp["nombre"] = normalizar_texto_mostrado($rowResp["nombre"] ?? '');
+        $responsables[] = $rowResp;
+    }
+}
+
+$estados = array();
+$link=Conectarse();
+$qry = "SELECT id, nombres FROM estado ORDER BY id";
+$res = mysql_query($qry);
+if ($res) {
+    while ($rowEst = mysql_fetch_array($res)) {
+        $estados[] = $rowEst;
+    }
 }
 
 mysql_close($link);
@@ -181,39 +234,27 @@ document.onkeypress = stopRKey;
                   </tr>
                   <tr>
                     <td bgcolor="#efefef">Responsable</td>
-                    <td colspan="2"><?php
-$linkc=conectarse();
-$resultc = mysql_query("SELECT * FROM usuarios where usuario <> 'administrador' order by nombre",$linkc);
-?>
+                    <td colspan="2">
                       <select class=bordecampos name="responsable" id="select7">
                         <option value="0">Seleccione Responsable...</option>
-                        <?php
-while($rowc = mysql_fetch_array($resultc)){
-?>
-                        <option value="<?php echo $rowc["usuario"] ?>"
-<?php if($rowc["usuario"] == $ac){?>selected<?php }?>> <?php echo $rowc["nombre"]?> </option>
-                        <?php }
-mysql_close($linkc);
-?>
-                      </select></td>
+                        <?php foreach($responsables as $rowc){ ?>
+                        <option value="<?php echo htmlspecialchars($rowc["usuario"], ENT_QUOTES, 'UTF-8'); ?>"
+<?php if($rowc["usuario"] == $ac){?>selected<?php }?>> <?php echo htmlspecialchars($rowc["nombre"], ENT_QUOTES, 'UTF-8'); ?> </option>
+                        <?php } ?>
+                      </select>
+                    </td>
                   </tr>
                   <tr>
                     <td bgcolor="#efefef">Estado</td>
-                    <td colspan="2"><?php
-$linkc=conectarse();
-$resultc = mysql_query("SELECT * FROM estado order by id",$linkc);
-?>
+                    <td colspan="2">
                       <select class=bordecampos name="estado" id="select7">
                         <option value="0">Seleccione Estado...</option>
-                        <?php
-while($rowc = mysql_fetch_array($resultc)){
-?>
-                        <option value="<?php echo $rowc["id"] ?>"
-<?php if($rowc["id"] == $estadoid){?>selected<?php }?>> <?php echo $rowc["nombres"]?> </option>
-                        <?php }
-mysql_close($linkc);
-?>
-                      </select></td>
+                        <?php foreach($estados as $rowc){ ?>
+                        <option value="<?php echo htmlspecialchars($rowc["id"], ENT_QUOTES, 'UTF-8'); ?>"
+<?php if($rowc["id"] == $estadoid){?>selected<?php }?>> <?php echo htmlspecialchars($rowc["nombres"], ENT_QUOTES, 'UTF-8'); ?> </option>
+                        <?php } ?>
+                      </select>
+                    </td>
                   </tr>
                   <tr> 
                     <td height="18" colspan="3" bgcolor="#666666"><font color="#FFFFFF"><strong>DATOS 

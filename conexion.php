@@ -8,9 +8,9 @@ error_reporting(0);
 // ============================================================
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');      // Cambiar por tu usuario MySQL
-define('DB_PASS', 'g360Qu34hAd8');        // Cambiar por tu contraseña MySQL
+define('DB_PASS', 'IuhLFjxE6701iR');        // Cambiar por tu contraseña MySQL
 define('DB_NAME', 'domsistemas'); // Nombre de la base de datos
-define('DB_CHARSET', getenv('DB_CHARSET') ?: 'utf8mb4'); // Fallback: latin1 si BD antigua
+define('DB_CHARSET', getenv('DB_CHARSET') ?: 'utf8mb4'); // Default moderno; usar DB_CHARSET=latin1 solo si la BD realmente lo requiere
 
 // Conexión global mysqli
 $conexion = null;
@@ -19,9 +19,17 @@ function Conectarse()
 {
     global $conexion;
 
-    // Si ya existe una conexión activa, retornarla
+    // Si ya existe una conexión global y está activa, retornarla.
+    // En este proyecto se llama mysql_close() muchas veces sobre el mismo handle.
+    // Si quedó cerrada, se recrea para evitar errores al seguir renderizando vistas.
     if ($conexion !== null && $conexion instanceof mysqli) {
-        return $conexion;
+        try {
+            if (@$conexion->ping()) {
+                return $conexion;
+            }
+        } catch (Throwable $e) {
+            // Se recrea la conexión más abajo.
+        }
     }
 
     // Crear nueva conexión mysqli
@@ -95,10 +103,17 @@ function mysql_real_escape_string($string, $link = null)
 function mysql_close($link = null)
 {
     global $conexion;
+
+    // Compatibilidad legacy: no cerrar la conexión global compartida.
+    // Muchas pantallas cierran $link en medio del render y luego vuelven a consultar.
+    if ($link === null || $link === $conexion) {
+        return true;
+    }
+
     if ($link !== null && $link instanceof mysqli) {
         return mysqli_close($link);
     }
-    // No cerrar la conexión global automáticamente
+
     return true;
 }
 

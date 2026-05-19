@@ -3,11 +3,22 @@
 include("../conexion.php");
 
 $x_flag = $_GET["flag"] ?? '';
+$x_param = $_GET["param"] ?? '';
 
-if ( $x_flag == 0 ) {
+// Valores por defecto para evitar variables no inicializadas.
+$idestado = "Estado(Ingresando Nuevo Registro)";
+$parz = 1;
+$desz = "";
+$hasz = "";
+$ufz = "";
+$utmz = "";
+$cuoz = "";
+$idz = "";
+
+// Nuevo registro: puede venir como ?param=1 o ?flag=0.
+if ($x_param == 1 || $x_flag == 0 || $x_flag === '') {
    $idestado = "Estado(Ingresando Nuevo Registro)";
    $parz = 1;
-   $nomz = "";
 }   
 
 if ( $x_flag == 1 ) {

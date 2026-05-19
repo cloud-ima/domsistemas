@@ -15,7 +15,20 @@ $idz = $_GET["id"] ?? '';
 $rolz = $_GET["rol"] ?? '';
 
 $link=conectarse();
-$ssql = "select * from propiedades where rol ='$rolz' limit 1";
+$rolNormVal = strtoupper(str_replace(array('-', ' '), '', $rolz));
+$rolNormExpr = "REPLACE(REPLACE(UPPER(rol),'-',''),' ','')";
+$ssql = "SELECT * FROM propiedades
+         WHERE ($rolNormExpr = '$rolNormVal' OR rol ='$rolz')
+         ORDER BY
+            CASE
+              WHEN COALESCE(n1,'') <> '' OR COALESCE(n2,'') <> '' OR COALESCE(n3,'') <> '' OR COALESCE(n4,'') <> '' OR
+                   COALESCE(a1,'') <> '' OR COALESCE(a2,'') <> '' OR COALESCE(a3,'') <> '' OR COALESCE(a4,'') <> '' OR
+                   COALESCE(l1,'') <> '' OR COALESCE(l2,'') <> '' OR COALESCE(l3,'') <> '' OR COALESCE(l4,'') <> '' OR
+                   COALESCE(d1,'') <> '' OR COALESCE(d2,'') <> '' OR COALESCE(d3,'') <> '' OR COALESCE(d4,'') <> ''
+              THEN 0 ELSE 1
+            END,
+            id DESC
+         LIMIT 1";
 $rs = mysql_query($ssql,$link);
 $num_registros = mysql_num_rows($rs);
 if ($num_registros == 0){
@@ -123,13 +136,25 @@ if ($num_registros == 0){
 	
 function suma_fechas($fecha,$ndias)
 {
-      if (preg_match("/[0-9]{1,2}\/[0-9]{1,2}\/([0-9][0-9]){1,2}/",$fecha))
-              list($dia,$mes,$anio)=split("/", $fecha);
-      if (preg_match("/[0-9]{1,2}-[0-9]{1,2}-([0-9][0-9]){1,2}/",$fecha))
-              list($dia,$mes,$anio)=split("-",$fecha);
-              $nueva = mktime(0,0,0, $mes,$dia,$anio) + $ndias * 24 * 60 * 60;
-              $nuevafecha=date("Y-m-d",$nueva);
-	  return ($nuevafecha);
+      $dia = null;
+      $mes = null;
+      $anio = null;
+
+      if (preg_match("/^[0-9]{1,2}\/[0-9]{1,2}\/([0-9]{2}|[0-9]{4})$/", $fecha)) {
+              list($dia, $mes, $anio) = explode("/", $fecha);
+      } elseif (preg_match("/^[0-9]{1,2}-[0-9]{1,2}-([0-9]{2}|[0-9]{4})$/", $fecha)) {
+              list($dia, $mes, $anio) = explode("-", $fecha);
+      } else {
+              return date("Y-m-d");
+      }
+
+      if (strlen((string)$anio) === 2) {
+              $anio = ((int)$anio >= 70) ? "19".$anio : "20".$anio;
+      }
+
+      $nueva = mktime(0, 0, 0, (int)$mes, (int)$dia, (int)$anio) + ((int)$ndias * 24 * 60 * 60);
+      $nuevafecha = date("Y-m-d", $nueva);
+      return $nuevafecha;
 }
 
 $fec = date('d')."/".date('m')."/".date('Y');

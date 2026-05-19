@@ -1,11 +1,22 @@
-﻿<?php session_start();
-$id = session_id();
+<?php
+session_start();
 include("conexion.php");
 
-$user = $_POST['txtLogin'] ?? '';
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header("Location: login.php");
+    exit;
+}
+
+$user = trim($_POST['txtLogin'] ?? '');
 $pass = $_POST['txtClave'] ?? '';
 
+if ($user === '' || $pass === '') {
+    header("Location: login.php?error=Debe ingresar usuario y contraseña");
+    exit;
+}
+
 $link = Conectarse();
+$id = session_id();
 
 // Limpiar sesión previa asociada al id actual
 $stmt = $link->prepare("SELECT id FROM usuarios WHERE session = ?");
@@ -25,45 +36,64 @@ if ($stmt) {
     $stmt->close();
 }
 
-//********************************************************
-
 $stmtLogin = $link->prepare("SELECT * FROM usuarios WHERE usuario = ?");
-if ($stmtLogin) {
-    $stmtLogin->bind_param("s", $user);
-    $stmtLogin->execute();
-    $result = $stmtLogin->get_result();
+if (!$stmtLogin) {
+    header("Location: login.php?error=Error interno al validar credenciales");
+    exit;
+}
 
-    if ($row = $result->fetch_assoc()) {
-        if (password_verify($pass, $row["password"])) {
-            $tipx = $row["tipo"];
-            
-            if ($row["estado"] == 1) {
-                session_start();
-                $id = session_id();
-                /*
-                $_SESSION['acceso']=$row["tipo"];
-                $_SESSION['user']=$row["usuario"];
-                $_SESSION['idnom']=$row["nombre"];
-                */
-                $stmtSession = $link->prepare("UPDATE usuarios SET session = ? WHERE usuario = ?");
-                if ($stmtSession) {
-                    $stmtSession->bind_param("ss", $id, $user);
-                    $stmtSession->execute();
-                    $stmtSession->close();
-                }
-                header("location: principal.php");
-            } elseif ($row["estado"] == 0) {
-                header("location: login.php?error=El Usuario ingresado ha sido desabilitado...!!");
-            }
-        } else {
-            header("location: login.php?error=Usuario o Contraseña Incorrecto!!");
+$stmtLogin->bind_param("s", $user);
+$stmtLogin->execute();
+$result = $stmtLogin->get_result();
+$row = $result ? $result->fetch_assoc() : null;
+$stmtLogin->close();
+
+if (!$row) {
+    header("Location: login.php?error=Usuario o Contraseña Incorrecto!!");
+    exit;
+}
+
+$dbPassword = (string)($row["password"] ?? '');
+$isHash = password_get_info($dbPassword)['algo'] !== null;
+$passwordOk = false;
+
+if ($isHash) {
+    $passwordOk = password_verify($pass, $dbPassword);
+} else {
+    // Compatibilidad con contraseñas antiguas en texto plano.
+    $passwordOk = hash_equals($dbPassword, $pass);
+    if ($passwordOk) {
+        $newHash = password_hash($pass, PASSWORD_DEFAULT);
+        $stmtMigrate = $link->prepare("UPDATE usuarios SET password = ? WHERE usuario = ?");
+        if ($stmtMigrate) {
+            $stmtMigrate->bind_param("ss", $newHash, $user);
+            $stmtMigrate->execute();
+            $stmtMigrate->close();
         }
-    } else {
-        header("location: login.php?error=Usuario o Contraseña Incorrecto!!");
     }
+}
 
-    $stmtLogin->close();
+if (!$passwordOk) {
+    header("Location: login.php?error=Usuario o Contraseña Incorrecto!!");
+    exit;
+}
+
+if ((int)$row["estado"] !== 1) {
+    header("Location: login.php?error=El Usuario ingresado ha sido desabilitado...!!");
+    exit;
+}
+
+session_regenerate_id(true);
+$id = session_id();
+
+$stmtSession = $link->prepare("UPDATE usuarios SET session = ? WHERE usuario = ?");
+if ($stmtSession) {
+    $stmtSession->bind_param("ss", $id, $user);
+    $stmtSession->execute();
+    $stmtSession->close();
 }
 
 $link->close();
+header("Location: principal.php");
+exit;
 ?>

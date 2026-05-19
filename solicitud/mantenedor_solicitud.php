@@ -49,7 +49,7 @@ else
    
 			 $link=conectarse();
 			 $sql = "INSERT INTO $tablaperiodo (fecha_solicitud,rut,total,idcert,rol,direccion,dias,mt,estado,usuario,fecha_entrega,rubro) VALUES
-			 	                                     ('$fec1','$rutx','$total','$certx','$rolx','$dirx','$dias','$dirx',1,'$cuentausuario','$fec2','$rubx')";
+			 	                                     ('$fec1','$rutx','$total','$certx','$rolx','$dirx','$diasx','$mtx',1,'$cuentausuario','$fec2','$rubx')";
 			 $result2=mysql_query($sql);
 			 $ultimo_id = mysql_insert_id($link);
 			 mysql_close($link);
