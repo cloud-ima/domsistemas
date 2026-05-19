@@ -27,6 +27,6 @@ if ($row = mysql_fetch_array($result)){
 }
 else{
      session_destroy();
-     header("location: ../login.php?error=Falta Iniciar Sessión");
+     header("location: ../login.php?error=Falta Iniciar SesiÃ³n");
 }
 ?>

@@ -38,6 +38,6 @@
 </div>
 
 
-Este artículo fue extraido de http://www.infrabios.com/index.php?topic=532.0#ixzz0nY0kfQkX
-Visita el sitio original para más información
+Este artï¿½culo fue extraido de http://www.infrabios.com/index.php?topic=532.0#ixzz0nY0kfQkX
+Visita el sitio original para mÃ¡s informaciï¿½n
 InfraBios - Tu Comunidad WebMaster

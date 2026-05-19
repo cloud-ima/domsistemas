@@ -11,7 +11,7 @@ if ( $x_flag == 0 ) {
 }   
 
 if ( $x_flag == 1 ) {
-    $idestado = "Estado(Modificación del Registro)";
+    $idestado = "Estado(ModificaciÃ³n del Registro)";
 	$link=conectarse();
     $idz=$_GET['id'] ?? '';
     $ssql = "select * from param where id ='$idz'";
@@ -39,7 +39,7 @@ $fechaactualed = date('d')."/".date('n')."/".date('Y');
 <head>
 <link href="../css/estilos.css" rel="stylesheet" type="text/css">
 <title></title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body>
 <form action="mantenedor.php" method="POST" enctype="multipart/form-data" >
@@ -60,7 +60,7 @@ $fechaactualed = date('d')."/".date('n')."/".date('Y');
             <td width="616" height="68"> 
               <table width="454" border="0" cellpadding="2" cellspacing="2">
                 <!-- <tr> -->
-                <!-- <td class=estilo_titulo >Código</td><td> -->
+                <!-- <td class=estilo_titulo >CÃ³digo</td><td> -->
                 <input type=hidden  class=estilo_text  name=t08_cod value=''>
                 <!-- </td> -->
                 <!-- </tr> -->
@@ -107,7 +107,7 @@ $fechaactualed = date('d')."/".date('n')."/".date('Y');
         </table>
         <table width="454" border="0" cellpadding="0" cellspacing="0">
           <!-- <tr> -->
-          <!-- <td class=estilo_titulo >Código</td><td> -->
+          <!-- <td class=estilo_titulo >CÃ³digo</td><td> -->
           <input type=hidden  class=estilo_text  name=t08_cod2 value=''>
           <!-- </td> -->
           <!-- </tr> -->

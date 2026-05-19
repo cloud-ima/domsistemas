@@ -1,7 +1,7 @@
 <?php include("../seguridad.php");
 /*if ($tipousuario == 2 or $tipousuario == 3 ) {
  			 echo '<script language="javascript">';
-			 echo "alert('Sr. Usuario, no tiene acceso a Este módulo!');";
+			 echo "alert('Sr. Usuario, no tiene acceso a Este mÃ³dulo!');";
 			 echo "location.href='principal.php';";
 			 echo "</script>";
 }*/	 ?>
@@ -10,7 +10,7 @@
 <title>MUNIARICA.CL</title>
 <link href="../css/estilos.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="../validarut.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body leftmargin="0" topmargin="0">
 <table width="457" border="0" align="center" cellpadding="0" cellspacing="0">

@@ -108,7 +108,7 @@ require_once('../tcpdf/tcpdf.php');
 // create new PDF document
 //$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 $PDF_PAGE_FORMAT='LTR';
-$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'LETTER', false, 'ISO-8859-1', false);
+$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'LETTER', false, 'UTF-8', false);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
@@ -161,7 +161,7 @@ $html = '<span style="text-align:justify;"> En cumplimiento a lo dispuesto en de
  Municipalidad de Arica y en la ley N&ordm; 18.695 Org&aacute;nica constitucional de Municipalidades , el Director
  de Obras de la Comuna de Arica, certifica que la propiedad Rol Nr. ' . $roled . ' ubicada en ' . $viaed . ' ' . $direed . '  
  tiene asignada la numeraci&oacute;n Municipal  ' . $numed . ' ' . $deptoed . ' dentro de la poblaci&oacute;n ' . $pobed. $maned . $sitioed . ' , la cual se
- encuentra emplazada en la comuna de ARICA y '. $urbax.' con la Urbanización.</span>';
+ encuentra emplazada en la comuna de ARICA y '. $urbax.' con la UrbanizaciÃ³n.</span>';
 
 $lin1 = 'FRANCISCO ZULETA GOMEZ<br>ARQUITECTO<br>DIRECTOR DE OBRAS DOM ARICA';
 

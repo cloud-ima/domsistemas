@@ -6,7 +6,7 @@ include("../fechaclasss.php");
 
 if ( $tipousuario <> 1 and $tipousuario <> 4 ) { 
 			 echo '<script language="javascript">';
-			 echo "alert('Sr. Usuario no tiene acceso a este módulo');";
+			 echo "alert('Sr. Usuario no tiene acceso a este mÃ³dulo');";
 			 echo "location.href='../parametros.php';";
 			 echo "</script>";
 }
@@ -152,7 +152,7 @@ if ($num_registros == 0){
 <title></title>
 <link href="../css/estilosprint.css" rel="stylesheet" type="text/css">
 <script language='javascript' src="../popcalendar.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script language="JavaScript">
 function popup()
 {

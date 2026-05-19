@@ -14,7 +14,7 @@ $parz = 1;
 
 /*if ($tipousuario == 2 or $tipousuario == 3 ) {
  			 echo '<script language="javascript">';
-			 echo "alert('Sr. Usuario, no tiene acceso a Este módulo!');";
+			 echo "alert('Sr. Usuario, no tiene acceso a Este mÃ³dulo!');";
 			 echo "location.href='principal.php';";
 			 echo "</script>";
 }*/
@@ -24,10 +24,10 @@ $mensajetitulo="Ingreso de Solicitud";
 function suma_fechas($fecha,$ndias)
 {
       if (preg_match("/[0-9]{1,2}\/[0-9]{1,2}\/([0-9][0-9]){1,2}/",$fecha))
-              list($dia,$mes,$año)=split("/", $fecha);
+              list($dia,$mes,$anio)=split("/", $fecha);
       if (preg_match("/[0-9]{1,2}-[0-9]{1,2}-([0-9][0-9]){1,2}/",$fecha))
-              list($dia,$mes,$año)=split("-",$fecha);
-              $nueva = mktime(0,0,0, $mes,$dia,$año) + $ndias * 24 * 60 * 60;
+              list($dia,$mes,$anio)=split("-",$fecha);
+              $nueva = mktime(0,0,0, $mes,$dia,$anio) + $ndias * 24 * 60 * 60;
               $nuevafecha=date("Y-m-d",$nueva);
 	  return ($nuevafecha);
 }
@@ -66,12 +66,12 @@ if(form1.certificado.value=="0"){
 return false;
 }
 if(form1.direccion.value==""){
-     alert("Debe Especificar una Dirección") 
+     alert("Debe Especificar una DirecciÃ³n") 
      form1.direccion.focus()
 return false;
 }
 if(form1.rol.value==""){
-     alert("Debe Ingresar Número de Rol") 
+     alert("Debe Ingresar NÃºmero de Rol") 
      form1.rol.focus()
 return false;
 }
@@ -81,7 +81,7 @@ if(form1.certificado.value=="10" && form1.mt.value==""){
 	  return false;
 }
 if(form1.certificado.value=="10" && form1.dias.value==""){
-	  alert("Debe Ingresar los dias para cálculo de B.N.U.P.")
+	  alert("Debe Ingresar los dias para cÃ¡lculo de B.N.U.P.")
 	  form1.dias.focus()
 	  return false;
 }
@@ -121,7 +121,7 @@ xmlhttp.send();
 }
 </script>
 
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <style type="text/css">
 <!--
 .style1 {
@@ -233,7 +233,7 @@ mysql_close($linkc);
             </TR>
             <TR>
               <TD bgColor=#ffffff>&nbsp;</TD>
-              <TD colspan="3" valign="top" bgColor=#ffffff><div class="style3" id="txtHint">Validación del Rol</div></TD>
+              <TD colspan="3" valign="top" bgColor=#ffffff><div class="style3" id="txtHint">ValidaciÃ³n del Rol</div></TD>
             </TR>
             <TR> 
               <TD bgColor=#ffffff>Direcci&oacute;n Completa</TD>

@@ -1,7 +1,7 @@
 <?php include "../seguridad.php";
 if ( $tipousuario <> 1 ) { 
 			 echo '<script language="javascript">';
-			 echo "alert('Sr. Usuario no tiene acceso a este módulo');";
+			 echo "alert('Sr. Usuario no tiene acceso a este mÃ³dulo');";
 			 echo "location.href='../parametros.php';";
 			 echo "</script>";
 }
@@ -10,7 +10,7 @@ if ( $tipousuario <> 1 ) {
 <head>
 <link href="../css/estilos.css" rel="stylesheet" type="text/css">
 <title></title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <style type="text/css">
 
 #fixedtipdiv{
@@ -106,7 +106,7 @@ while ($row = mysql_fetch_array($result)){
                       <td width="176" bgcolor="<?php echo $color ?>" ><div align="center"><?php echo $tipous ?></div>                        <div align="center"></div>                        <div align="center"></div></td>
                       <td width="33" bgcolor="<?php echo $color ?>"><div align="center"><A onclick="MM_openBrWindow('formulario.php?id=<?php echo $row["id"]. "&flag=1"?>','','scrollbars=no,width=500,height=250')" 
             href="javascript:;"><img src="../css/modificar.gif" alt="Modificar Ficha" width="17" height="12" border="0"></a></div></td>
-                      <td width="34" bgcolor="<?php echo $color ?>"> <div align="center"><a href="mantenedor.php?id=<?php echo $row['id']."&param=3"; ?>"class="bot" onClick="if(!confirm('¿Deseas realmente borrar el Registro, ID Número : <?php echo strtolower($row['id']); ?>?'))return false"><img src="../css/action_stop.gif" title="Eliminar Parámetro" width="16" height="16" border="0"></a></div></td>
+                      <td width="34" bgcolor="<?php echo $color ?>"> <div align="center"><a href="mantenedor.php?id=<?php echo $row['id']."&param=3"; ?>"class="bot" onClick="if(!confirm('Â¿Deseas realmente borrar el Registro, ID NÃºmero : <?php echo strtolower($row['id']); ?>?'))return false"><img src="../css/action_stop.gif" title="Eliminar ParÃ¡metro" width="16" height="16" border="0"></a></div></td>
                     </tr>
                   </table>
                   <table width="41" border="0" cellspacing="0" cellpadding="0">

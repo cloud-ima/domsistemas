@@ -4,7 +4,7 @@ include("../fechaclasss.php");
 include("fckeditor/fckeditor.php");
 if ( $tipousuario <> 1 and $tipousuario <> 4 ) { 
 			 echo '<script language="javascript">';
-			 echo "alert('Sr. Usuario no tiene acceso a este módulo');";
+			 echo "alert('Sr. Usuario no tiene acceso a este mï¿½dulo');";
 			 echo "location.href='../parametros.php';";
 			 echo "</script>";
 }
@@ -82,7 +82,7 @@ if ($num_registros == 0){
 
 /*if ($tipousuario == 2 or $tipousuario == 3 ) {
  			 echo '<script language="javascript">';
-			 echo "alert('Sr. Usuario, no tiene acceso a Este módulo!');";
+			 echo "alert('Sr. Usuario, no tiene acceso a Este mï¿½dulo!');";
 			 echo "location.href='principal.php';";
 			 echo "</script>";
 }*/
@@ -90,10 +90,10 @@ if ($num_registros == 0){
 function suma_fechas($fecha,$ndias)
 {
       if (preg_match("/[0-9]{1,2}\/[0-9]{1,2}\/([0-9][0-9]){1,2}/",$fecha))
-              list($dia,$mes,$año)=split("/", $fecha);
+              list($dia,$mes,$aï¿½o)=split("/", $fecha);
       if (preg_match("/[0-9]{1,2}-[0-9]{1,2}-([0-9][0-9]){1,2}/",$fecha))
-              list($dia,$mes,$año)=split("-",$fecha);
-              $nueva = mktime(0,0,0, $mes,$dia,$año) + $ndias * 24 * 60 * 60;
+              list($dia,$mes,$aï¿½o)=split("-",$fecha);
+              $nueva = mktime(0,0,0, $mes,$dia,$aï¿½o) + $ndias * 24 * 60 * 60;
               $nuevafecha=date("Y-m-d",$nueva);
 	  return ($nuevafecha);
 }
@@ -143,13 +143,13 @@ if(form1.num.value==""){
 return false;
 }
 if(form1.pob.value=="SIN ESPECIFICAR"){
-     alert("Debe Especificar Nombre de Población") 
+     alert("Debe Especificar Nombre de Poblaciï¿½n") 
      form1.pob.focus()
 return false;
 }
 }
 </script>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <style type="text/css">
 <!--
 .style5 {color: #333333; font-weight: bold; }

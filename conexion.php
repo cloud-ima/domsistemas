@@ -10,6 +10,7 @@ define('DB_HOST', 'localhost');
 define('DB_USER', 'root');      // Cambiar por tu usuario MySQL
 define('DB_PASS', 'g360Qu34hAd8');        // Cambiar por tu contraseña MySQL
 define('DB_NAME', 'domsistemas'); // Nombre de la base de datos
+define('DB_CHARSET', getenv('DB_CHARSET') ?: 'utf8mb4'); // Fallback: latin1 si BD antigua
 
 // Conexión global mysqli
 $conexion = null;
@@ -30,8 +31,8 @@ function Conectarse()
         die("Error conectando a la base de datos: " . $conexion->connect_error);
     }
 
-    // Establecer charset UTF-8
-    $conexion->set_charset("utf8mb4");
+    // Establecer charset configurable para compatibilidad (utf8mb4 recomendado)
+    $conexion->set_charset(DB_CHARSET);
 
     return $conexion;
 }

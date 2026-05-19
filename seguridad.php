@@ -18,7 +18,7 @@ if ($row = mysql_fetch_array($result)){
    
 /*   if ( $tipousuario == 1 ) { $nombredepto = "Administrador"; }
    if ( $tipousuario == 2 ) { $nombredepto = "Director"; }
-   if ( $tipousuario == 3 ) { $nombredepto = "Atención de Público"; }
+   if ( $tipousuario == 3 ) { $nombredepto = "AtenciÃ³n de PÃºblico"; }
    if ( $tipousuario == 4 ) { $nombredepto = "Digitador"; }*/
       
    $iddepto = $row["unidad"];
@@ -34,6 +34,6 @@ include("topmenu.php");
 }
 else{
      session_destroy();
-     header("location: ../login.php?error=Falta Iniciar Sessión");
+     header("location: ../login.php?error=Falta Iniciar SesiÃ³n");
 }
 ?>

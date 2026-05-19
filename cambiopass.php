@@ -1,7 +1,7 @@
 <?php include("seguridad.php");
 ?>
 
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link href="css/estilos.css" rel="stylesheet" type="text/css">
 <script language="Javascript">
 function validar()
@@ -15,27 +15,27 @@ ingresoold = document.formu.passold.value
 
 if ( ingresoold.length == 0 ) 
 	{
-		alert( "Debe ingresar la Contraseña Anterior");
+		alert( "Debe ingresar la ContraseÃ±a Anterior");
 		formu.passold.focus()
 		return false;
 	}
 
 if ( ingreso.length == 0 ) 
 	{
-		alert( "Debe ingresar una Contraseña");
+		alert( "Debe ingresar una ContraseÃ±a");
 		formu.pass1.focus()
 		return false;
 	}
 
 if ( ingreso1.length == 0 ) 
 	{
-		alert( "Debe ingresar una Contraseña");
+		alert( "Debe ingresar una ContraseÃ±a");
 		formu.pass2.focus()
 		return false;
 	}
 
 if (ingreso != ingreso1)
-{ alert("Contraseña Incorrecta, confirme nuevamente")
+{ alert("ContraseÃ±a Incorrecta, confirme nuevamente")
 formu.pass2.focus()
 return false
 }

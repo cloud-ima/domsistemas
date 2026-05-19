@@ -50,7 +50,7 @@ $fechaactualed = date('d')."/".date('n')."/".date('Y');
 <head>
 <link href="../css/estilos.css" rel="stylesheet" type="text/css">
 <title></title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body>
 <form action="mantenedor.php" method="POST" enctype="multipart/form-data">

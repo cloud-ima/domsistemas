@@ -54,7 +54,7 @@ if ( $x_param == 2 ){
 
 if ( $x_param == 3 ){
 			 echo '<script language="javascript">';
-			 echo "alert('Opción Deshabilitada por Razones de Seguridad');";
+			 echo "alert('OpciÃ³n Deshabilitada por Razones de Seguridad');";
 			 echo "location.href='index.php';";
 			 echo "opener.window.location.reload( false );";
 	         //echo "window.close();";

@@ -57,14 +57,14 @@ return false;
 }
 if(formulario.telefonos.value==""){
      //formulario.nombre.className="disabled";
-     alert("Debe ingresar teléfonos del contacto") 
+     alert("Debe ingresar telÃ©fonos del contacto") 
      formulario.telefonos.focus()
 return false;
 }
 }
 </script>
 <script type="text/javascript" src="../validarut.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body leftmargin="0" topmargin="0">
 <br>

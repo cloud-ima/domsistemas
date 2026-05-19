@@ -5,7 +5,7 @@ include "../seguridad.php";
 <head>
 <link href="../css/estilos.css" rel="stylesheet" type="text/css">
 <title></title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <style type="text/css">
 
 #fixedtipdiv{
@@ -96,7 +96,7 @@ while ($row = mysql_fetch_array($result)){
 							<?php echo $row["id"] ?>                    <div align="center"></div>                        <div align="center"></div>                        <div align="center"></div></td>
                       <td width="64%" align="center" bgcolor="<?php echo $color ?>"><div align="left"><?php echo $row["info"]
  ?></div></td>
-                      <td width="6%" bgcolor="<?php echo $color ?>"><div align="center"></div> <div align="center"><a href="mantenedor.php?id=<?php echo $row['id']."&param=3"; ?>"class="bot" onClick="if(!confirm('¿Deseas realmente borrar el Registro, ID Número : <?php echo strtolower($row['id']); ?>?'))return false"><img src="../css/action_stop.gif" title="Eliminar Parámetro" width="16" height="16" border="0"></a></div></td>
+                      <td width="6%" bgcolor="<?php echo $color ?>"><div align="center"></div> <div align="center"><a href="mantenedor.php?id=<?php echo $row['id']."&param=3"; ?>"class="bot" onClick="if(!confirm('Â¿Deseas realmente borrar el Registro, ID NÃºmero : <?php echo strtolower($row['id']); ?>?'))return false"><img src="../css/action_stop.gif" title="Eliminar ParÃ¡metro" width="16" height="16" border="0"></a></div></td>
                       <td width="6%" bgcolor="<?php echo $color ?>"><div align="center"><A onclick="MM_openBrWindow('formulario.php?id=<?php echo $row["id"]. "&flag=1"?>','','scrollbars=yes,width=500,height=290')" 
             href="javascript:;"><img src="../css/modificar.gif" alt="Modificar Ficha" width="17" height="12" border="0"></a></div></td>
                     </tr>

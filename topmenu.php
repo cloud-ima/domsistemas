@@ -1,4 +1,4 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>SICDOM ::: Municipalidad de Arica</title>
 <link href="css/estilos.css" rel="stylesheet" type="text/css">
 <style type="text/css">

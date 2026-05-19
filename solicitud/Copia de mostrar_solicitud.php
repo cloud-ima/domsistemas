@@ -93,7 +93,7 @@ if ((evt.keyCode == 13) && (node.type=="text")) {return false;}
 }
 document.onkeypress = stopRKey;
 </script>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body leftmargin="0" topmargin="0">
 <table width="650" border="0" align="center" cellpadding="0" cellspacing="0">

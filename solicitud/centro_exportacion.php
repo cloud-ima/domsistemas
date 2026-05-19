@@ -1,6 +1,6 @@
 <?php include("../seguridad.php"); 
 $fecha_hoy = date('Y')."-".date('m')."-".date('d');?>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link href="../css/estilos.css" rel="stylesheet" type="text/css">
 <script language='javascript' src="../popcalendar.js"></script>
 <script language=javascript type=text/javascript>

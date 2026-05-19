@@ -118,7 +118,7 @@ if ($num_registros == 0){
 			  $deptoed=''; 
 			  
 			  if ( $deptox <> '' ) {
-			       $deptoed = 'Block ' . $_POST['block'] ?? '' . ' Depto Nº. '. $_POST['depto'] ?? '';
+			       $deptoed = 'Block ' . $_POST['block'] ?? '' . ' Depto NÂº. '. $_POST['depto'] ?? '';
 			  }	   
 
 			  if ( $maned <> '' ){
@@ -153,7 +153,7 @@ require_once('../tcpdf/tcpdf.php');
 // create new PDF document
 //$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 $PDF_PAGE_FORMAT='LTR';
-$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'LETTER', false, 'ISO-8859-1', false);
+$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'LETTER', false, 'UTF-8', false);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);

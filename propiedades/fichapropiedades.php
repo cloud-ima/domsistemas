@@ -1,5 +1,5 @@
 <?php
-header('Content-Type: text/html; charset=ISO-8859-1'); 
+header('Content-Type: text/html; charset=utf-8'); 
 //include "../seguridad.php";
 include("../seguridadsimple.php");
 include("../fechaclasss.php");
@@ -7,7 +7,7 @@ include("../topmenu2.php");
 include("fckeditor/fckeditor.php");
 if ( $tipousuario <> 1 and $tipousuario <> 4 ) { 
 			 echo '<script language="javascript">';
-			 echo "alert('Sr. Usuario no tiene acceso a este módulo');";
+			 echo "alert('Sr. Usuario no tiene acceso a este mÃ³dulo');";
 			 echo "location.href='../parametros.php';";
 			 echo "</script>";
 }
@@ -116,7 +116,7 @@ if ($num_registros == 0){
 
 /*if ($tipousuario == 2 or $tipousuario == 3 ) {
  			 echo '<script language="javascript">';
-			 echo "alert('Sr. Usuario, no tiene acceso a Este módulo!');";
+			 echo "alert('Sr. Usuario, no tiene acceso a Este mÃ³dulo!');";
 			 echo "location.href='principal.php';";
 			 echo "</script>";
 }*/
@@ -124,10 +124,10 @@ if ($num_registros == 0){
 function suma_fechas($fecha,$ndias)
 {
       if (preg_match("/[0-9]{1,2}\/[0-9]{1,2}\/([0-9][0-9]){1,2}/",$fecha))
-              list($dia,$mes,$año)=split("/", $fecha);
+              list($dia,$mes,$anio)=split("/", $fecha);
       if (preg_match("/[0-9]{1,2}-[0-9]{1,2}-([0-9][0-9]){1,2}/",$fecha))
-              list($dia,$mes,$año)=split("-",$fecha);
-              $nueva = mktime(0,0,0, $mes,$dia,$año) + $ndias * 24 * 60 * 60;
+              list($dia,$mes,$anio)=split("-",$fecha);
+              $nueva = mktime(0,0,0, $mes,$dia,$anio) + $ndias * 24 * 60 * 60;
               $nuevafecha=date("Y-m-d",$nueva);
 	  return ($nuevafecha);
 }
@@ -141,7 +141,7 @@ $fec_entrega = cambiaf_a_normal($fec_entrega);
 <html>
 <head>
 <title>MUNIARICA.CL</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
 <link href="../css/estilos.css" rel="stylesheet" type="text/css">
 <script language='javascript' src="../popcalendar.js"></script>
 <script language=javascript type=text/javascript>
@@ -178,7 +178,7 @@ if(form1.num.value==""){
 return false;
 }
 if(form1.pob.value=="SIN ESPECIFICAR"){
-     alert("Debe Especificar Nombre de Población") 
+     alert("Debe Especificar Nombre de PoblaciÃ³n") 
      form1.pob.focus()
 return false;
 }
