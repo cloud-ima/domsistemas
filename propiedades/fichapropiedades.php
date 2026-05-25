@@ -65,10 +65,33 @@ if ($num_registros == 0){
 				 $corx = mysql_result($res, 0, "correo");
 
 				 $link=Conectarse();
-				 $qry = "SELECT * FROM tipocertificado where id ='$idcertx'";
-				 $res = mysql_query($qry);
-				 $cerdoc = mysql_result($res, 0, "nombre");
-				 $reporte = mysql_result($res, 0, "reporte");
+					 $qry = "SELECT * FROM tipocertificado where id ='$idcertx'";
+					 $res = mysql_query($qry);
+					 $cerdoc = mysql_result($res, 0, "nombre");
+					 $reporte = trim((string)mysql_result($res, 0, "reporte"));
+
+                     // Fallback: si el reporte viene vacío o inválido en BD,
+                     // resolvemos según el nombre del certificado para evitar
+                     // que el formulario se postee a la misma página.
+                     if ($reporte === '' || !file_exists(__DIR__ . DIRECTORY_SEPARATOR . $reporte)) {
+                         $certNombre = strtoupper((string)$cerdoc);
+                         if (strpos($certNombre, 'INFORME PREVIO') !== false) {
+                             $reporte = 'cert_ip.php';
+                         } elseif (strpos($certNombre, 'UBICACION') !== false || strpos($certNombre, 'UBICACIÓN') !== false) {
+                             $reporte = 'cert_ubicacion.php';
+                         } elseif (strpos($certNombre, 'PATENTE') !== false) {
+                             $reporte = 'cert_patente.php';
+                         } elseif (strpos($certNombre, 'NUMERO') !== false || strpos($certNombre, 'NÚMERO') !== false) {
+                             $reporte = 'cert_numero.php';
+                         } elseif (strpos($certNombre, 'EXPROPI') !== false) {
+                             $reporte = 'cert_expro.php';
+                         } elseif (strpos($certNombre, 'URBAN') !== false) {
+                             $reporte = 'cert_urbanizacion.php';
+                         } else {
+                             // Último fallback seguro para no recargar la misma vista.
+                             $reporte = 'cert_numero.php';
+                         }
+                     }
 
 				 
 		//*************************| Fin del Proceso de Busqueda de la Solicitud |********************************
@@ -207,6 +230,7 @@ if(form1.pob.value=="SIN ESPECIFICAR"){
      form1.pob.focus()
 return false;
 }
+return true;
 }
 </script>
 
@@ -231,7 +255,7 @@ return false;
 <body leftmargin="0" topmargin="0">
 <table width="1000" border="0" align="center" cellpadding="2" cellspacing="2">
   <tr>
-    <td width="990" valign="top"><form name="form1" method="post" action="<?php echo $reporte; ?>" onSubmit="return enviar(this)" >
+    <td width="990" valign="top"><form name="form1" method="post" action="<?php echo htmlspecialchars($reporte); ?>" onSubmit="return enviar(this)" >
       <br>
       <table width="998" border="0" cellpadding="2" cellspacing="2" bgcolor="#cccccc">
         <tr>

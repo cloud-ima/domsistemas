@@ -1,7 +1,11 @@
 <?php
+ob_start();
 //include("../seguridadsimple.php");
 include("../conexion.php");
 include("../fechaclasss.php");
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 
 $link=conectarse();
 
@@ -19,6 +23,11 @@ include("grabaclass.php");
 //echo $rfdx;
 //echo $idx;
 //echo $ff;
+
+if (empty($ff) || empty($idx)) {
+    echo "<h3>Error</h3><p>Faltan datos para generar el certificado (folio o propiedad).</p>";
+    exit;
+}
 
  if ( $ok == 'checkbox' )
 	 {
@@ -91,7 +100,7 @@ include("grabaclass.php");
 			  
 			  $roled = $_POST['rol'] ?? '';
 			  $numed =  $_POST['num'] ?? '';
-	          $viaed  = strtolower($_POST['via']);
+	          $viaed  = strtolower((string)($_POST['via'] ?? ''));
 			  $direed = $_POST['dire'] ?? '';
 			  $sitioed = $_POST['sitio'] ?? '';
 			  $maned = $_POST['man'] ?? '';
@@ -113,27 +122,37 @@ include("grabaclass.php");
 	*/
 	
 	if ( $deptox <> '') {
-			       $deptoed = 'Block ' . $_POST['block'] ?? '' . ' Depto Num. '. $_POST['depto'] ?? '';
+			       $blocktmp = (string)($_POST['block'] ?? '');
+			       $deptotmp = (string)($_POST['depto'] ?? '');
+			       $deptoed = 'Block ' . $blocktmp . ' Depto Num. '. $deptotmp;
 			  }	   
 
 			  if ( $maned <> '' ){
-			       $maned = ' , Manzana ' . $_POST['man'] ?? '';
+			       $maned = ' , Manzana ' . (string)($_POST['man'] ?? '');
 			  }
 
 			  if ( $sitioed <> '' ){
-			       $sitioed = ' , Sitio ' . $_POST['sitio'] ?? ''; 
+			       $sitioed = ' , Sitio ' . (string)($_POST['sitio'] ?? ''); 
 			  }else { $sitioed = ''; }
 
-require_once('../tcpdf/config/lang/eng.php');
-require_once('../tcpdf/config/tcpdf_config_alt.php');
-define("K_TCPDF_EXTERNAL_CONFIG", true);
-
-require_once('../tcpdf/tcpdf.php');
+$tcpdfLang = '../tcpdf/config/lang/eng.php';
+$tcpdfCfg = '../tcpdf/config/tcpdf_config_alt.php';
+$tcpdfMain = '../tcpdf/tcpdf.php';
+if (!file_exists($tcpdfLang) || !file_exists($tcpdfCfg) || !file_exists($tcpdfMain)) {
+    echo "<h3>Error</h3><p>No se encontró la librería TCPDF para generar el certificado.</p>";
+    exit;
+}
+require_once($tcpdfLang);
+require_once($tcpdfCfg);
+if (!defined("K_TCPDF_EXTERNAL_CONFIG")) {
+    define("K_TCPDF_EXTERNAL_CONFIG", true);
+}
+require_once($tcpdfMain);
 
 // create new PDF document
 //$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 $PDF_PAGE_FORMAT='LTR';
-$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'LETTER', false, 'UTF-8', false);
+$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'LETTER', true, 'UTF-8', false);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
@@ -175,70 +194,44 @@ $pdf->setLanguageArray($l);
 // ---------------------------------------------------------
 
 // create some HTML content
-$titulo = '<span style="text-align:center;">INFORME DE CONSTRUCCION PARA OBTENER</span>';
-$titulo2 = 'PATENTE MUNICIPAL N&ordm; ' . $folioz; ;
-//$nntt = 'Folio : ' . $folioz;
-
-$html2 = '<span style="text-align:center;">PATENTE MUNICIPAL N&ordm; ' . $folioz .' </span>';
-
-$html = '<span style="text-align:justify;"> De acuerdo a lo dispuesto en el Art&iacute;culo 142 de la Ley General de Urbanismo y construcci&oacute;n, en el decreto Alcaldicio  N&ordm; 6.247 de fecha 28 de septiembre del 2010
- articulo 1 numeral 183 inciso 19 y de la Ley N&ordm; 18.695 Org&aacute;nica constitucional de Municipalidades , el Director
- de Obras de la Comuna de Arica, certifica que la propiedad Rol N&ordm; ' . $roled . ' ubicada en ' . $viaed . ' ' . $direed . '  
- tiene asignada la numeraci&oacute;n Municipal  ' . $numed . ' ' . $deptoed . ' dentro de la poblaci&oacute;n o sector ' . $pobed. $maned . $sitioed . ' , la cual se
- encuentra emplazada en la comuna de ARICA. Inserto en la Zona ' . $zonax .' del Plano regulador vigente de la ciudad de Arica, aprobado
- por resoluci&oacute;n Nr. 4 de fecha 03/03/2009, publicado en el diario oficial con fecha 11/07/2009.'. $resto .' </span>';
- 
-//$html3 = '<span style="text-align:justify;"> Inserto en la Zona ' . $zonax .' del Plano regulador vigente de la ciudad de Arica, aprobado
-// por resoluci&oacute;n Nr. 4 de fecha 03/03/2009, publicado en el diario oficial con fecha 11/07/2009.</span>';
-
-$lin1 = 'FRANCISCO ZULETA GOMEZ<br>ARQUITECTO<br>DIRECTOR DE OBRAS DOM ARICA';
-
-$pie = 'N&ordm; Giro: ' . $girox . ' , Orden Municipal : ' . $orden . ' , Fecha : ' . $fechg . ' , usuario :  ' . $idusuario; 
+$titulo = 'INFORME DE CONSTRUCCIÓN PARA OBTENER';
+$titulo2 = 'PATENTE MUNICIPAL N° ' . (string)$folioz;
+$html = 'De acuerdo a lo dispuesto en el Artículo 142 de la Ley General de Urbanismo y Construcción, en el decreto Alcaldicio N° 6.247 de fecha 28 de septiembre del 2010, artículo 1 numeral 183 inciso 19 y de la Ley N° 18.695 Orgánica Constitucional de Municipalidades, el Director de Obras de la Comuna de Arica, certifica que la propiedad Rol N° ' . (string)$roled . ' ubicada en ' . (string)$viaed . ' ' . (string)$direed . ' tiene asignada la numeración Municipal ' . (string)$numed . ' ' . (string)$deptoed . ' dentro de la población o sector ' . (string)$pobed . (string)$maned . (string)$sitioed . ', la cual se encuentra emplazada en la comuna de ARICA. Inserto en la Zona ' . (string)$zonax . ' del Plano Regulador vigente de la ciudad de Arica, aprobado por resolución N° 4 de fecha 03/03/2009, publicado en el Diario Oficial con fecha 11/07/2009. ' . (string)$resto;
+$pie = 'N° Giro: ' . (string)$girox . ' , Orden Municipal: ' . (string)$orden . ' , Fecha: ' . (string)$fechg . ' , usuario: ' . (string)$idusuario; 
 $pie2 = 'Kardex : ' . $kx ; 
 
-// set core font
-$pdf->SetFont('helvetica', '', 16);
-
-// add a page
 $pdf->AddPage();
-// output the HTML content
-//$pdf->Ln();
-$pdf->writeHTML(' ', true, 0, true, true);
-$pdf->writeHTML(' ', true, 0, true, true);
-$pdf->writeHTML(' ', true, 0, true, true);
-$pdf->writeHTML($titulo, true, 0, true, true);
-$pdf->writeHTML($html2, true, 0, true, true);
-$pdf->Ln();
-$pdf->Ln();
-$pdf->Ln();
-//$pdf->Ln();
-
-$pdf->SetFont('helvetica', '', 13);
-$pdf->writeHTML($html, true, 0, true, true);
-$pdf->Ln();
-$pdf->Ln();
-$pdf->Ln();
+$pdf->SetFont('helvetica', 'B', 13);
+$pdf->Cell(0, 8, $titulo, 0, 1, 'C');
+$pdf->Cell(0, 8, $titulo2, 0, 1, 'C');
+$pdf->Ln(6);
+$pdf->SetFont('helvetica', '', 11);
+$pdf->MultiCell(0, 6, $html, 0, 'J', false, 1);
+$pdf->Ln(12);
 $pdf->SetFont('helvetica', '', 10);
-$firma1 = '<span style="text-align:center;">'.$linea_fin1.'</span>';
-$firma2 = '<span style="text-align:center;">'.$linea_fin2.'</span>';
-$firma3 = '<span style="text-align:center;">'.$linea_fin3.'</span>';
-$pdf->writeHTML($firma1, true, 0, true, true);
-$pdf->writeHTML($firma2, true, 0, true, true);
-$pdf->writeHTML($firma3, true, 0, true, true);
-/*$pdf->MultiCell(100, 0, 'FRANCISCO ZULETA GOMEZ'."\n", 0, 'C', 0, 1, '', '', true, 0);
-$pdf->MultiCell(100, 0, 'ARQUITECTO'."\n", 0, 'C', 0, 1, '', '', true, 0);
-$pdf->MultiCell(100, 0, 'DIRECTOR DE OBRAS ARICA'."\n", 0, 'C', 0, 1, '', '', true, 0);*/
-$pdf->Ln();
-$pdf->Ln();
-$pdf->Ln();
-$pdf->Ln();
-$pdf->SetFont('helvetica', '', 10);
-$pdf->writeHTML($pie, true, 0, true, true);
-$pdf->writeHTML($pie2, true, 0, true, true);
+$pdf->Cell(0, 6, (string)$linea_fin1, 0, 1, 'C');
+$pdf->Cell(0, 6, (string)$linea_fin2, 0, 1, 'C');
+$pdf->Cell(0, 6, (string)$linea_fin3, 0, 1, 'C');
+$pdf->Ln(10);
+$pdf->SetFont('helvetica', '', 9);
+$pdf->MultiCell(0, 6, $pie, 0, 'L', false, 1);
+$pdf->MultiCell(0, 6, $pie2, 0, 'L', false, 1);
 $pdf->lastPage();
 
 //Close and output PDF document
-$pdf->Output('certificado.pdf', 'I');
+$pdfBinary = $pdf->Output('certificado.pdf', 'S');
+if (ob_get_length()) {
+    ob_end_clean();
+}
+if ($pdfBinary === false || strlen($pdfBinary) < 500) {
+    echo "<h3>Error</h3><p>No fue posible generar el PDF del certificado de patente.</p>";
+    exit;
+}
+header('Content-Type: application/pdf');
+header('Content-Disposition: inline; filename="certificado_patente.pdf"');
+header('Content-Length: ' . strlen($pdfBinary));
+echo $pdfBinary;
+exit;
 
 //============================================================+
 // END OF FILE                                                 

@@ -1,4 +1,5 @@
 <?php
+ob_start();
 
 include("../conexion.php");
 include("../fechaclasss.php");
@@ -16,6 +17,11 @@ $ff = $_POST['foliox'] ?? '';
 			  $linea_fin3 = mysql_result($res, 0, "cargo");
 
 include("grabaclass.php");
+
+if (empty($ff) || empty($idx)) {
+    echo "<h3>Error</h3><p>Faltan datos para generar el certificado (folio o propiedad).</p>";
+    exit;
+}
 
 //echo $idx;
 //echo $folioz;
@@ -113,7 +119,7 @@ if ($num_registros == 0){
 			  
 			  $roled = $_POST['rol'] ?? '';
 			  $numed =  $_POST['num'] ?? '';
-	          $viaed  = strtolower($_POST['via']);
+	          $viaed  = strtolower((string)($_POST['via'] ?? ''));
 			  $direed = $_POST['dire'] ?? '';
 			  $sitioed = $_POST['sitio'] ?? '';
 			  $maned = $_POST['man'] ?? '';
@@ -121,15 +127,17 @@ if ($num_registros == 0){
 			  $deptoed=''; 
 			  
 			  if ( $deptox <> '' ) {
-			       $deptoed = 'Block ' . $_POST['block'] ?? '' . ' Depto Num. '. $_POST['depto'] ?? '';
+			       $blocktmp = (string)($_POST['block'] ?? '');
+			       $deptotmp = (string)($_POST['depto'] ?? '');
+			       $deptoed = 'Block ' . $blocktmp . ' Depto Num. '. $deptotmp;
 			  }	   
 
 			  if ( $maned <> '' ){
-			       $maned = ' , Manzana ' . $_POST['man'] ?? '';
+			       $maned = ' , Manzana ' . (string)($_POST['man'] ?? '');
 			  }
 
 			  if ( $sitioed <> '' ){
-			       $sitioed = ' , Sitio ' . $_POST['sitio'] ?? '';
+			       $sitioed = ' , Sitio ' . (string)($_POST['sitio'] ?? '');
 			  }
 
 			  $urbax = $_POST['urba'] ?? '';
@@ -146,16 +154,24 @@ if ($num_registros == 0){
 			  $mtcx = $row["mt2cons"];
 	*/
 
-require_once('../tcpdf/config/lang/eng.php');
-require_once('../tcpdf/config/tcpdf_config_alt.php');
-define("K_TCPDF_EXTERNAL_CONFIG", true);
-
-require_once('../tcpdf/tcpdf.php');
+$tcpdfLang = '../tcpdf/config/lang/eng.php';
+$tcpdfCfg = '../tcpdf/config/tcpdf_config_alt.php';
+$tcpdfMain = '../tcpdf/tcpdf.php';
+if (!file_exists($tcpdfLang) || !file_exists($tcpdfCfg) || !file_exists($tcpdfMain)) {
+    echo "<h3>Error</h3><p>No se encontró la librería TCPDF para generar el certificado.</p>";
+    exit;
+}
+require_once($tcpdfLang);
+require_once($tcpdfCfg);
+if (!defined("K_TCPDF_EXTERNAL_CONFIG")) {
+    define("K_TCPDF_EXTERNAL_CONFIG", true);
+}
+require_once($tcpdfMain);
 
 // create new PDF document
 //$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 $PDF_PAGE_FORMAT='LTR';
-$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'LETTER', false, 'UTF-8', false);
+$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'LETTER', true, 'UTF-8', false);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
@@ -197,11 +213,11 @@ $pdf->setLanguageArray($l);
 // ---------------------------------------------------------
 
 // create some HTML content
-$titulo = '<span style="text-align:center;">CERTIFICADO DE UBICACION</span>';
-$titulo2 = 'N&ordm;  ' . $folioz; ;
+$titulo = '<span style="text-align:center;">CERTIFICADO DE UBICACIÓN</span>';
+$titulo2 = 'N°  ' . $folioz; ;
 //$nntt = 'Folio : ' . $folioz;
 
-$html2 = '<span style="text-align:center;"> Nr. ' . $folioz .' </span>';
+$html2 = '<span style="text-align:center;"> N° ' . $folioz .' </span>';
 
 
 $html = '<span style="text-align:justify;"> En cumplimiento a lo dispuesto en decreto N&ordm; 5090 del 29 de octubre de 2008 de la Ilustre
@@ -215,7 +231,7 @@ $html3 = '<span style="text-align:justify;"> Inserto en la Zona ' . $zonax .' de
 
 $lin1 = 'FRANCISCO ZULETA GOMEZ<br>ARQUITECTO<br>DIRECTOR DE OBRAS DOM ARICA';
 
-$pie = 'N&ordm; Giro: ' . $girox . ' , Orden Municipal : ' . $orden . ' , Fecha : ' . $fechg . ' , usuario :  ' . $idusuario; 
+$pie = 'N° Giro: ' . $girox . ' , Orden Municipal : ' . $orden . ' , Fecha : ' . $fechg . ' , usuario :  ' . $idusuario; 
 
 // set core font
 $pdf->SetFont('helvetica', '', 16);
@@ -257,6 +273,9 @@ $pdf->writeHTML($pie, true, 0, true, true);
 $pdf->lastPage();
 
 //Close and output PDF document
+if (ob_get_length()) {
+    ob_end_clean();
+}
 $pdf->Output('certificado.pdf', 'I');
 
 //============================================================+
