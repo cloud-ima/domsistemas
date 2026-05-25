@@ -97,6 +97,7 @@ if(form1.certificado.value=="10" && form1.dias.value==""){
 	  form1.dias.focus()
 	  return false;
 }
+return true;
 }
 </script>
 <script language='javascript'>

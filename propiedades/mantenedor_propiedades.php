@@ -1,6 +1,10 @@
 <?php    include("../seguridad.php");
    include("../fechaclasss.php");
+   ini_set('display_errors', '1');
+   ini_set('display_startup_errors', '1');
+   error_reporting(E_ALL);
    
+   $x_param = '';
    if ( isset($_GET["param"]) ) {
       $x_param = $_GET["param"] ?? ''; }
 	  
@@ -11,27 +15,36 @@ $fecha_hoy = date('Y')."/".date('m')."/".date('d');
 	  
 $link=Conectarse();
 
+function valor_fk($v)
+{
+    $v = trim((string)$v);
+    if ($v === '' || strtoupper($v) === 'SIN ESPECIFICAR') {
+        return '0';
+    }
+    return $v;
+}
+
 if ( $x_param == 1 ){
 
 			// $idx = $_POST['id'] ?? '';
 			  $rolx = $_POST['rol'] ?? '';
 			  $direx = $_POST['dire'] ?? '';
-			  $desx= $_POST['destino'] ?? '';
+			  $desx= valor_fk($_POST['destino'] ?? '');
 			  $viax = $_POST['via'] ?? '';
 			  $numx = $_POST['num'] ?? '';
 			  $blockx = $_POST['block'] ?? '';
 			  $deptox = $_POST['depto'] ?? '';
 			  $sitiox = $_POST['sitio'] ?? '';
 			  $manx = $_POST['man'] ?? '';
-			  $pobx = $_POST['pob'] ?? '';
+			  $pobx = valor_fk($_POST['pob'] ?? '');
 			  $refx = $_POST['referencia'] ?? '';
-			  $zonax = $_POST['zona'] ?? '';
-			  $urbax = $_POST['urba'] ?? '';
-			  $tipox = $_POST['tipo'] ?? '';
-			  $usox = $_POST['uso'] ?? '';
-			  $expox = $_POST['expo'] ?? '';
-			  $radiox = $_POST['radio'] ?? '';
-			  $classx = $_POST['class'] ?? '';
+			  $zonax = valor_fk($_POST['zona'] ?? '');
+			  $urbax = valor_fk($_POST['urba'] ?? '');
+			  $tipox = valor_fk($_POST['tipo'] ?? '');
+			  $usox = valor_fk($_POST['uso'] ?? '');
+			  $expox = valor_fk($_POST['expo'] ?? '');
+			  $radiox = valor_fk($_POST['radio'] ?? '');
+			  $classx = valor_fk($_POST['class'] ?? '');
 			  $mtx = $_POST['mt'] ?? '';
 			  $mtcx = $_POST['mtc'] ?? '';
 			  $kx = $_POST['kardex'] ?? '';
@@ -59,7 +72,7 @@ if ( $x_param == 1 ){
 			  $rfx = $_POST["rf"] ?? '';
 			  $rfdx = $_POST["rfd"] ?? '';
 			  
- 			  $sitpatx = $_POST["sitpatente"] ?? '';
+ 			  $sitpatx = valor_fk($_POST["sitpatente"] ?? '');
 			  $obspatx = $_POST["obspat"] ?? '';
 			  $numnx = $_POST["numnuevo"] ?? '';
 			  
@@ -67,6 +80,11 @@ if ( $x_param == 1 ){
 			 $sql = "INSERT INTO propiedades (rol,tipocalle,direccion,numero,depto,block,pob,manzana,sitio,clase,tipo,mt2total,mt2cons,uso,nombre_referencial,urbanizacion,kardex,expropiacion,radiourbano,zona,obs,destino,n1,n2,n3,n4,a1,a2,a3,a4,l1,l2,l3,l4,d1,d2,d3,d4,pc,pcdate,rf,rfdate,estadopatente,festadopatente,otrosnum,obspatente) VALUES
                                          ('$rolx','$viax','$direx','$numx','$deptox','$blockx','$pobx','$manx','$sitiox','$classx','$tipox','$mtx','$mtcx','$usox','$refx','$urbax','$kx','$expox','$radiox','$zonax','$obsx','$desx','$n1x','$n2x','$n3x','$n4x','$a1x','$a2x','$a3x','$a4x','$l1x','$l2x','$l3x','$l4x','$d1x','$d2x','$d3x','$d4x','$pcx','$pcdx','$rfx','$rfdx','$sitpatx','$fecha_hoy','$numnx','$obspatx')";
 			 $result2=mysql_query($sql);
+	             if (!$result2) {
+	                 $error_sql = htmlspecialchars(mysql_error($link));
+	                 echo "<h3>Error al guardar propiedad</h3><pre>$error_sql</pre><p><a href='javascript:history.back()'>Volver</a></p>";
+	                 exit;
+	             }
 			 $ultimo_id = mysql_insert_id($link);
 			 mysql_close($link);
 			 $linknuevo = 'propiedades.php?id='.$ultimo_id.'&flag=1';
@@ -74,12 +92,13 @@ if ( $x_param == 1 ){
 			 echo "alert('Nueva registro de Propiedad Correctamente, con Nro. Folio : $ultimo_id; ');";
 			 echo "location.href='$linknuevo';";
 			 echo "</script>";
+             exit;
 }
 
 if ( $x_param == 2 ){
 
 			 $idx = $_POST['codigo'] ?? '';
-		     $desx= $_POST['destino'] ?? '';			 
+		     $desx= valor_fk($_POST['destino'] ?? '');			 
 			 $rolx = $_POST['rol'] ?? '';
 			 $direx = $_POST['dire'] ?? '';
 			 $viax = $_POST['via'] ?? '';
@@ -88,15 +107,15 @@ if ( $x_param == 2 ){
 			 $deptox = $_POST['depto'] ?? '';
 			 $sitiox = $_POST['sitio'] ?? '';
 			 $manx = $_POST['man'] ?? '';
-			 $pobx = $_POST['pob'] ?? '';
+			 $pobx = valor_fk($_POST['pob'] ?? '');
 			 $refx = $_POST['referencia'] ?? '';
-			 $zonax = $_POST['zona'] ?? '';
-			 $urbax = $_POST['urba'] ?? '';
-			 $tipox = $_POST['tipo'] ?? '';
-			 $usox = $_POST['uso'] ?? '';
-			 $expox = $_POST['expo'] ?? '';
-			 $radiox = $_POST['radio'] ?? '';
-			 $classx = $_POST['class'] ?? '';
+			 $zonax = valor_fk($_POST['zona'] ?? '');
+			 $urbax = valor_fk($_POST['urba'] ?? '');
+			 $tipox = valor_fk($_POST['tipo'] ?? '');
+			 $usox = valor_fk($_POST['uso'] ?? '');
+			 $expox = valor_fk($_POST['expo'] ?? '');
+			 $radiox = valor_fk($_POST['radio'] ?? '');
+			 $classx = valor_fk($_POST['class'] ?? '');
 			 $mtx = $_POST['mt'] ?? '';
 			 $mtcx = $_POST['mtc'] ?? '';
 			 $kx = $_POST['kardex'] ?? '';
@@ -124,14 +143,14 @@ if ( $x_param == 2 ){
 			  $rfx = $_POST["rf"] ?? '';
 			  $rfdx = $_POST["rfd"] ?? '';
 			  
- 			  $sitpatx = $_POST["sitpatente"] ?? '';
+ 			  $sitpatx = valor_fk($_POST["sitpatente"] ?? '');
 			  $obspatx = $_POST["obspat"] ?? '';
 			  $numnx = $_POST["numnuevo"] ?? '';
 
  			 $linknuevo = 'propiedades.php?id='.$idx.'&flag=1';
 
 		 	 $link=conectarse();
-    	     $sql= "UPDATE propiedades SET 
+   	     $sql= "UPDATE propiedades SET 
 			 tipocalle='$viax',
 			 direccion='$direx',
 			 numero='$numx',
@@ -178,6 +197,11 @@ if ( $x_param == 2 ){
 			 obspatente='$obspatx',
 			 zona='$zonax' WHERE id='$idx'";
    		     $result2=mysql_query($sql);
+             if (!$result2) {
+                 $error_sql = htmlspecialchars(mysql_error($link));
+                 echo "<h3>Error al actualizar propiedad</h3><pre>$error_sql</pre><p><a href='javascript:history.back()'>Volver</a></p>";
+                 exit;
+             }
   		     mysql_close($link);
 			 echo '<script language="javascript">';
 			 echo "alert('Cambios guardados correctamente');";
@@ -202,5 +226,13 @@ if ( $x_param == 3 ){
 			 echo "alert('Registro Borrado');";
 			 echo "location.href='list_publicaciones.php';";
  		     echo "</script>";		*/
+}
+
+if ($x_param === '' || ($x_param != 1 && $x_param != 2 && $x_param != 3)) {
+    echo '<script language="javascript">';
+    echo "alert('No se recibió el parámetro de operación para guardar la propiedad (param).');";
+    echo "history.back();";
+    echo "</script>";
+    exit;
 }
 ?>

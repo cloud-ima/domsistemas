@@ -51,9 +51,60 @@ $fechaactualed = date('d')."/".date('n')."/".date('Y');
 <link href="../css/estilos.css" rel="stylesheet" type="text/css">
 <title></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript">
+function esNumeroValido(v) {
+  var x = (v || "").replace(/\./g, "").replace(",", ".").trim();
+  if (x === "") return false;
+  return !isNaN(x);
+}
+
+function enviar(form1){
+if(form1.desde.value==""){
+     alert("Debe Ingresar Fecha Inicial")
+     form1.desde.focus()
+return false;
+}
+if(form1.hasta.value==""){
+     alert("Debe Ingresar Fecha Final")
+     form1.hasta.focus()
+return false;
+}
+if(form1.uf.value==""){
+     alert("Debe Ingresar valor U.F.")
+     form1.uf.focus()
+return false;
+}
+if(!esNumeroValido(form1.uf.value)){
+     alert("Debe Ingresar un valor numérico válido para U.F.")
+     form1.uf.focus()
+return false;
+}
+if(form1.utm.value==""){
+     alert("Debe Ingresar valor U.T.M.")
+     form1.utm.focus()
+return false;
+}
+if(!esNumeroValido(form1.utm.value)){
+     alert("Debe Ingresar un valor numérico válido para U.T.M.")
+     form1.utm.focus()
+return false;
+}
+if(form1.cuota.value==""){
+     alert("Debe Ingresar valor Cuota Ahorro")
+     form1.cuota.focus()
+return false;
+}
+if(!esNumeroValido(form1.cuota.value)){
+     alert("Debe Ingresar un valor numérico válido para Cuota Ahorro")
+     form1.cuota.focus()
+return false;
+}
+return true;
+}
+</script>
 </head>
 <body>
-<form action="mantenedor.php" method="POST" enctype="multipart/form-data" >
+<form action="mantenedor.php" method="POST" enctype="multipart/form-data" onSubmit="return enviar(this)">
   <table width="467" border="0" align="center" cellpadding="0" cellspacing="0">
     <tr>
       <td width="467" height="200" valign="top"> 

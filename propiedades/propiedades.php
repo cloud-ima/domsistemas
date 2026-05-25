@@ -236,6 +236,7 @@ if(form1.num.value==""){
      form1.num.focus()
 return false;
 }
+return true;
 }
 //-->
 </script>
