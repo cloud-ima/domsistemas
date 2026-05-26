@@ -1,4 +1,8 @@
 <?php
+ob_start();
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 
 include("../conexion.php");
 include("../fechaclasss.php");
@@ -16,6 +20,11 @@ $ff = $_POST['foliox'] ?? '';
 			  $linea_fin3 = mysql_result($res, 0, "cargo");	
 
 include("grabaclass.php");
+
+if (empty($ff) || empty($idx)) {
+    echo "<h3>Error</h3><p>Faltan datos para generar el certificado (folio o propiedad).</p>";
+    exit;
+}
 
  if ( $ok == 'checkbox' )
 	 {
@@ -63,7 +72,7 @@ include("grabaclass.php");
 			  
 			  $roled = $_POST['rol'] ?? '';
 			  $numed =  $_POST['num'] ?? '';
-	          $viaed  = strtolower($_POST['via']);
+	          $viaed  = strtolower((string)($_POST['via'] ?? ''));
 			  $direed = $_POST['dire'] ?? '';
 			  $sitioed = $_POST['sitio'] ?? '';
 			  $maned = $_POST['man'] ?? '';
@@ -71,15 +80,17 @@ include("grabaclass.php");
 			  $deptoed=''; 
 			  
 			  if ( $deptox <> '' ) {
-			       $deptoed = 'Block ' . $_POST['block'] ?? '' . ' Depto Num. '. $_POST['depto'] ?? '';
+			       $blocktmp = (string)($_POST['block'] ?? '');
+			       $deptotmp = (string)($_POST['depto'] ?? '');
+			       $deptoed = 'Block ' . $blocktmp . ' Depto Num. '. $deptotmp;
 			  }	   
 
 			  if ( $maned <> '' ){
-			       $maned = ' , Manzana ' . $_POST['man'] ?? '';
+			       $maned = ' , Manzana ' . (string)($_POST['man'] ?? '');
 			  }
 
 			  if ( $sitioed <> '' ){
-			       $sitioed = ' , Sitio ' . $_POST['sitio'] ?? '';
+			       $sitioed = ' , Sitio ' . (string)($_POST['sitio'] ?? '');
 			  }
 
 			  $urbax = $_POST['urba'] ?? '';
@@ -96,16 +107,24 @@ include("grabaclass.php");
 			  $mtcx = $row["mt2cons"];
 	*/
 
-require_once('../tcpdf/config/lang/eng.php');
-require_once('../tcpdf/config/tcpdf_config_alt.php');
-define("K_TCPDF_EXTERNAL_CONFIG", true);
-
-require_once('../tcpdf/tcpdf.php');
+$tcpdfLang = '../tcpdf/config/lang/eng.php';
+$tcpdfCfg = '../tcpdf/config/tcpdf_config_alt.php';
+$tcpdfMain = '../tcpdf/tcpdf.php';
+if (!file_exists($tcpdfLang) || !file_exists($tcpdfCfg) || !file_exists($tcpdfMain)) {
+    echo "<h3>Error</h3><p>No se encontró la librería TCPDF para generar el certificado.</p>";
+    exit;
+}
+require_once($tcpdfLang);
+require_once($tcpdfCfg);
+if (!defined("K_TCPDF_EXTERNAL_CONFIG")) {
+    define("K_TCPDF_EXTERNAL_CONFIG", true);
+}
+require_once($tcpdfMain);
 
 // create new PDF document
 //$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 $PDF_PAGE_FORMAT='LTR';
-$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'LETTER', false, 'UTF-8', false);
+$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'LETTER', true, 'UTF-8', false);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
@@ -154,8 +173,7 @@ $titulo2 = 'N&ordm;  ' . $folioz; ;
 $html2 = '<span style="text-align:center;"> Nr. ' . $folioz .' </span>';
 
 
-$html = '<span style="text-align:justify;"> En cumplimiento a lo dispuesto en decreto N&ordm; 5090 del 29 de octubre de 2008 de la Ilustre
- Municipalidad de Arica y en la ley N&ordm; 18.695 Org&aacute;nica constitucional de Municipalidades , el Director
+$html = '<span style="text-align:justify;"> En cumplimiento a lo dispuesto en la Ordenanza de Derechos Municipales Nº 2 del 30 de octubre de 2025 de la Ilustre  Municipalidad de Arica y en la ley N&ordm; 18.695 Org&aacute;nica constitucional de Municipalidades , el Director
  de Obras de la Comuna de Arica, certifica que la propiedad Rol Nr. ' . $roled . ' ubicada en ' . $viaed . ' ' . $direed . '  
  tiene asignada la numeraci&oacute;n Municipal  ' . $numed . ' ' . $deptoed . ' dentro de la poblaci&oacute;n ' . $pobed. $maned . $sitioed . ' , la cual se
  encuentra emplazada en la comuna de ARICA. </span>';
@@ -212,7 +230,19 @@ $pdf->writeHTML($pie, true, 0, true, true);
 $pdf->lastPage();
 
 //Close and output PDF document
-$pdf->Output('certificado.pdf', 'I');
+$pdfBinary = $pdf->Output('certificado.pdf', 'S');
+if (ob_get_length()) {
+    ob_end_clean();
+}
+if ($pdfBinary === false || strlen($pdfBinary) < 500) {
+    echo "<h3>Error</h3><p>No fue posible generar el PDF del certificado.</p>";
+    exit;
+}
+header('Content-Type: application/pdf');
+header('Content-Disposition: inline; filename="certificado_expropiacion.pdf"');
+header('Content-Length: ' . strlen($pdfBinary));
+echo $pdfBinary;
+exit;
 
 //============================================================+
 // END OF FILE                                                 

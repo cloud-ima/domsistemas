@@ -1,4 +1,12 @@
 <?php $fecha_hoy = date('Y')."/".date('m')."/".date('d');
+
+function normalize_catalog_value($value) {
+    $v = trim((string)$value);
+    if ($v === '' || strcasecmp($v, 'SIN ESPECIFICAR') === 0) {
+        return '0';
+    }
+    return $v;
+}
 			 $idx = $_POST['codigo'] ?? '';
 			 $rolx = $_POST['rol'] ?? '';
 			 $direx = $_POST['dire'] ?? '';
@@ -52,6 +60,19 @@
 			  $obspatx = $_POST["obspat"] ?? '';
 			  $numnx = $_POST["numnuevo"] ?? '';
 			  $obsx = $_POST["FCKeditor2"] ?? '';			  
+
+			  // Normalización de catálogos para evitar errores de tipo entero en MySQL.
+			  $zonax = normalize_catalog_value($zonax);
+			  $urbax = normalize_catalog_value($urbax);
+			  $tipox = normalize_catalog_value($tipox);
+			  $usox = normalize_catalog_value($usox);
+			  $expox = normalize_catalog_value($expox);
+			  $radiox = normalize_catalog_value($radiox);
+			  $classx = normalize_catalog_value($classx);
+			  $pobx = normalize_catalog_value($pobx);
+			  $sitpatx = normalize_catalog_value($sitpatx);
+			  $oax = normalize_catalog_value($oax);
+
 		 	  $link=conectarse();
     	      $sql= "UPDATE propiedades SET
 			 tipocalle='$viax',

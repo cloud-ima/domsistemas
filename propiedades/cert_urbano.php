@@ -1,104 +1,122 @@
 <?php
+ob_start();
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 
 include("../conexion.php");
 include("../fechaclasss.php");
 
-$link=conectarse();
+$link = conectarse();
 
 $ok = $_POST['listo'] ?? '';
 $ff = $_POST['foliox'] ?? '';
 
 //*******************[ Busqueda de Directores para firma de documentos ]**********************
-			  $qry = "SELECT * FROM directores where activo ='S'";
-			  $res = mysql_query($qry);
-			  $linea_fin1 = mysql_result($res, 0, "nombre");
-			  $linea_fin2 = mysql_result($res, 0, "titulo");
-			  $linea_fin3 = mysql_result($res, 0, "cargo");		
+$qry = "SELECT * FROM directores where activo ='S'";
+$res = mysql_query($qry);
+$linea_fin1 = mysql_result($res, 0, "nombre");
+$linea_fin2 = mysql_result($res, 0, "titulo");
+$linea_fin3 = mysql_result($res, 0, "cargo");
 
 include("grabaclass.php");
 
-if ( $ok == 'checkbox' )
-	 {
- 		 	 $link=conectarse();
-	   	     $sql= "UPDATE cert2009 SET estado = '3' where id = '$ff' ";
-   		     $result2=mysql_query($sql);
- 			 mysql_close($link);
-	 }
+if (empty($ff) || empty($idx)) {
+	echo "<h3>Error</h3><p>Faltan datos para generar el certificado (folio o propiedad).</p>";
+	exit;
+}
+
+if ($ok == 'checkbox') {
+	$link = conectarse();
+	$sql = "UPDATE cert2009 SET estado = '3' where id = '$ff' ";
+	$result2 = mysql_query($sql);
+	mysql_close($link);
+}
 
 $ssql = "select * from propiedades where id ='$idx'";
 
-			 $idx = $_POST['codigo'] ?? '';
-			 $rolx = $_POST['rol'] ?? '';
-			 $direx = $_POST['dire'] ?? '';
-			 $viax = $_POST['via'] ?? '';
-			 $numx = $_POST['num'] ?? '';
-			 $blockx = $_POST['block'] ?? '';
-			 $deptox = $_POST['depto'] ?? '';
-			 $sitiox = $_POST['sitio'] ?? '';
-			 $manx = $_POST['man'] ?? '';
-			 $pobx = $_POST['pob'] ?? '';
-			 $refx = $_POST['referencia'] ?? '';	 
-			 $zonax = $_POST['zona'] ?? '';
-			 $urbax = $_POST['urba'] ?? '';
-			 $tipox = $_POST['tipo'] ?? '';
-			 $usox = $_POST['uso'] ?? '';
-			 $expox = $_POST['expo'] ?? '';
-			 $radiox = $_POST['radio'] ?? '';
-			 $classx = $_POST['class'] ?? '';
-			 $mtx = $_POST['mt'] ?? '';
-			 $mtcx = $_POST['mtc'] ?? '';
-			 $kx = $_POST['kardex'] ?? '';
+$idx = $_POST['codigo'] ?? '';
+$rolx = $_POST['rol'] ?? '';
+$direx = $_POST['dire'] ?? '';
+$viax = $_POST['via'] ?? '';
+$numx = $_POST['num'] ?? '';
+$blockx = $_POST['block'] ?? '';
+$deptox = $_POST['depto'] ?? '';
+$sitiox = $_POST['sitio'] ?? '';
+$manx = $_POST['man'] ?? '';
+$pobx = $_POST['pob'] ?? '';
+$refx = $_POST['referencia'] ?? '';
+$zonax = $_POST['zona'] ?? '';
+$urbax = $_POST['urba'] ?? '';
+$tipox = $_POST['tipo'] ?? '';
+$usox = $_POST['uso'] ?? '';
+$expox = $_POST['expo'] ?? '';
+$radiox = $_POST['radio'] ?? '';
+$classx = $_POST['class'] ?? '';
+$mtx = $_POST['mt'] ?? '';
+$mtcx = $_POST['mtc'] ?? '';
+$kx = $_POST['kardex'] ?? '';
 
- 			  $cod = $_POST['pob'] ?? '';
- 			  $link=Conectarse();
-			  $qry = "SELECT * FROM pob where id ='$cod'";
-			  $res = mysql_query($qry);
-			  $pobed = mysql_result($res, 0, "nombre");
-			  
-			  $roled = $_POST['rol'] ?? '';
-			  $numed =  $_POST['num'] ?? '';
-	          $viaed  = strtolower($_POST['via']);
-			  $direed = $_POST['dire'] ?? '';
-			  $sitioed = $_POST['sitio'] ?? '';
-			  $maned = $_POST['man'] ?? '';
-			  $deptox = $_POST['depto'] ?? '';
-			  $deptoed=''; 
-			  
-  			  $link=Conectarse();
-			  $qry = "SELECT * FROM cert2009 where id ='$ff'";
-			  $res = mysql_query($qry);
-			  $idusuario = mysql_result($res, 0, "responsable");
-			  $fechag = mysql_result($res, 0, "giro_fecha");
-			  
-			  
-			  if ( $deptox <> '' ) {
-			       $deptoed = 'Block ' . $_POST['block'] ?? '' . ' Depto Num. '. $_POST['depto'] ?? '';
-			  }	   
+$cod = $_POST['pob'] ?? '';
+$link = Conectarse();
+$qry = "SELECT * FROM pob where id ='$cod'";
+$res = mysql_query($qry);
+$pobed = mysql_result($res, 0, "nombre");
 
-			  if ( $maned <> '' ){
-			       $maned = ' , Manzana ' . $_POST['man'] ?? '';
-			  }
+$roled = $_POST['rol'] ?? '';
+$numed =  $_POST['num'] ?? '';
+$viaed  = strtolower((string)($_POST['via'] ?? ''));
+$direed = $_POST['dire'] ?? '';
+$sitioed = $_POST['sitio'] ?? '';
+$maned = $_POST['man'] ?? '';
+$deptox = $_POST['depto'] ?? '';
+$deptoed = '';
 
-			  if ( $sitioed <> '' ){
-			       $sitioed = ' , Sitio ' . $_POST['sitio'] ?? '';
-			  }
+$link = Conectarse();
+$qry = "SELECT * FROM cert2009 where id ='$ff'";
+$res = mysql_query($qry);
+$idusuario = mysql_result($res, 0, "responsable");
+$fechag = mysql_result($res, 0, "giro_fecha");
 
-			  $urbax = $_POST['urba'] ?? '';
-			  $expox = $_POST['expo'] ?? '';
-			  $radiox = $_POST['radio'] ?? '';
-			  $zonax =  $_POST['zona'] ?? '';
-			  $classx = $_POST['class'] ?? '';
-			  			  
-require_once('../tcpdf/config/lang/eng.php');
-require_once('../tcpdf/config/tcpdf_config_alt.php');
-define("K_TCPDF_EXTERNAL_CONFIG", true);
 
-require_once('../tcpdf/tcpdf.php');
+if ($deptox <> '') {
+	$blocktmp = (string)($_POST['block'] ?? '');
+	$deptotmp = (string)($_POST['depto'] ?? '');
+	$deptoed = 'Block ' . $blocktmp . ' Depto Num. ' . $deptotmp;
+}
+
+if ($maned <> '') {
+	$maned = ' , Manzana ' . (string)($_POST['man'] ?? '');
+}
+
+if ($sitioed <> '') {
+	$sitioed = ' , Sitio ' . (string)($_POST['sitio'] ?? '');
+}
+
+$urbax = $_POST['urba'] ?? '';
+$expox = $_POST['expo'] ?? '';
+$radiox = $_POST['radio'] ?? '';
+$zonax =  $_POST['zona'] ?? '';
+$classx = $_POST['class'] ?? '';
+
+$tcpdfLang = '../tcpdf/config/lang/eng.php';
+$tcpdfCfg = '../tcpdf/config/tcpdf_config_alt.php';
+$tcpdfMain = '../tcpdf/tcpdf.php';
+if (!file_exists($tcpdfLang) || !file_exists($tcpdfCfg) || !file_exists($tcpdfMain)) {
+	echo "<h3>Error</h3><p>No se encontró la librería TCPDF para generar el certificado.</p>";
+	exit;
+}
+require_once($tcpdfLang);
+require_once($tcpdfCfg);
+if (!defined("K_TCPDF_EXTERNAL_CONFIG")) {
+	define("K_TCPDF_EXTERNAL_CONFIG", true);
+}
+require_once($tcpdfMain);
 
 // create new PDF document
 //$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-$PDF_PAGE_FORMAT='LTR';
-$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'LETTER', false, 'UTF-8', false);
+$PDF_PAGE_FORMAT = 'LTR';
+$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'LETTER', true, 'UTF-8', false);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
@@ -132,30 +150,30 @@ $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 
 //set image scale factor
-$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO); 
+$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
 //set some language-dependent strings
-$pdf->setLanguageArray($l); 
+$pdf->setLanguageArray($l);
 
 // ---------------------------------------------------------
 
 // create some HTML content
 $titulo = '<span style="text-align:center;">CERTIFICADO DE RADIO URBANO</span>';
-$titulo2 = 'N&ordm;  ' . $folioz; ;
+$titulo2 = 'N&ordm;  ' . $folioz;;
 //$nntt = 'Folio : ' . $folioz;
 
-$html2 = '<span style="text-align:center;"> Nr. ' . $folioz .' </span>';
+$html2 = '<span style="text-align:center;"> Nr. ' . $folioz . ' </span>';
 
 
-$html = '<span style="text-align:justify;"> En cumplimiento a lo dispuesto en decreto N&ordm; 5090 del 29 de octubre de 2008 de la Ilustre
+$html = '<span style="text-align:justify;"> En cumplimiento a lo dispuesto en la Ordenanza de Derechos Municipales Nº 2 del 30 de octubre de 2025 de la Ilustre
  Municipalidad de Arica y en la ley N&ordm; 18.695 Org&aacute;nica constitucional de Municipalidades , el Director
  de Obras de la Comuna de Arica, certifica que la propiedad Rol N&ordm;  ' . $roled . ' ubicada en ' . $viaed . ' ' . $direed . '  
- tiene asignada la numeraci&oacute;n Municipal  ' . $numed . ' ' . $deptoed . ' dentro de la poblaci&oacute;n o sector ' . $pobed. $maned . $sitioed . ' , la cual se
- encuentra emplazada '. $radiox .' en la comuna de ARICA. </span>';
+ tiene asignada la numeraci&oacute;n Municipal  ' . $numed . ' ' . $deptoed . ' dentro de la poblaci&oacute;n o sector ' . $pobed . $maned . $sitioed . ' , la cual se
+ encuentra emplazada ' . $radiox . ' en la comuna de ARICA. </span>';
 
 $lin1 = 'FRANCISCO ZULETA GOMEZ<br>ARQUITECTO<br>DIRECTOR DE OBRAS DOM ARICA';
 
-$pie = 'N&ordm; Giro: ' . $girox . ' , Orden Municipal : ' . $orden . ' , Fecha : ' . $fechg . ' , usuario :  ' . $idusuario; 
+$pie = 'N&ordm; Giro: ' . $girox . ' , Orden Municipal : ' . $orden . ' , Fecha : ' . $fechg . ' , usuario :  ' . $idusuario;
 
 // set core font
 $pdf->SetFont('helvetica', '', 16);
@@ -181,9 +199,9 @@ $pdf->Ln();
 $pdf->Ln();
 $pdf->Ln();
 $pdf->Ln();
-$firma1 = '<span style="text-align:center;">'.$linea_fin1.'</span>';
-$firma2 = '<span style="text-align:center;">'.$linea_fin2.'</span>';
-$firma3 = '<span style="text-align:center;">'.$linea_fin3.'</span>';
+$firma1 = '<span style="text-align:center;">' . $linea_fin1 . '</span>';
+$firma2 = '<span style="text-align:center;">' . $linea_fin2 . '</span>';
+$firma3 = '<span style="text-align:center;">' . $linea_fin3 . '</span>';
 $pdf->writeHTML($firma1, true, 0, true, true);
 $pdf->writeHTML($firma2, true, 0, true, true);
 $pdf->writeHTML($firma3, true, 0, true, true);
@@ -198,11 +216,20 @@ $pdf->writeHTML($pie, true, 0, true, true);
 $pdf->lastPage();
 
 //Close and output PDF document
-$pdf->Output('certificado.pdf', 'I');
+$pdfBinary = $pdf->Output('certificado.pdf', 'S');
+if (ob_get_length()) {
+	ob_end_clean();
+}
+if ($pdfBinary === false || strlen($pdfBinary) < 500) {
+	echo "<h3>Error</h3><p>No fue posible generar el PDF del certificado.</p>";
+	exit;
+}
+header('Content-Type: application/pdf');
+header('Content-Disposition: inline; filename="certificado_radio_urbano.pdf"');
+header('Content-Length: ' . strlen($pdfBinary));
+echo $pdfBinary;
+exit;
 
 //============================================================+
 // END OF FILE                                                 
 //============================================================+
-
-
-?>

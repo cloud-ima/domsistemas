@@ -1,0 +1,10 @@
+2026-05-26 14:49:51 REQUEST method=POST param=2 codigo=155440
+2026-05-26 14:49:51 Fatal en entregarcert.php: Uncaught mysqli_sql_exception: Data too long for column 'entregado' at row 1 in C:\Users\Admin\Herd\domsistemas\conexion.php:54
+Stack trace:
+#0 C:\Users\Admin\Herd\domsistemas\conexion.php(54): mysqli_query(Object(mysqli), 'UPDATE cert2009...')
+#1 C:\Users\Admin\Herd\domsistemas\solicitud\entregarcert.php(89): mysql_query('UPDATE cert2009...')
+#2 C:\Program Files\Herd\resources\app.asar.unpacked\resources\valet\server.php(139): require('C:\\Users\\Admin\\...')
+#3 {main}
+  thrown en C:\Users\Admin\Herd\domsistemas\conexion.php:54
+2026-05-26 14:50:59 REQUEST method=POST param=2 codigo=155440
+2026-05-26 14:51:13 REQUEST method=POST param=2 codigo=155430

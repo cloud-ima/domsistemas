@@ -6,6 +6,11 @@ $hoy = date('Y')."-".date('m')."-".date('d');
 $rut_id=$_GET['rut'] ?? '';
 $sol_id=$_GET['id'] ?? '';
 
+if (trim((string)$rut_id) === '' || trim((string)$sol_id) === '') {
+    echo "<h3>Error</h3><p>Faltan parámetros de solicitud (id/rut) para entregar certificado.</p>";
+    exit;
+}
+
 $link=Conectarse();
 $qry = "SELECT * FROM rut where rut ='$rut_id'";
 $res = mysql_query($qry);
@@ -67,9 +72,9 @@ $res = mysql_query($qry);
 $quienentrego = mysql_result($res, 0, "nombre");
  }
 
-if ( $responsable <> '' ) {
+if ( $ac <> '' ) {
 $link=Conectarse();
-$qry = "SELECT * FROM usuarios where usuario ='$responsable'";
+$qry = "SELECT * FROM usuarios where usuario ='$ac'";
 $res = mysql_query($qry);
 $quienlohizo = mysql_result($res, 0, "nombre");
 }

@@ -69,12 +69,7 @@ if(form1.hasta.value==""){
      form1.hasta.focus()
 return false;
 }
-if(form1.uf.value==""){
-     alert("Debe Ingresar valor U.F.")
-     form1.uf.focus()
-return false;
-}
-if(!esNumeroValido(form1.uf.value)){
+if(form1.uf.value!="" && !esNumeroValido(form1.uf.value)){
      alert("Debe Ingresar un valor numérico válido para U.F.")
      form1.uf.focus()
 return false;

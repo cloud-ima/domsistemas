@@ -108,8 +108,7 @@ $pdf->setLanguageArray($l);
 
 $titulo = '<span style="text-align:center;">CERTIFICADO DE NUMERO</span>';
 
-$html = '<span style="text-align:justify;"> En cumplimiento a lo dispuesto en decreto Nr. 5090 del 29 de octubre de 2008 de la Ilustre
- Municipalidad de Arica y en la ley Nr 18.695 Org&aacute;nica constitucional de Municipalidades , el director
+$html = '<span style="text-align:justify;"> En cumplimiento a lo dispuesto en la Ordenanza de Derechos Municipales Nº 2 del 30 de octubre de 2025 de la Ilustre  Municipalidad de Arica y en la ley Nr 18.695 Org&aacute;nica constitucional de Municipalidades , el director
  de obras de la comuna de Arica, certifica que la propiedad ' . $roled . ' ubicada en ' . $viaed . ' ' . $direed . '  
  tiene asignada la numeraci&oacute;n municipal  ' . $numed . ' ' . $deptoed. ' Dentro de la Poblaci&oacute;n ' . $pobed. ' , manzana '. $maned ' , SITIO ' . $sitioed . ' se
  encuentra emplazada en la comuna de ARICA. </span>';

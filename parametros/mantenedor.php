@@ -26,9 +26,9 @@ if ( $x_param == 1 ){
 			 $utmx = $_POST["utm"] ?? '';
 			 $cuox = $_POST["cuota"] ?? '';
 
-             if (trim($desx) === '' || trim($hasx) === '' || trim($ufx) === '' || trim($utmx) === '' || trim($cuox) === '') {
+             if (trim($desx) === '' || trim($hasx) === '' || trim($utmx) === '' || trim($cuox) === '') {
                  echo '<script language="javascript">';
-                 echo "alert('Debe Ingresar Fecha Inicial, Fecha Final, U.F., U.T.M. y Cuota Ahorro');";
+                 echo "alert('Debe Ingresar Fecha Inicial, Fecha Final, U.T.M. y Cuota Ahorro');";
                  echo "history.back();";
                  echo "</script>";
                  exit;
@@ -38,6 +38,7 @@ if ( $x_param == 1 ){
              $ufx = str_replace(array('.', ','), array('', '.'), trim((string)$ufx));
              $utmx = str_replace(array('.', ','), array('', '.'), trim((string)$utmx));
              $cuox = str_replace(array('.', ','), array('', '.'), trim((string)$cuox));
+             if ($ufx === '') { $ufx = '0'; }
 
 			 $link=conectarse();
 			 $sql = "INSERT INTO param (desde,hasta,uf,utm,cuota) VALUES ('$desx','$hasx','$ufx','$utmx','$cuox')";
@@ -64,9 +65,9 @@ if ( $x_param == 2 ){
 			 $cuox = $_POST["cuota"] ?? '';
 			 $idx  = $_POST["codigo"] ?? '';
 
-             if (trim($desx) === '' || trim($hasx) === '' || trim($ufx) === '' || trim($utmx) === '' || trim($cuox) === '') {
+             if (trim($desx) === '' || trim($hasx) === '' || trim($utmx) === '' || trim($cuox) === '') {
                  echo '<script language="javascript">';
-                 echo "alert('Debe Ingresar Fecha Inicial, Fecha Final, U.F., U.T.M. y Cuota Ahorro');";
+                 echo "alert('Debe Ingresar Fecha Inicial, Fecha Final, U.T.M. y Cuota Ahorro');";
                  echo "history.back();";
                  echo "</script>";
                  exit;
@@ -75,6 +76,7 @@ if ( $x_param == 2 ){
              $ufx = str_replace(array('.', ','), array('', '.'), trim((string)$ufx));
              $utmx = str_replace(array('.', ','), array('', '.'), trim((string)$utmx));
              $cuox = str_replace(array('.', ','), array('', '.'), trim((string)$cuox));
+             if ($ufx === '') { $ufx = '0'; }
 		 
 		 	 $link=conectarse();
     	     $sql= "UPDATE param SET desde='$desx',hasta='$hasx',uf='$ufx',utm='$utmx',cuota='$cuox' WHERE id='$idx'";

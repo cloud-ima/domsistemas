@@ -201,8 +201,7 @@ $titulo2 = 'N&ordm; ' . $folioz; ;
 
 $html2 = '<span style="text-align:center;"> N&ordm; ' . $folioz .' </span>';
 
-$html = '<span style="text-align:justify;"> En cumplimiento a lo dispuesto en decreto N&ordm; 5090 del 29 de octubre de 2008 de la Ilustre
- Municipalidad de Arica y en la ley N&ordm; 18.695 Org&aacute;nica constitucional de Municipalidades , el Director
+$html = '<span style="text-align:justify;"> En cumplimiento a lo dispuesto en la Ordenanza de Derechos Municipales Nº 2 del 30 de octubre de 2025 de la Ilustre  Municipalidad de Arica y en la ley N&ordm; 18.695 Org&aacute;nica constitucional de Municipalidades , el Director
  de Obras de la Comuna de Arica, certifica que la propiedad Rol N&ordm; ' . $roled . ' ubicada en ' . $viaed . ' ' . $direed . '  
  tiene asignada la numeraci&oacute;n Municipal  ' . $numed . ' ' . $deptoed . ' dentro de la poblaci&oacute;n o sector ' . $pobed. $maned . $sitioed . ' , la cual se
  encuentra emplazada en la comuna de ARICA. </span>';
