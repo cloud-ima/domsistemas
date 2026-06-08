@@ -106,3 +106,29 @@ volvieron a cargar correctamente.
 ## Nota
 
 Esta corrección no cambia datos del sistema. Solo agrega índices para que MySQL pueda resolver más rápido las consultas existentes.
+
+## Corrección adicional: filas duplicadas en listados
+
+Después de aplicar índices se detectó que algunos registros se veían duplicados en:
+
+- `solicitud/list_solicitudes.php`
+- `solicitud/list_solicitudes_ok.php`
+
+La causa no era que la solicitud estuviera duplicada en `cert2009`, sino que la tabla `rut` contiene algunos RUT repetidos. El listado hacía:
+
+```sql
+LEFT JOIN rut r ON c.rut = r.rut
+```
+
+Si un mismo `rut.rut` existe más de una vez, MySQL devuelve una fila por cada coincidencia, repitiendo visualmente la misma solicitud.
+
+La consulta fue ajustada para unir contra un solo registro de `rut` por RUT, usando el mayor `rut.id` como registro vigente para mostrar `nombre` y `apellidos`.
+
+Validación local:
+
+```text
+No syntax errors detected in solicitud/list_solicitudes_ok.php
+No syntax errors detected in solicitud/list_solicitudes.php
+```
+
+Además se probó con solicitudes que antes se repetían por RUT duplicado y el resultado quedó con IDs únicos.

@@ -13,25 +13,44 @@ $link = Conectarse();
 $qry = "SELECT * from parametros where id = 1";
 $res = mysql_query($qry);
 $tablaperiodo = "cert" . mysql_result($res, 0, "periodo");
+$rutJoinSql = "(SELECT r1.rut, r1.nombre, r1.apellidos
+                  FROM rut r1
+                  INNER JOIN (
+                    SELECT rut, MAX(id) AS id
+                    FROM rut
+                    GROUP BY rut
+                  ) ru ON ru.id = r1.id) r";
 
 if ($x_flag == '') {
-  $consultaSQL = "SELECT c.*, r.nombre, r.apellidos, tc.nombre as nombre_certificado, e.nombres as nombre_estado 
-                       FROM $tablaperiodo c 
-                       LEFT JOIN rut r ON c.rut = r.rut 
+  $consultaSQL = "SELECT c.*, r.nombre, r.apellidos,
+                       tc.nombre as nombre_certificado,
+                       e.nombres as nombre_estado 
+                       FROM (
+                         SELECT *
+                         FROM $tablaperiodo
+                         WHERE estado = 2
+                         ORDER BY id DESC
+                         LIMIT 400
+                       ) c
+                       LEFT JOIN $rutJoinSql ON c.rut = r.rut 
                        LEFT JOIN tipocertificado tc ON c.idcert = tc.id 
                        LEFT JOIN estado e ON c.estado = e.id 
-                       WHERE c.estado = 2 
-                       ORDER BY c.id DESC 
-                       LIMIT 400";
+                       ORDER BY c.id DESC";
 } else {
-  $consultaSQL = "SELECT c.*, r.nombre, r.apellidos, tc.nombre as nombre_certificado, e.nombres as nombre_estado 
-                       FROM $tablaperiodo c 
-                       LEFT JOIN rut r ON c.rut = r.rut 
+  $consultaSQL = "SELECT c.*, r.nombre, r.apellidos,
+                       tc.nombre as nombre_certificado,
+                       e.nombres as nombre_estado 
+                       FROM (
+                         SELECT *
+                         FROM $tablaperiodo
+                         WHERE fecha_solicitud = '$fecha_consulta' AND estado = 2
+                         ORDER BY id DESC
+                         LIMIT 400
+                       ) c
+                       LEFT JOIN $rutJoinSql ON c.rut = r.rut 
                        LEFT JOIN tipocertificado tc ON c.idcert = tc.id 
                        LEFT JOIN estado e ON c.estado = e.id 
-                       WHERE c.fecha_solicitud = '$fecha_consulta' AND c.estado = 2 
-                       ORDER BY c.id DESC 
-                       LIMIT 400";
+                       ORDER BY c.id DESC";
   $fecha_hoy = $_POST["fecha"] ?? '';
 }
 
