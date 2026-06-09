@@ -18,7 +18,7 @@ function normalizar_texto_mostrado($texto)
 
 $hoy = date('Y')."-".date('m')."-".date('d');
 $sol_id=$_POST['id'] ?? '';
-$seguridaddecampo = 'hidden';
+$seguridaddecampo = 'text';
 
 $link=Conectarse();
 $qry = "SELECT * from parametros where id = 1";
@@ -208,9 +208,8 @@ document.onkeypress = stopRKey;
                   </tr>
                   <tr> 
                     <td bgcolor="#efefef">Direcci&oacute;n</td>
-                    <td colspan="2"><?php echo $direccion ?> , ROL: 
-                      <input name="rol_aux" type="<?php echo $seguridaddecampo; ?>" id="rol_aux" value="<?php echo $rol ?>" size="20"> 
-                    <?php echo $rol ?></td>
+                    <td colspan="2"><?php echo $direccion ?> , ROL:
+                      <input name="rol_aux" type="<?php echo $seguridaddecampo; ?>" id="rol_aux" value="<?php echo htmlspecialchars($rol, ENT_QUOTES, 'UTF-8'); ?>" size="20" maxlength="20"></td>
                   </tr>
                   <tr>
                     <td bgcolor="#efefef">Rubro</td>
