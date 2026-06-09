@@ -130,15 +130,15 @@ mkdir($dire, 0777, true);
 
     // Completar campos vacíos de líneas oficiales desde otra ficha del mismo ROL.
     if (!empty($rolx)) {
-        $rolEsc = mysql_real_escape_string($rolx, $link);
-        $rolNorm = mysql_real_escape_string($rolx, $link);
-        $rolNormExpr = "REPLACE(REPLACE(UPPER(rol),'-',''),' ','')";
-        $rolNormVal = strtoupper(str_replace(array('-', ' '), '', $rolNorm));
+        $rolEsc = mysql_real_escape_string(trim((string)$rolx), $link);
+        $rolNormExpr = "REPLACE(REPLACE(UPPER(TRIM(rol)),'-',''),' ','')";
+        $rolExactExpr = "UPPER(TRIM(rol))";
+        $rolNormVal = strtoupper(str_replace(array('-', ' '), '', $rolEsc));
         $idEsc = mysql_real_escape_string($idz, $link);
         $sqlFallback = "
             SELECT n1,n2,n3,n4,a1,a2,a3,a4,l1,l2,l3,l4,d1,d2,d3,d4,otrosnum,obs
             FROM propiedades
-            WHERE ($rolNormExpr = '$rolNormVal' OR rol = '$rolEsc')
+            WHERE $rolExactExpr = UPPER('$rolEsc')
               AND id <> '$idEsc'
               AND (
                     COALESCE(n1,'') <> '' OR COALESCE(n2,'') <> '' OR COALESCE(n3,'') <> '' OR COALESCE(n4,'') <> '' OR
@@ -149,6 +149,22 @@ mkdir($dire, 0777, true);
             ORDER BY id DESC
             LIMIT 1";
         $rsFallback = mysql_query($sqlFallback, $link);
+        if (!$rsFallback || mysql_num_rows($rsFallback) === 0) {
+            $sqlFallback = "
+                SELECT n1,n2,n3,n4,a1,a2,a3,a4,l1,l2,l3,l4,d1,d2,d3,d4,otrosnum,obs
+                FROM propiedades
+                WHERE $rolNormExpr = '$rolNormVal'
+                  AND id <> '$idEsc'
+                  AND (
+                        COALESCE(n1,'') <> '' OR COALESCE(n2,'') <> '' OR COALESCE(n3,'') <> '' OR COALESCE(n4,'') <> '' OR
+                        COALESCE(a1,'') <> '' OR COALESCE(a2,'') <> '' OR COALESCE(a3,'') <> '' OR COALESCE(a4,'') <> '' OR
+                        COALESCE(l1,'') <> '' OR COALESCE(l2,'') <> '' OR COALESCE(l3,'') <> '' OR COALESCE(l4,'') <> '' OR
+                        COALESCE(d1,'') <> '' OR COALESCE(d2,'') <> '' OR COALESCE(d3,'') <> '' OR COALESCE(d4,'') <> ''
+                      )
+                ORDER BY id DESC
+                LIMIT 1";
+            $rsFallback = mysql_query($sqlFallback, $link);
+        }
         if ($rsFallback && ($rowFallback = mysql_fetch_array($rsFallback))) {
             if (trim((string)$n1x) === '') { $n1x = $rowFallback["n1"]; }
             if (trim((string)$n2x) === '') { $n2x = $rowFallback["n2"]; }

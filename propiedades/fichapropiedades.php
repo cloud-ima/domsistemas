@@ -15,10 +15,15 @@ $idz = $_GET["id"] ?? '';
 $rolz = $_GET["rol"] ?? '';
 
 $link=conectarse();
-$rolNormVal = strtoupper(str_replace(array('-', ' '), '', $rolz));
-$rolNormExpr = "REPLACE(REPLACE(UPPER(rol),'-',''),' ','')";
+$rolExactVal = strtoupper(trim((string)$rolz));
+$rolNormVal = strtoupper(str_replace(array('-', ' '), '', $rolExactVal));
+$rolNormExpr = "REPLACE(REPLACE(UPPER(TRIM(rol)),'-',''),' ','')";
+$rolExactExpr = "UPPER(TRIM(rol))";
+
+// Importante: priorizar coincidencia exacta del ROL para no mezclar
+// propiedades distintas como 164-35 vs 1643-5.
 $ssql = "SELECT * FROM propiedades
-         WHERE ($rolNormExpr = '$rolNormVal' OR rol ='$rolz')
+         WHERE $rolExactExpr = '$rolExactVal'
          ORDER BY
             CASE
               WHEN COALESCE(n1,'') <> '' OR COALESCE(n2,'') <> '' OR COALESCE(n3,'') <> '' OR COALESCE(n4,'') <> '' OR
@@ -30,7 +35,25 @@ $ssql = "SELECT * FROM propiedades
             id DESC
          LIMIT 1";
 $rs = mysql_query($ssql,$link);
-$num_registros = mysql_num_rows($rs);
+
+// Fallback histórico: si no hay exacto, intenta match normalizado.
+if (!$rs || mysql_num_rows($rs) == 0) {
+    $ssql = "SELECT * FROM propiedades
+             WHERE $rolNormExpr = '$rolNormVal'
+             ORDER BY
+                CASE
+                  WHEN COALESCE(n1,'') <> '' OR COALESCE(n2,'') <> '' OR COALESCE(n3,'') <> '' OR COALESCE(n4,'') <> '' OR
+                       COALESCE(a1,'') <> '' OR COALESCE(a2,'') <> '' OR COALESCE(a3,'') <> '' OR COALESCE(a4,'') <> '' OR
+                       COALESCE(l1,'') <> '' OR COALESCE(l2,'') <> '' OR COALESCE(l3,'') <> '' OR COALESCE(l4,'') <> '' OR
+                       COALESCE(d1,'') <> '' OR COALESCE(d2,'') <> '' OR COALESCE(d3,'') <> '' OR COALESCE(d4,'') <> ''
+                  THEN 0 ELSE 1
+                END,
+                id DESC
+             LIMIT 1";
+    $rs = mysql_query($ssql,$link);
+}
+
+$num_registros = ($rs) ? mysql_num_rows($rs) : 0;
 if ($num_registros == 0){
 		 echo '<script language="javascript">';
 			 echo "alert('Imposible Editar Ficha de la Propiedad, debido a ROL, erroneo o no existe en nuestra Base de Datos');";
