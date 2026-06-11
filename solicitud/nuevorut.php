@@ -61,6 +61,7 @@ if(formulario.telefonos.value==""){
      formulario.telefonos.focus()
 return false;
 }
+return true;
 }
 </script>
 <script type="text/javascript" src="../validarut.js"></script>
